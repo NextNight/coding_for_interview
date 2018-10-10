@@ -295,6 +295,7 @@ ul.off-canvas-list li a:hover{background: #335a79;}
   position: relative;
   margin-top: 1em;
   margin-bottom: 16px;
+	font-family: sans-serif,monospace;
   font-weight: 300;
   line-height: 1.4;
 }
