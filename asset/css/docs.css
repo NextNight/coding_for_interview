@@ -83,7 +83,6 @@ ul.off-canvas-list li a:hover{background: #335a79;}
 }
 
 .markdown-body h1 {
-  font-size: 2em;
   margin: 0.67em 0;
 }
 
@@ -104,7 +103,7 @@ ul.off-canvas-list li a:hover{background: #335a79;}
 .markdown-body code,
 .markdown-body kbd,
 .markdown-body pre {
-  font-family: PingFangSC-Regular, sans-serif, monospace;
+  font-family: sans-serif, monospace;
   font-size: 1em;
 }
 
@@ -190,11 +189,11 @@ ul.off-canvas-list li a:hover{background: #335a79;}
 }
 
 .markdown-body h1 {
-  font-size: 30px;
+  font-size: 23px;
 }
 
 .markdown-body h2 {
-  font-size: 21px;
+  font-size: 18px;
 }
 
 .markdown-body h3 {
