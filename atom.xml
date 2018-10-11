@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-11T22:29:01+08:00</updated>
+  <updated>2018-10-11T22:32:39+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -310,12 +310,9 @@
 <h1 id="toc_1">常见链表</h1>
 
 <ul>
-<li>单向链表
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg" alt=""/></li>
-<li>双向链表
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Doubly-linked-list.svg" alt=""/></li>
-<li>循环链表
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg" alt=""/></li>
+<li>单向链表</li>
+<li>双向链表</li>
+<li>循环链表</li>
 </ul>
 
 <h1 id="toc_2">链表的实现</h1>
@@ -392,8 +389,9 @@ class LinkedList(object):
         return data
 </code></pre>
 
-<p>因为是自定义实现，使用了固定长度的List来实现，链表的重要操作难度是在删除和添加节点上，<br/>
-<strong>⚠️注意</strong>：<code>Head指针永远不变，是链表的开始</code>，不要直接使用head指针直接去进行指针移动，这样就无法返回操作后的链表了。</p>
+<p>因为是自定义实现，使用了固定长度的List来实现，链表的重要操作难度是在删除和添加节点上，</p>
+
+<p><strong>⚠️注意</strong>：<code>Head指针永远不变，是链表的开始</code>，不要直接使用head指针直接去进行指针移动，这样就无法返回操作后的链表了。</p>
 
 <h1 id="toc_3">链表相关的题目</h1>
 
