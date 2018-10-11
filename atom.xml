@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-11T22:21:37+08:00</updated>
+  <updated>2018-10-11T22:24:24+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -401,7 +401,7 @@ class LinkedList(object):
 
 <h4 id="toc_4">简单:</h4>
 
-<p><a href="">删除链表中的节点</a>,<a href="">删除链表的倒数第N个节点</a>,<a href="">反转链表</a>,<a href="">合并两个有序链表</a>,<a href="">回文链表</a>,<a href="https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/6/linked-list/46/">环形链表</a></p>
+<p><a href="">『删除链表中的节点』</a>,<a href="">『删除链表的倒数第N个节点』</a>,<a href="">『反转链表』</a>,<a href="">『合并两个有序链表』</a>,<a href="">『回文链表』</a>,<a href="">『环形链表』</a></p>
 
 <h4 id="toc_5">中等</h4>
 
