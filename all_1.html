@@ -86,9 +86,13 @@
         <li><label>算法设计</label></li>
 
           
+            <li><a title="排序" href="15392700147620.html">排序</a></li>
+          
+            <li><a title="插入排序" href="15392697680749.html">插入排序</a></li>
+          
             <li><a title="Markdown语法" href="15391839924703.html">Markdown语法</a></li>
           
-            <li><a title="排序" href="15391804641073.html">排序</a></li>
+            <li><a title="选择排序" href="15391804641073.html">选择排序</a></li>
           
 
       
@@ -151,9 +155,13 @@
                     
                       <li class="side-title"><span>算法设计</span></li>
                         
+                          <li><a title="排序" href="15392700147620.html">排序</a></li>
+                        
+                          <li><a title="插入排序" href="15392697680749.html">插入排序</a></li>
+                        
                           <li><a title="Markdown语法" href="15391839924703.html">Markdown语法</a></li>
                         
-                          <li><a title="排序" href="15391804641073.html">排序</a></li>
+                          <li><a title="选择排序" href="15391804641073.html">选择排序</a></li>
                         
 
                     
@@ -174,65 +182,17 @@
 
 	
 		<div class="markdown-body">
-		<h1>队列：Queue</h1>
+		<h1>树：Tree</h1>
 
-		<p>队列是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
-
-<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。</p>
-
-<h1 id="toc_0">队列的特点</h1>
-
-<ul>
-<li>先入先出</li>
-</ul>
-
-<h1 id="toc_1">队列的应用</h1>
-
-<p>对于需要顺序执行的任务尝试用队列这种结构实现。</p>
-
-<h1 id="toc_2">队列的简单实现</h1>
-
-<h4 id="toc_3">1. Python List实现固定长度的队列,同样的方式可以实现双端队列</h4>
-
-<pre class="line-numbers"><code class="language-python">class Queue(object):
-    def __init__(self, init_size):
-        self._data = [None] * init_size
-        self._head = -1
-        self._tail = -1
-        self._size = init_size
-
-    def add(self, item):
-        if self._tail &gt;= self._size-1:
-            print(&quot;queue full&quot;)
-        else:
-            self._tail += 1
-            self._data[self._tail] = item
-
-
-    def poll(self):
-        if self._head &gt;= self._tail:
-            print(&quot;queue empty&quot;)
-        else:
-            self._head += 1
-            top = self._data[self._head]
-            self._data[self._head] = None
-            return top
-
-    def foreach(self):
-        rs = []
-        while self._head &lt;= self._tail-1:
-            top = self.poll()
-            rs.append(top)
-        return rs
-</code></pre>
-
-<h4 id="toc_4">2. 两个栈实现队列</h4>
-
-<pre class="line-numbers"><code class="language-text">
-</code></pre>
-
+		
 
 		</div>
+	
+
+ 
+	
+
+ 
 	
 
  

@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-11T22:51:07+08:00</updated>
+  <updated>2018-10-11T23:03:02+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://www.mweb.im">MWeb</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392700147620.html"/>
+    <updated>2018-10-11T23:00:14+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392700147620.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[插入排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392697680749.html"/>
+    <updated>2018-10-11T22:56:08+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392697680749.html</id>
+    <content type="html"><![CDATA[
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Insertion_sort_animation.gif" alt=""/></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[最近想做的事]]></title>
@@ -743,7 +765,7 @@ Bob--&gt;Alice: I am good thanks!
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[排序]]></title>
+    <title type="html"><![CDATA[选择排序]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15391804641073.html"/>
     <updated>2018-10-10T22:07:44+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15391804641073.html</id>
