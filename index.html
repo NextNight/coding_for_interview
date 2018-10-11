@@ -97,10 +97,30 @@
 
       
         <li class="divider"></li>
+        <li><label>算法思想</label></li>
+
+          
+            <li><a title="动态规划" href="15392704829367.html">动态规划</a></li>
+          
+            <li><a title="贪心" href="15392704711231.html">贪心</a></li>
+          
+            <li><a title="递归" href="15392704564412.html">递归</a></li>
+          
+
+      
+        <li class="divider"></li>
         <li><label>Leetcode</label></li>
 
           
             <li><a title="Twonumsum" href="15392386512557.html">Twonumsum</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>公式推导</label></li>
+
+          
+            <li><a title="罗辑回归" href="15392705055223.html">罗辑回归</a></li>
           
 
       
@@ -165,9 +185,25 @@
                         
 
                     
+                      <li class="side-title"><span>算法思想</span></li>
+                        
+                          <li><a title="动态规划" href="15392704829367.html">动态规划</a></li>
+                        
+                          <li><a title="贪心" href="15392704711231.html">贪心</a></li>
+                        
+                          <li><a title="递归" href="15392704564412.html">递归</a></li>
+                        
+
+                    
                       <li class="side-title"><span>Leetcode</span></li>
                         
                           <li><a title="Twonumsum" href="15392386512557.html">Twonumsum</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>公式推导</span></li>
+                        
+                          <li><a title="罗辑回归" href="15392705055223.html">罗辑回归</a></li>
                         
 
                     
@@ -182,9 +218,63 @@
 
 	
 		<div class="markdown-body">
-		<h1>排序</h1>
+		<h1>罗辑回归</h1>
 
-		<p><img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></p>
+		<h3 id="toc_0">概率推导</h3>
+
+<p>\[\begin{aligned}<br/>
+&amp;\Rightarrow {\color{DarkGreen} ln(\frac{p}{1-p})=z}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{z}=\frac{p}{1-p}}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1-p}{p}}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1}{p}-1}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{-z}+1=\frac{1}{p}}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} p=\frac{1}{e^{-z}+1}}\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+<h3 id="toc_1">损失函数推导</h3>
+
+<p>\[\begin{aligned}<br/>
+L(w)&amp;=\prod_{i=1}^n{p(y^i|x^i,w)}\\<br/>
+&amp;=\prod_{i=1}^n{h(z)^{y^i}.(1-h(z))^{1-y^i}}\\<br/>
+ln(L(w))&amp;=\sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))\\<br/>
+J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
+\end{aligned}<br/>
+\]</p>
+
+<h3 id="toc_2">梯度推导</h3>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
+&amp;=-\sum_ {i=1}^{n}({yln(h(z))+(1-y)ln(1-h(z)))}&#39; \\<br/>
+&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}{h(z)}&#39;+(1-y)\frac{1}{1-h(z)}{(1-h(z))}&#39; \\<br/>
+对h(z)求偏导：\\<br/>
+{h(z)}&#39; &amp;={ \frac{1}{1+e^{-wx}}}&#39;\\<br/>
+&amp;= {(1+e^{-wx})^{-1}}&#39;\\<br/>
+&amp;= (1+e^{-wx})^{-2} {(1+e^{-wx})}&#39;\\<br/>
+&amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
+&amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
+&amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
+&amp;= - \frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
+&amp;= - \frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
+&amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
+对1-h(z)求偏导：\\<br/>
+(1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
+&amp;=h(z)(1-h(z)){(wx)}&#39;\\<br/>
+\\<br/>
+\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
+&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}(-h(z)(1-h(z)){(wx)}&#39;)+(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
+&amp;=\sum_ {i=1}^{n} y\frac{1}{h(z)}(h(z)(1-h(z)){(wx)}&#39;)-(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
+&amp;=\sum_ {i=1}^{n}[y(1-h(z))-(1-y)h(z)]{(wx)}&#39;\\<br/>
+&amp;=\sum_ {i=1}^{n}[y-yh(z)-h(z)+yh(z)]{(wx)}&#39;\\<br/>
+&amp;=\sum_ {i=1}^{n}(y-h(z)){(wx)}&#39;\\<br/>
+&amp;=\sum_ {i=1}^{n}(y-h(z))x_j\\<br/>
+&amp;=(y-h(z))x_j\\<br/>
+\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;=\sum_ {i=1}^{n}(y^i-h(z)^i){x_j}^i\\<br/>
+其中i表示第i条数据，j表示第j维\\<br/>
+\end{aligned}<br/>
+\]</p>
 
 
 		</div>
