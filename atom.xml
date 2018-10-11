@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-11T22:24:24+08:00</updated>
+  <updated>2018-10-11T22:29:01+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -310,12 +310,12 @@
 <h1 id="toc_1">常见链表</h1>
 
 <ul>
-<li>单向链表；
-<img src="https://zh.wikipedia.org/wiki/File:Singly-linked-list.svg" alt=""/></li>
+<li>单向链表
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6d/Singly-linked-list.svg" alt=""/></li>
 <li>双向链表
-<img src="https://zh.wikipedia.org/wiki/File:Doubly-linked-list.svg" alt=""/></li>
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Doubly-linked-list.svg" alt=""/></li>
 <li>循环链表
-<img src="https://zh.wikipedia.org/wiki/File:Circularly-linked-list.svg" alt=""/></li>
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Circularly-linked-list.svg" alt=""/></li>
 </ul>
 
 <h1 id="toc_2">链表的实现</h1>
