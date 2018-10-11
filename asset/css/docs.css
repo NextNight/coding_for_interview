@@ -22,7 +22,7 @@ ul.off-canvas-list li a:hover{background: #335a79;}
     margin: 0;
     padding: 0;
 }
-.sidebar .side-nav a{ font-family: Lato,Helvetica Neue,Helvetica,Arial,sans-serif;}
+.sidebar .side-nav a{ font-family: sans-serif,monospace,Helvetica,Arial;}
 .sidebar .side-nav li a{ padding: 4px 4px;}
 .sidebar .side-nav li.side-title span{ display: inline-block; padding: 10px 0; margin-top: 40px; color:#0e83cd; border-top: solid 1px #e3e3e3; font-weight: bold; font-size: 1.2em;}
 
