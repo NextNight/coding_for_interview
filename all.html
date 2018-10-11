@@ -120,7 +120,7 @@
         <li><label>公式推导</label></li>
 
           
-            <li><a title="罗辑回归" href="15392705055223.html">罗辑回归</a></li>
+            <li><a title="逻辑回归" href="15392705055223.html">逻辑回归</a></li>
           
 
       
@@ -203,7 +203,7 @@
                     
                       <li class="side-title"><span>公式推导</span></li>
                         
-                          <li><a title="罗辑回归" href="15392705055223.html">罗辑回归</a></li>
+                          <li><a title="逻辑回归" href="15392705055223.html">逻辑回归</a></li>
                         
 
                     
@@ -218,7 +218,7 @@
 
 	
 		<div class="markdown-body">
-		<h1>罗辑回归</h1>
+		<h1>逻辑回归</h1>
 
 		<h3 id="toc_0">概率推导</h3>
 
@@ -256,8 +256,8 @@ J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
 &amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
 &amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
 &amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
-&amp;= - \frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
-&amp;= - \frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
+&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
+&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
 &amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
 对1-h(z)求偏导：\\<br/>
 (1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>

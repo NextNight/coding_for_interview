@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-11T23:17:06+08:00</updated>
+  <updated>2018-10-11T23:20:14+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[罗辑回归]]></title>
+    <title type="html"><![CDATA[逻辑回归]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15392705055223.html"/>
     <updated>2018-10-11T23:08:25+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15392705055223.html</id>
@@ -55,8 +55,8 @@ J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
 &amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
 &amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
 &amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
-&amp;= - \frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
-&amp;= - \frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
+&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
+&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
 &amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
 对1-h(z)求偏导：\\<br/>
 (1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
