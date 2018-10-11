@@ -16,7 +16,8 @@
     <script src="asset/js/vendor/modernizr.js"></script>
     <script src="asset/js/vendor/jquery.js"></script>
     <script src="asset/highlightjs/highlight.pack.js"></script>
-    <link href="asset/highlightjs/styles/atom-one-dark.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="asset/highlightjs/styles/github-gist.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <!-- <link href="asset/highlightjs/styles/googlecode.css" media="screen, projection" rel="stylesheet" type="text/css"> -->
     <script>hljs.initHighlightingOnLoad();</script>
 
   </head>
@@ -179,6 +180,20 @@ class SomeClass:
 if __name__ == &#39;__main__&#39;:
     # A comment
     print &#39;hello world&#39;
+</code></pre>
+
+<pre class="line-numbers"><code class="language-python">def swap_bin(num, i, j):
+    &quot;&quot;&quot;x&amp;1 表示最后一位是什么
+    (0b0000110 &gt;&gt; 1) &amp;1 # 1
+    (0b0000110 &gt;&gt; 2) &amp;1 # 1
+    (0b0000110 &gt;&gt; 3) &amp;1 # 0
+
+    (1 &lt;&lt; num) | (1 &lt;&lt; j)表示交换i,j的值
+    &quot;&quot;&quot;
+    if (num &gt;&gt; i) &amp; 1 != (num &gt;&gt; j) &amp; j:
+        num = num ^ (1 &lt;&lt; num) | (1 &lt;&lt; j)
+
+    return num
 </code></pre>
 
 <h3 id="toc_6">4. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-%E6%B5%81%E7%A8%8B%E5%9B%BE">流程图</a></h3>
