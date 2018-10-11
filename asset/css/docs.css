@@ -57,7 +57,9 @@ ul.off-canvas-list li a:hover{background: #335a79;}
 .markdown-toc ul ul{padding-left: 16px;}
 .markdown-toc li a:hover{color: #0e83cd; background:none;}
 
-
+body{
+	font-family: sans-serif,monospace;
+}
 .markdown-body{ margin-top: 54px;}
 
 .markdown-toc{ position: absolute; display: none; right: 80px; top: 130px; }
