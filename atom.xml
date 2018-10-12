@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-11T23:28:11+08:00</updated>
+  <updated>2018-10-12T08:45:14+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,192 +12,6 @@
   </author>
   <generator uri="http://www.mweb.im">MWeb</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[计数排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392716754828.html"/>
-    <updated>2018-10-11T23:27:55+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392716754828.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[希尔排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392716677172.html"/>
-    <updated>2018-10-11T23:27:47+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392716677172.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[桶排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392715483846.html"/>
-    <updated>2018-10-11T23:25:48+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392715483846.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[归并排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392715143262.html"/>
-    <updated>2018-10-11T23:25:14+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392715143262.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[快速排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392714966006.html"/>
-    <updated>2018-10-11T23:24:56+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392714966006.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[冒泡排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392714719077.html"/>
-    <updated>2018-10-11T23:24:31+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392714719077.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[逻辑回归]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392705055223.html"/>
-    <updated>2018-10-11T23:08:25+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392705055223.html</id>
-    <content type="html"><![CDATA[
-<h3 id="toc_0">概率推导</h3>
-
-<p>\[\begin{aligned}<br/>
-&amp;\Rightarrow {\color{DarkGreen} ln(\frac{p}{1-p})=z}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{z}=\frac{p}{1-p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1-p}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1}{p}-1}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}+1=\frac{1}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} p=\frac{1}{e^{-z}+1}}\\<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h3 id="toc_1">损失函数推导</h3>
-
-<p>\[\begin{aligned}<br/>
-L(w)&amp;=\prod_{i=1}^n{p(y^i|x^i,w)}\\<br/>
-&amp;=\prod_{i=1}^n{h(z)^{y^i}.(1-h(z))^{1-y^i}}\\<br/>
-ln(L(w))&amp;=\sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))\\<br/>
-J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h3 id="toc_2">梯度推导</h3>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n}({yln(h(z))+(1-y)ln(1-h(z)))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}{h(z)}&#39;+(1-y)\frac{1}{1-h(z)}{(1-h(z))}&#39; \\<br/>
-对h(z)求偏导：\\<br/>
-{h(z)}&#39; &amp;={ \frac{1}{1+e^{-wx}}}&#39;\\<br/>
-&amp;= {(1+e^{-wx})^{-1}}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2} {(1+e^{-wx})}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
-&amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
-&amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
-&amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
-对1-h(z)求偏导：\\<br/>
-(1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
-&amp;=h(z)(1-h(z)){(wx)}&#39;\\<br/>
-\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}(-h(z)(1-h(z)){(wx)}&#39;)+(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n} y\frac{1}{h(z)}(h(z)(1-h(z)){(wx)}&#39;)-(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n}[y(1-h(z))-(1-y)h(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}[y-yh(z)-h(z)+yh(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z)){(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z))x_j\\<br/>
-&amp;=(y-h(z))x_j\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;=\sum_ {i=1}^{n}(y^i-h(z)^i){x_j}^i\\<br/>
-其中i表示第i条数据，j表示第j维\\<br/>
-\end{aligned}<br/>
-\]</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[动态规划]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392704829367.html"/>
-    <updated>2018-10-11T23:08:02+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392704829367.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[贪心]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392704711231.html"/>
-    <updated>2018-10-11T23:07:51+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392704711231.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[递归]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392704564412.html"/>
-    <updated>2018-10-11T23:07:36+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392704564412.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392700147620.html"/>
-    <updated>2018-10-11T23:00:14+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392700147620.html</id>
-    <content type="html"><![CDATA[
-<p><img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[插入排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392697680749.html"/>
-    <updated>2018-10-11T22:56:08+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392697680749.html</id>
-    <content type="html"><![CDATA[
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/2/25/Insertion_sort_animation.gif" alt=""/></p>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[最近想做的事]]></title>
@@ -437,6 +251,336 @@ J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
     <id>http://atlasbl.cn/coding_for_interview/15392292427453.html</id>
     <content type="html"><![CDATA[
 <p>。。。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[树：Tree]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392291769523.html"/>
+    <updated>2018-10-11T11:39:36+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392291769523.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[栈：Stack]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392291360952.html"/>
+    <updated>2018-10-11T11:38:56+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392291360952.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[队列：Queue]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391808453198.html"/>
+    <updated>2018-10-10T22:14:05+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391808453198.html</id>
+    <content type="html"><![CDATA[
+<p>队列是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
+
+<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。</p>
+
+<h1 id="toc_0">队列的特点</h1>
+
+<ul>
+<li>先入先出</li>
+</ul>
+
+<h1 id="toc_1">队列的应用</h1>
+
+<p>对于需要顺序执行的任务尝试用队列这种结构实现。</p>
+
+<h1 id="toc_2">队列的简单实现</h1>
+
+<h4 id="toc_3">1. Python List实现固定长度的队列,同样的方式可以实现双端队列</h4>
+
+<pre class="line-numbers"><code class="language-python">class Queue(object):
+    def __init__(self, init_size):
+        self._data = [None] * init_size
+        self._head = -1
+        self._tail = -1
+        self._size = init_size
+
+    def add(self, item):
+        if self._tail &gt;= self._size-1:
+            print(&quot;queue full&quot;)
+        else:
+            self._tail += 1
+            self._data[self._tail] = item
+
+
+    def poll(self):
+        if self._head &gt;= self._tail:
+            print(&quot;queue empty&quot;)
+        else:
+            self._head += 1
+            top = self._data[self._head]
+            self._data[self._head] = None
+            return top
+
+    def foreach(self):
+        rs = []
+        while self._head &lt;= self._tail-1:
+            top = self.poll()
+            rs.append(top)
+        return rs
+</code></pre>
+
+<h4 id="toc_4">2. 两个栈实现队列</h4>
+
+<pre class="line-numbers"><code class="language-text">
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[链表：LinkedList]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391807987921.html"/>
+    <updated>2018-10-10T22:13:18+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391807987921.html</id>
+    <content type="html"><![CDATA[
+<p>链表（Linked list）是一种常见的基础数据结构，是一种线性表，但是并不会按线性的顺序存储数据，而是在每一个节点里存到下一个节点的指针(Pointer)。由于不必须按顺序存储，链表在插入的时候可以达到O(1)的复杂度，比另一种线性表顺序表快得多，但是查找一个节点或者访问特定编号的节点则需要O(n)的时间，而顺序表相应的时间复杂度分别是O(logn)和O(1)。</p>
+
+<p>使用链表结构可以克服数组链表需要预先知道数据大小的缺点，链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。但是链表失去了数组随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大。</p>
+
+<h1 id="toc_0">链表的特点</h1>
+
+<ul>
+<li>不使用连续的内存</li>
+<li>只能顺序访问，不能随机读取</li>
+<li>插入，删除简单，查找慢</li>
+<li>动态扩展</li>
+</ul>
+
+<h1 id="toc_1">常见链表</h1>
+
+<ul>
+<li>单向链表</li>
+<li>双向链表</li>
+<li>循环链表</li>
+</ul>
+
+<h1 id="toc_2">链表的实现</h1>
+
+<p>Python List实现链表：</p>
+
+<pre class="line-numbers"><code class="language-python">class Node(object):
+    &quot;&quot;&quot;定义链表的节点&quot;&quot;&quot;
+    def __init__(self, data):
+        self._data = data
+        self._next = None
+
+    def get_data(self):
+        return self._data
+
+    def get_next(self):
+        return self._next
+
+    def set_data(self, data):
+        self._data = data
+
+    def set_next(self, next):
+        self._next = next
+
+class LinkedList(object):
+    def __init__(self):
+        self._head = Node(None)
+        self._tail = Node(None)
+        self._head.set_next(self._tail)
+        self._size = 0
+        
+    def add(self, data):
+        &quot;&quot;&quot;头插法：新加入的元素永远在head._next&quot;&quot;&quot;
+        node = Node(data)
+        node.set_next(self._head.get_next())
+        self._head.set_next(node)
+        self._size += 1
+        
+    def remove(self, data):
+        &quot;&quot;&quot;删除节点&quot;&quot;&quot;
+        prev = self._head
+        while prev.get_next() is not self._tail:
+            cur = prev.get_next()
+            if cur.get_data() == data:
+                prev.set_next(cur.get_next())
+        self._size -=1
+        
+    def size(self):
+        return self._size
+        
+    def is_exist(self, data):
+        &quot;&quot;&quot;查询某值是否在链表&quot;&quot;&quot;
+        if any([self._head.get_next() == self._tail, data == None]):
+            return False
+        cur = self._head.get_next()
+        while cur is not self._tail:
+            if cur.get_data == data:
+                return True
+            else:
+                return False
+                
+    def is_empty(self):
+        &quot;&quot;&quot;判断是否为空&quot;&quot;&quot;
+        return self._head.get_next() == self._tail
+        
+    def foreach(self):
+        if self._head.get_next() == self._tail:
+            return None
+        data = []
+        cur = self._head.get_next()
+        while cur is not self._tail:
+            data.append(cur.get_data())
+            cur = cur.get_next()
+        return data
+</code></pre>
+
+<p>因为是自定义实现，使用了固定长度的List来实现，链表的重要操作难度是在删除和添加节点上，</p>
+
+<p><strong>⚠️注意</strong>：<code>Head指针永远不变，是链表的开始</code>，不要直接使用head指针直接去进行指针移动，这样就无法返回操作后的链表了。</p>
+
+<h1 id="toc_3">链表相关的题目</h1>
+
+<p>全部来源于<a href="https://leetcode-cn.com/">Leetcode</a>中文网</p>
+
+<h4 id="toc_4">简单:</h4>
+
+<p><a href="">『删除链表中的节点』</a>,<a href="">『删除链表的倒数第N个节点』</a>,<a href="">『反转链表』</a>,<a href="">『合并两个有序链表』</a>,<a href="">『回文链表』</a>,<a href="">『环形链表』</a></p>
+
+<h4 id="toc_5">中等</h4>
+
+<p>``</p>
+
+<h4 id="toc_6">困难</h4>
+
+<p>``</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[数组：Array]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391804069666.html"/>
+    <updated>2018-10-10T22:06:46+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391804069666.html</id>
+    <content type="html"><![CDATA[
+<p>在计算器科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，「分配一块连续的内存来存储」。利用元素的索引（index）可以计算出该元素对应的存储地址。</p>
+
+<p>最简单的数据结构类型是一维数组。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。</p>
+
+<h2 id="toc_0">数组的特点</h2>
+
+<ul>
+<li>连续的内存</li>
+<li>同一类型</li>
+<li>相同大小</li>
+<li>随机读取</li>
+<li>插入删除耗时</li>
+<li>初始化必须知道大小</li>
+<li>扩容消耗时间，空间</li>
+</ul>
+
+<h2 id="toc_1">数组应用</h2>
+
+<ul>
+<li>实现List：List这种数据结构就是通过数组实现的</li>
+<li>实现String：字符串这种数据结构就是通过字符数组实现的</li>
+<li>实现：队列，堆，树，栈。</li>
+</ul>
+
+<h2 id="toc_2">数组相关的题目</h2>
+
+<p><a href="15392386512557.html">两数之和</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[排序问题]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392700147620.html"/>
+    <updated>2018-10-11T23:00:14+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392700147620.html</id>
+    <content type="html"><![CDATA[
+<p>在计算器科学与数学中，一个排序算法（英语：Sorting algorithm）是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法（例如搜索算法与合并算法）中是重要的，如此这些算法才能得到正确解答。排序算法也用在处理文字数据以及产生人类可读的输出结果。基本上，排序算法的输出必须遵守下列两个原则：</p>
+
+<ul>
+<li>输出结果为递增序列（递增是针对所需的排序顺序而言）</li>
+<li>输出结果是原输入的一种排列、或是重组<br/>
+虽然排序算法是一个简单的问题，但是从计算器科学发展以来，在此问题上已经有大量的研究。举例而言，冒泡排序在1956年就已经被研究。虽然大部分人认为这是一个已经被解决的问题，有用的新算法仍在不断的被发明。<a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">source：wiki</a><br/>
+# 排序算法的简单对比
+<img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[计数排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392716754828.html"/>
+    <updated>2018-10-11T23:27:55+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392716754828.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[希尔排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392716677172.html"/>
+    <updated>2018-10-11T23:27:47+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392716677172.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[桶排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392715483846.html"/>
+    <updated>2018-10-11T23:25:48+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392715483846.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[归并排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392715143262.html"/>
+    <updated>2018-10-11T23:25:14+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392715143262.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[快速排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392714966006.html"/>
+    <updated>2018-10-11T23:24:56+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392714966006.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[冒泡排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392714719077.html"/>
+    <updated>2018-10-11T23:24:31+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392714719077.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
 
 ]]></content>
   </entry>
