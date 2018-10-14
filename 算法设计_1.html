@@ -18,8 +18,8 @@
     <script src="asset/highlightjs/highlight.pack.js"></script>
     <script src="asset/highlightjs/mermaid.min.js"></script>
     <link href="asset/highlightjs/styles/github-gist.css" media="screen, projection" rel="stylesheet" type="text/css">
-    <!-- <link href="asset/highlightjs/styles/googlecode.css" media="screen, projection" rel="stylesheet" type="text/css"> -->
     <script>hljs.initHighlightingOnLoad();</script>
+    <!--add  -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.0/mermaid.min.js"></script>
     <script>
         var config = {
@@ -387,16 +387,6 @@ if __name__ == &#39;__main__&#39;:
 
 <h3 id="toc_5">4. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-%E6%B5%81%E7%A8%8B%E5%9B%BE">流程图</a></h3>
 
-<pre class="line-numbers"><code class="language-flow">st=&gt;start: Start
-op=&gt;operation: Your Operation
-cond=&gt;condition: Yes or No?
-e=&gt;end
-
-st-&gt;op-&gt;cond
-cond(yes)-&gt;e
-cond(no)-&gt;op
-</code></pre>
-
 <pre class="line-numbers"><code class="language-mermaid">graph TD;
   A--&gt;B;
   A--&gt;C;
@@ -406,9 +396,17 @@ cond(no)-&gt;op
 
 <h3 id="toc_6">5. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-%E5%BA%8F%E5%88%97%E5%9B%BE">序列图</a></h3>
 
-<pre class="line-numbers"><code class="language-seq">Alice-&gt;Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob--&gt;Alice: I am good thanks!
+<pre class="line-numbers"><code class="language-mermaid">sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice-&gt;John: Hello John, how are you?
+    loop Healthcheck
+        John-&gt;John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts &lt;br&gt;prevail...
+    John--&gt;Alice: Great!
+    John-&gt;Bob: How about you?
+    Bob--&gt;John: Jolly good!
 </code></pre>
 
 <h3 id="toc_7">6. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-%E7%94%98%E7%89%B9%E5%9B%BE">甘特图</a></h3>
