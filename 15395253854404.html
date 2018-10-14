@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  逻辑回归 - 不以刷题为目的的面试不是个好程序员
+  二分查找 - 不以刷题为目的的面试不是个好程序员
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -286,63 +286,23 @@
             </div>
             <div class="large-9 medium-9 columns">
  <div class="markdown-body">
-<h1>逻辑回归</h1>
+<h1>二分查找</h1>
 
-<h3 id="toc_0">概率推导</h3>
+<p>二分查找是一种查询算法，它的前提是：<code>数据必须有序</code>，基本思想是不断的将数据2分(即不断的去缩小一半的搜索范围)最终定位找到查询数据。</p>
 
-<p>\[\begin{aligned}<br/>
-&amp;\Rightarrow {\color{DarkGreen} ln(\frac{p}{1-p})=z}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{z}=\frac{p}{1-p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1-p}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1}{p}-1}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}+1=\frac{1}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} p=\frac{1}{e^{-z}+1}}\\<br/>
-\end{aligned}<br/>
-\]</p>
+<h1 id="toc_0">二分查找的实现</h1>
 
-<h3 id="toc_1">损失函数推导</h3>
+<h4 id="toc_1">1、递归实现</h4>
 
-<p>\[\begin{aligned}<br/>
-L(w)&amp;=\prod_{i=1}^n{p(y^i|x^i,w)}\\<br/>
-&amp;=\prod_{i=1}^n{h(z)^{y^i}.(1-h(z))^{1-y^i}}\\<br/>
-ln(L(w))&amp;=\sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))\\<br/>
-J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
-\end{aligned}<br/>
-\]</p>
+<pre class="line-numbers"><code class="language-python">def binarySearch():
+    pass
+</code></pre>
 
-<h3 id="toc_2">梯度推导</h3>
+<h4 id="toc_2">2、非递归实现</h4>
 
-<p>\[<br/>
-\begin{aligned}<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n}({yln(h(z))+(1-y)ln(1-h(z)))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}{h(z)}&#39;+(1-y)\frac{1}{1-h(z)}{(1-h(z))}&#39; \\<br/>
-对h(z)求偏导：\\<br/>
-{h(z)}&#39; &amp;={ \frac{1}{1+e^{-wx}}}&#39;\\<br/>
-&amp;= {(1+e^{-wx})^{-1}}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2} {(1+e^{-wx})}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
-&amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
-&amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
-&amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
-对1-h(z)求偏导：\\<br/>
-(1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
-&amp;=h(z)(1-h(z)){(wx)}&#39;\\<br/>
-\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}(-h(z)(1-h(z)){(wx)}&#39;)+(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n} y\frac{1}{h(z)}(h(z)(1-h(z)){(wx)}&#39;)-(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n}[y(1-h(z))-(1-y)h(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}[y-yh(z)-h(z)+yh(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z)){(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z))x_j\\<br/>
-&amp;=(y-h(z))x_j\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;=\sum_ {i=1}^{n}(y^i-h(z)^i){x_j}^i\\<br/>
-其中i表示第i条数据，j表示第j维\\<br/>
-\end{aligned}<br/>
-\]</p>
+<pre class="line-numbers"><code class="language-python">def binarySearch():
+    pass
+</code></pre>
 
 
 </div>
@@ -354,13 +314,14 @@ J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
   <div class="large-6 columns">
 	<div class="text-left" style="padding:15px 0px;">
 		
-	        <a href="15392386512557.html"  title="Previous Post: Twonumsum">&laquo; Twonumsum</a>
-	    
 	</div>
   </div>
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
+	        <a href="15395247337147.html" 
+	        title="Next Post: 词向量模型">词向量模型 &raquo;</a>
+	    
 	</div>
   </div>
 </div>
@@ -372,7 +333,7 @@ J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
 </div>
 <script type="text/javascript">
 	$(function(){
-		var currentURL = '15392705055223.html';
+		var currentURL = '15395253854404.html';
 		$('#side-nav a').each(function(){
 			if($(this).attr('href') == currentURL){
 				$(this).parent().addClass('active');

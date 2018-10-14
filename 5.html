@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  逻辑回归 - 不以刷题为目的的面试不是个好程序员
+  论文相关 - 不以刷题为目的的面试不是个好程序员
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -285,101 +285,48 @@
               </div>
             </div>
             <div class="large-9 medium-9 columns">
- <div class="markdown-body">
-<h1>逻辑回归</h1>
-
-<h3 id="toc_0">概率推导</h3>
-
-<p>\[\begin{aligned}<br/>
-&amp;\Rightarrow {\color{DarkGreen} ln(\frac{p}{1-p})=z}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{z}=\frac{p}{1-p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1-p}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1}{p}-1}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}+1=\frac{1}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} p=\frac{1}{e^{-z}+1}}\\<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h3 id="toc_1">损失函数推导</h3>
-
-<p>\[\begin{aligned}<br/>
-L(w)&amp;=\prod_{i=1}^n{p(y^i|x^i,w)}\\<br/>
-&amp;=\prod_{i=1}^n{h(z)^{y^i}.(1-h(z))^{1-y^i}}\\<br/>
-ln(L(w))&amp;=\sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))\\<br/>
-J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h3 id="toc_2">梯度推导</h3>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n}({yln(h(z))+(1-y)ln(1-h(z)))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}{h(z)}&#39;+(1-y)\frac{1}{1-h(z)}{(1-h(z))}&#39; \\<br/>
-对h(z)求偏导：\\<br/>
-{h(z)}&#39; &amp;={ \frac{1}{1+e^{-wx}}}&#39;\\<br/>
-&amp;= {(1+e^{-wx})^{-1}}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2} {(1+e^{-wx})}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
-&amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
-&amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
-&amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
-对1-h(z)求偏导：\\<br/>
-(1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
-&amp;=h(z)(1-h(z)){(wx)}&#39;\\<br/>
-\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}(-h(z)(1-h(z)){(wx)}&#39;)+(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n} y\frac{1}{h(z)}(h(z)(1-h(z)){(wx)}&#39;)-(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n}[y(1-h(z))-(1-y)h(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}[y-yh(z)-h(z)+yh(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z)){(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z))x_j\\<br/>
-&amp;=(y-h(z))x_j\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;=\sum_ {i=1}^{n}(y^i-h(z)^i){x_j}^i\\<br/>
-其中i表示第i条数据，j表示第j维\\<br/>
-\end{aligned}<br/>
-\]</p>
+ 
 
 
-</div>
+	
+		<div class="markdown-body">
+		<h1>文本分类的注意力模型:</h1>
 
-<br /><br />
-<hr />
+		<p><a href="http://tcci.ccf.org.cn/conference/2017/papers/1057.pdf">「A Convolutional Attention Model for Text Classification」↩</a> <br/>
+Abstract：具有注意机制的神经网络模型已经显示出它们在各种任务的效率。然而，很少研究工作会关注到文本分类机制和文本分类现有注意模型缺乏认知直觉和数学解释。在本文中，我们提出了一种基于注意力模型的神经网络新架构用于文本分类。特别是，我们展示了卷积神经网络（CNN）是从文本序列中提取注意力的合理模型在数学方面。然后，我们提出了一个基于CNN的新型注意模型并介绍一种新的网络架构，它结合了递归神经网络和我们基于CNN的关注模型。五个数据集的实验结果表明我们提出的模型可以准确地捕捉句子的重要部分来改进文本分类的表现。</p>
 
-<div class="row clearfix">
-  <div class="large-6 columns">
-	<div class="text-left" style="padding:15px 0px;">
-		
-	        <a href="15392386512557.html"  title="Previous Post: Twonumsum">&laquo; Twonumsum</a>
-	    
-	</div>
-  </div>
-  <div class="large-6 columns">
-	<div class="text-right" style="padding:15px 0px;">
-		
-	</div>
-  </div>
-</div>
+<h1 id="toc_0">1、简介</h1>
 
-<div class="row">
-<div style="padding:0px 0.93em;" class="share-comments">
+<p>近年来，毫无疑问，深度学习在自然语言处理（NLP）研究上已经迎来了惊人的技术进展。深度学习的很多工作涉及通过自然语言模型学习词向量表示[15和结合词向量用于文本分类等各种任务[4]，机器翻译[9]，文件摘要[2]等。</p>
 
-</div>
-</div>
-<script type="text/javascript">
-	$(function(){
-		var currentURL = '15392705055223.html';
-		$('#side-nav a').each(function(){
-			if($(this).attr('href') == currentURL){
-				$(this).parent().addClass('active');
-			}
-		});
-	});
-</script>  
+<p>在本文中，我们关注文本分类问题。传统方法文本分类首先表示具有稀疏特征的文本序列，例如n-gram[3]，基于主题的表示[26]和核方法[8]。最近深度学习模型已经在文本分类中取得了巨大成功，例如卷积神经网络[12]和基于长期短期记忆的递归神经网络[7]。</p>
+
+<p>将卷积神经网络（CNN）应用于NLP，包括文本分类，近年来吸引了很多人的兴趣。已经表明CNN可以是直接的适用于嵌入词[11]。与词级模型不同，[27]提出用于文本分类的字符级CNN，取得了有竞争力的成果。虽然CNN已经被证明在文本分类方面是有效的，它通常忽略了重要的长距离序列信息，这极大地影响了分类性能，特别是在有『否定和语义转换』的句子中。循环神经网络（RNN）是NLP中的另一个重要模型。 [22]使用门控反复发作神经网络对模型进行建模，并将该模型应用于情感分类。[21]探讨了句子的结构，并使用了树状结构的递归神经网络和长短记忆（LSTM）神经网络用于文本分类。<code>RNN的优点是能够更好地捕获上下文信息</code>，尤其是长篇文章语义,然而RNN模型<code>不能注意文本的重要部分</code>。这导致RNN应用于文本分类时，会降低有效性。</p>
+
+<p>最近，基于上述架构，神经网络的新方向已经出现。它学会将“注意力”集中在文本的特定部分作为模拟阅读时人的注意力，然而，神经网络注意机制的研究仅在NLP中的（seq2seq）任务上有一定的效果，包括<code>机器翻译[1]</code>，<code>字幕生成[24]</code>和<code>文本摘要[18]</code>。使用相同的对齐机制用于分类是不合适的。例如，[25]将seq2seq任务中使用的注意力模型应用于文档级分类。注意力由一个隐藏层感知器建模使用RNN隐藏单元作为输入。<code>『与非注意力方法相比，对改进最终结果十分有限』</code>。 <code>原因是</code>，在seq2seq问题中，每个word有一个相应的标签，例如另一种语言的单词（用于机器）翻译任务）或词性标签（用于POS标记任务）。`在文本分类中，每个单词没有目标标签，表示该单词与类别相关或不。因此，没有证据表明为什么有一个Attention隐藏层的感知器对于文本分类有效.</p>
+
+<p>在认知和神经科学研究的推动下，我们提出了一种新颖的注意力模型。基本思想是首先使用卷积运算来捕捉注意力信号，每个都代表其上下文中一个单词的本地信息;然后用RNN使用注意信号模拟文本。一个具有较高注意力的词，其中携带更多有价值的信息，在文本建模中将更为重要。我们的主要本文的贡献有三个方面：</p>
+
+<ul>
+<li>这是第一次提出卷积神经网络模型来刺激基于认知和神经科学研究的人类阅读注意力，以及本文给出了该模型的详细数学推导。</li>
+<li>此外，已经提出了一种可用于多个任务的基于该模型的新型注意力提取方法。</li>
+<li>最后，我们提出了一种基于卷积注意力提取的新架构模型，与现有技术相比，这种神经网络在文本分类模型中显示出有竞争力的结果。</li>
+</ul>
+
+<p>本文的其余部分结构如下，第2部分探讨了一种新颖的注意模型基于卷积神经网络，并详细减少了该模型。第3部分给出了卷积循环注意网络（CRAN）用于文本分类的描述。第4部分介绍了一些证明有效性的实验CRAN对文本分类的影响。第5节总结了论文并概述了未来工作。</p>
+
+<h1 id="toc_1">2、基于CNN的注意力模型</h1>
+
+<p>众所周知，我们只能关注在视觉场景中呈现的少量信息，并且仅关注与手头的任务相关的特定信息。认知和神经科学研究证实了这一假设，许多实验表明，人类在大脑中描绘出一种视觉表现或某些任务的“搜索模板”，并尝试只关注它可以匹配“面向任务的模板”[5]信息。心理语言学证明了这一点模板匹配过程也有助于我们强调大脑正在处理文本的重要内容。虽然这种注意力机制在神经科学和心理学方面的研究已经很彻底 然而很少有研究关于如何引入它适用于计算语言和自然语言处理。由此激励，我们提出了一种将上述注意机制引入自然语言处理的新模型中，特别是文本分类。</p>
+
+<p>基于深入调查，我们发现卷积神经网络（CNN）是一种刺激人类阅读注意机制的自然模型卷积操作作为CNN的核心组件类似于模板匹配的过程。对于文本数据，CNN始终应用一维卷积，每个单词的向量表示的。我们的第一个目标是CNN的一维卷积恰恰是计算相似度的过程展示这一点在文本片段和“注意力搜索模板”之间。在神经网络模型中，经常表示长度为T的文本序列（必要时填充）</p>
+
+
+		</div>
+	
+
+  
+  
 </div></div>
 
 

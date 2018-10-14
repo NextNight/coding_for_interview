@@ -62,7 +62,7 @@
         <li><label>数据结构</label></li>
 
           
-            <li><a title="此类的文章结构" href="15392326678534.html">此类的文章结构</a></li>
+            <li><a title="--" href="15392326678534.html">--</a></li>
           
             <li><a title="堆：Heap" href="15392363328863.html">堆：Heap</a></li>
           
@@ -85,6 +85,8 @@
         <li class="divider"></li>
         <li><label>算法设计</label></li>
 
+          
+            <li><a title="二分查找" href="15395253854404.html">二分查找</a></li>
           
             <li><a title="查找问题" href="15393054098142.html">查找问题</a></li>
           
@@ -135,6 +137,24 @@
 
       
         <li class="divider"></li>
+        <li><label>深度学习</label></li>
+
+          
+            <li><a title="词向量模型" href="15395247337147.html">词向量模型</a></li>
+          
+            <li><a title="文本分类模型" href="15395241741886.html">文本分类模型</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>论文相关</label></li>
+
+          
+            <li><a title="文本分类的注意力模型:" href="15395117974496.html">文本分类的注意力模型:</a></li>
+          
+
+      
+        <li class="divider"></li>
         <li><label>公式推导</label></li>
 
           
@@ -171,7 +191,7 @@
                     
                       <li class="side-title"><span>数据结构</span></li>
                         
-                          <li><a title="此类的文章结构" href="15392326678534.html">此类的文章结构</a></li>
+                          <li><a title="--" href="15392326678534.html">--</a></li>
                         
                           <li><a title="堆：Heap" href="15392363328863.html">堆：Heap</a></li>
                         
@@ -192,6 +212,8 @@
 
                     
                       <li class="side-title"><span>算法设计</span></li>
+                        
+                          <li><a title="二分查找" href="15395253854404.html">二分查找</a></li>
                         
                           <li><a title="查找问题" href="15393054098142.html">查找问题</a></li>
                         
@@ -237,6 +259,20 @@
                         
 
                     
+                      <li class="side-title"><span>深度学习</span></li>
+                        
+                          <li><a title="词向量模型" href="15395247337147.html">词向量模型</a></li>
+                        
+                          <li><a title="文本分类模型" href="15395241741886.html">文本分类模型</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>论文相关</span></li>
+                        
+                          <li><a title="文本分类的注意力模型:" href="15395117974496.html">文本分类的注意力模型:</a></li>
+                        
+
+                    
                       <li class="side-title"><span>公式推导</span></li>
                         
                           <li><a title="逻辑回归" href="15392705055223.html">逻辑回归</a></li>
@@ -254,66 +290,24 @@
 
 	
 		<div class="markdown-body">
-		<h1>逻辑回归</h1>
+		<h1>动态规划</h1>
 
-		<h3 id="toc_0">概率推导</h3>
-
-<p>\[\begin{aligned}<br/>
-&amp;\Rightarrow {\color{DarkGreen} ln(\frac{p}{1-p})=z}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{z}=\frac{p}{1-p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1-p}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1}{p}-1}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} e^{-z}+1=\frac{1}{p}}\\<br/>
-&amp;\Rightarrow {\color{DarkGreen} p=\frac{1}{e^{-z}+1}}\\<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h3 id="toc_1">损失函数推导</h3>
-
-<p>\[\begin{aligned}<br/>
-L(w)&amp;=\prod_{i=1}^n{p(y^i|x^i,w)}\\<br/>
-&amp;=\prod_{i=1}^n{h(z)^{y^i}.(1-h(z))^{1-y^i}}\\<br/>
-ln(L(w))&amp;=\sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))\\<br/>
-J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
-\end{aligned}<br/>
-\]</p>
-
-<h3 id="toc_2">梯度推导</h3>
-
-<p>\[<br/>
-\begin{aligned}<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n}({yln(h(z))+(1-y)ln(1-h(z)))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}{h(z)}&#39;+(1-y)\frac{1}{1-h(z)}{(1-h(z))}&#39; \\<br/>
-对h(z)求偏导：\\<br/>
-{h(z)}&#39; &amp;={ \frac{1}{1+e^{-wx}}}&#39;\\<br/>
-&amp;= {(1+e^{-wx})^{-1}}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2} {(1+e^{-wx})}&#39;\\<br/>
-&amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
-&amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
-&amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
-&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
-&amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
-对1-h(z)求偏导：\\<br/>
-(1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
-&amp;=h(z)(1-h(z)){(wx)}&#39;\\<br/>
-\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
-&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}(-h(z)(1-h(z)){(wx)}&#39;)+(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n} y\frac{1}{h(z)}(h(z)(1-h(z)){(wx)}&#39;)-(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
-&amp;=\sum_ {i=1}^{n}[y(1-h(z))-(1-y)h(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}[y-yh(z)-h(z)+yh(z)]{(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z)){(wx)}&#39;\\<br/>
-&amp;=\sum_ {i=1}^{n}(y-h(z))x_j\\<br/>
-&amp;=(y-h(z))x_j\\<br/>
-\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;=\sum_ {i=1}^{n}(y^i-h(z)^i){x_j}^i\\<br/>
-其中i表示第i条数据，j表示第j维\\<br/>
-\end{aligned}<br/>
-\]</p>
+		<h2 id="toc_0"></h2>
 
 
 		</div>
+	
+
+ 
+	
+
+ 
+	
+
+ 
+	
+
+ 
 	
 
   
