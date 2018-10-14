@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-14T22:15:49+08:00</updated>
+  <updated>2018-10-14T22:16:38+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -282,13 +282,11 @@ Abstract：具有注意机制的神经网络模型已经显示出它们在各种
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[[TOC]]]></title>
+    <title type="html"><![CDATA[文章结构]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15392326678534.html"/>
     <updated>2018-10-11T12:37:47+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15392326678534.html</id>
     <content type="html"><![CDATA[
-<h1 id="toc_0">此类的文章结构</h1>
-
 <ul>
 <li>数据结构介绍，相关实现，应用</li>
 <li>数据结构的操作图示</li>
@@ -299,7 +297,7 @@ Abstract：具有注意机制的神经网络模型已经显示出它们在各种
 # 示例</li>
 </ul>
 
-<h2 id="toc_1">树</h2>
+<h2 id="toc_0">树</h2>
 
 <p>树是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：</p>
 
@@ -310,14 +308,14 @@ Abstract：具有注意机制的神经网络模型已经显示出它们在各种
 <li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
 </ul>
 
-<h2 id="toc_2">树的实现方式</h2>
+<h2 id="toc_1">树的实现方式</h2>
 
 <ul>
 <li>二维数组：每个数组是树的一个节点node,每个node存储了当前节点的数据和它的父节点索引。</li>
 <li>字典实现：</li>
 </ul>
 
-<h2 id="toc_3">树的应用</h2>
+<h2 id="toc_2">树的应用</h2>
 
 <ul>
 <li>二叉树
@@ -333,12 +331,12 @@ Abstract：具有注意机制的神经网络模型已经显示出它们在各种
 <li>Trie树：</li>
 </ul>
 
-<h2 id="toc_4">二叉树的python实现</h2>
+<h2 id="toc_3">二叉树的python实现</h2>
 
 <pre class="line-numbers"><code class="language-text">def 
 </code></pre>
 
-<h2 id="toc_5">二叉树的各种操作</h2>
+<h2 id="toc_4">二叉树的各种操作</h2>
 
 <ul>
 <li>层次遍历</li>
