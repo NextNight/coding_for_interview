@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-10-14T22:11:13+08:00</updated>
+  <updated>2018-10-14T22:15:49+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -73,7 +73,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[文本分类的注意力模型:]]></title>
+    <title type="html"><![CDATA[文本分类的注意力模型]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15395117974496.html"/>
     <updated>2018-10-14T18:09:57+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15395117974496.html</id>
@@ -165,15 +165,15 @@ Abstract：具有注意机制的神经网络模型已经显示出它们在各种
     <content type="html"><![CDATA[
 <p>「用偶像中这个词可能不太确切，但是好像偶像更能让我像个年轻人一样仿佛对生活充满了热情。」</p>
 
-<h1 id="toc_0">「Andrew Ng」</h1>
+<h1 id="toc_0"><span style="color:rgb(0,173,167)">「Andrew Ng」</span></h1>
 
 <p>吴恩达（英语：Andrew Ng，1976年－）是斯坦福大学计算机科学系和电气工程系的副教授，斯坦福人工智能实验室的主任。他还与达芙妮·科勒一起创建了在线教育平台Coursera。</p>
 
-<h1 id="toc_1">「唐骏」</h1>
+<h1 id="toc_1"><span style="color:rgb(0,173,167)">「唐骏」</span></h1>
 
 <p>唐骏，是中国的著名职业经理人，曾留学日本和美国，有“打工皇帝”之称。他本科毕业于北京邮电大学，后前往日本名古屋大学深造取得工学硕士学位。1994年加入微软公司美国总部，先后担任微软全球技术中心总经理，微软中国公司总裁。2004年出任中国最大的互动娱乐公司盛大网络公司总裁，并帮助盛大公司在美国纳斯达克成功上市，被华尔街誉为中国资本的第一人。2008年唐骏先生以“十亿“身价转会新华都集团出任总裁兼CEO。</p>
 
-<h1 id="toc_2"><span style="color:blue">「陈天桥」</span></h1>
+<h1 id="toc_2"><span style="color:rgb(0,173,167)">「陈天桥」</span></h1>
 
 <p>陈天桥，1973年5月生于浙江新昌。盛大网络董事会主席和首席执行官（CEO）。陈天桥是中国网络游戏产业的奠基人和领军人物，缔造了一个白手起家创业的神话，其影响力遍布国内及全球。</p>
 
