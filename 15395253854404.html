@@ -325,11 +325,12 @@
 <li>用数组的中间元素比较key,相等则返回中间元素的索引</li>
 <li>如果中间元素大于key,则在左侧继续查找</li>
 <li>如果中间元素小于key,则在右侧继续查找</li>
-<li>直到定位到蛋黄哥元素为止<br/>
-# 二分查找的实现</li>
+<li>直到定位到蛋黄哥元素为止</li>
 </ol>
 
-<h4 id="toc_1">1、递归实现</h4>
+<h1 id="toc_1">二分查找的实现</h1>
+
+<h4 id="toc_2">1、递归实现</h4>
 
 <pre class="line-numbers"><code class="language-python">def binary_search(nums, start, end, key):
     &quot;&quot;&quot;递归实现&quot;&quot;&quot;
@@ -344,7 +345,7 @@
         return mid
 </code></pre>
 
-<h4 id="toc_2">2、非递归实现</h4>
+<h4 id="toc_3">2、非递归实现</h4>
 
 <pre class="line-numbers"><code class="language-python">def binary_search(nums, start, end, key):
     &quot;&quot;&quot;非递归实现&quot;&quot;&quot;
