@@ -115,9 +115,9 @@
         <li><label>算法设计</label></li>
 
           
-            <li><a title="二分查找" href="15395253854404.html">二分查找</a></li>
-          
             <li><a title="查找问题" href="15393054098142.html">查找问题</a></li>
+          
+            <li><a title="二分查找" href="15395253854404.html">二分查找</a></li>
           
             <li><a title="排序问题" href="15392700147620.html">排序问题</a></li>
           
@@ -242,9 +242,9 @@
                     
                       <li class="side-title"><span>算法设计</span></li>
                         
-                          <li><a title="二分查找" href="15395253854404.html">二分查找</a></li>
-                        
                           <li><a title="查找问题" href="15393054098142.html">查找问题</a></li>
+                        
+                          <li><a title="二分查找" href="15395253854404.html">二分查找</a></li>
                         
                           <li><a title="排序问题" href="15392700147620.html">排序问题</a></li>
                         
@@ -319,49 +319,9 @@
 
 	
 		<div class="markdown-body">
-		<h1>二分查找</h1>
+		<h1>查找问题</h1>
 
-		<p>二分查找是一种查询算法，它的前提是：<code>数据必须有序</code>，基本思想是不断的将数据2分(即不断的去缩小一半的搜索范围)最终定位找到查询数据。</p>
-
-<h1 id="toc_0">二分搜索的步骤：</h1>
-
-<ol>
-<li>用数组的中间元素比较key,相等则返回中间元素的索引</li>
-<li>如果中间元素大于key,则在左侧继续查找</li>
-<li>如果中间元素小于key,则在右侧继续查找</li>
-<li>直到定位到单个元素为止</li>
-</ol>
-
-<h1 id="toc_1">二分查找的实现</h1>
-
-<h4 id="toc_2">1、递归实现</h4>
-
-<pre class="line-numbers"><code class="language-python">def binary_search(nums, start, end, key):
-    &quot;&quot;&quot;递归实现&quot;&quot;&quot;
-    if start &gt; end:
-        return -1
-    mid = start + (start - end) / 2
-    if nums[mid] &gt; key:
-        return binary_search(nums, start, mid-1, key)
-    elif nums[mid] &lt; key:
-        return binary_search(nums, mid+1, end, key)
-    else:
-        return mid
-</code></pre>
-
-<h4 id="toc_3">2、非递归实现</h4>
-
-<pre class="line-numbers"><code class="language-python">def binary_search(nums, start, end, key):
-    &quot;&quot;&quot;非递归实现&quot;&quot;&quot;
-    while start&lt;=end:
-        mid = start+(start-end)/2
-        if nums[mid]&gt;key:
-            end = mid-1
-        elif nums[mid]&lt;key:
-            start = mid+1
-        else:
-            return mid
-</code></pre>
+		<p>最常见的查找就是<code>二分查找</code>，多数的查找问题的解决方案都是转化为选择合适的数据结构存储，再利用数据结构的特性来解决。比如：<code>Hash表</code>能够实现数据的直接定位，即O(1)的时间复杂度。<code>二叉排序树</code>，<code>红黑树</code>，<code>B树</code>，这些数据结构的设计就是为了解决数据搜索的问题。还有一些数据的查找如TopN借助于排序算法，</p>
 
 
 		</div>
