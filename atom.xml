@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-11-14T19:03:44+08:00</updated>
+  <updated>2018-11-14T19:09:15+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -128,20 +128,21 @@ sparse_categorical_crossentropy
 <p>评估函数是用来评估模型效果，与loss有很多公用的函数，keras中的metrics实现如下：</p>
 
 <pre class="line-numbers"><code class="language-python">误差：
-mse = MSE = mean_squared_error
-mae = MAE = mean_absolute_error
-mape = MAPE = mean_absolute_percentage_error
-msle = MSLE = mean_squared_logarithmic_error
-cosine = cosine_proximity
+    mse = MSE = mean_squared_error
+    mae = MAE = mean_absolute_error
+    mape = MAPE = mean_absolute_percentage_error
+    msle = MSLE = mean_squared_logarithmic_error
+    cosine = cosine_proximity
 准确率：
-binary_accuracy:
-categorical_accuracy
-sparse_categorical_accuracy
+    binary_accuracy:
+    categorical_accuracy
+    sparse_categorical_accuracy
 。。。
 </code></pre>
 
 <blockquote>
 <p>如果没有我们需要的评价函数的话就需要自定义评价函数如：f1_score</p>
+</blockquote>
 
 <pre class="line-numbers"><code class="language-python">def f1_score(y_true, y_pred):
     # Count positive samples.
@@ -159,7 +160,6 @@ sparse_categorical_accuracy
     f1_score = 2 * (precision * recall) / (precision + recall)
     return f1_score
 </code></pre>
-</blockquote>
 
 <h3 id="toc_7">keras的「optimizer」优化器</h3>
 
