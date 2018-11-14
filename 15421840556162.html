@@ -332,8 +332,7 @@
   模型训练--&gt;模型优化;
 </code></pre>
 
-<p>深度学习整个的流程跟机器学习没什么差别，主要的区别在模型上，深度神经网络更复杂，更加多变，能力更强，<br/>
-「 简单快读的入门方式就是找到体系的流程快读的实现demo。而这个流程的一些问题和阻碍，以及应该注意的地方是我这里想说的。 」。</p>
+<p>深度学习整个的流程跟机器学习没什么差别，主要的区别在模型上，深度神经网络更复杂，更加多变，能力更强，「 简单快读的入门方式就是找到体系的流程快读的实现demo。而这个流程的一些问题和阻碍，以及应该注意的地方是我这里想说的。」</p>
 
 <h2 id="toc_1">keras相关的模块</h2>
 
@@ -341,7 +340,7 @@
 
 <h3 id="toc_2">keras的预处理模块</h3>
 
-<p><code>from keras.preprocessing import sequence,text,image</code></p>
+<p><code>from keras.preprocessing import sequence,text,image</code>s</p>
 
 <ul>
 <li>image：图像相关</li>
@@ -414,16 +413,16 @@ model.add(Activation(&#39;softmax&#39;))
 <p>losses即损失函数，也可以叫做目标函数，优化评分函数，它用来告诉我们模型该如何调整到最优，keras中的losses 实现如下：</p>
 
 <pre class="line-numbers"><code class="language-python">回归
-mse = MSE = mean_squared_error
-mae = MAE = mean_absolute_error
-mape = MAPE = mean_absolute_percentage_error
-msle = MSLE = mean_squared_logarithmic_error
-kld = KLD = kullback_leibler_divergence
-cosine = cosine_proximity
+    mse = MSE = mean_squared_error
+    mae = MAE = mean_absolute_error
+    mape = MAPE = mean_absolute_percentage_error
+    msle = MSLE = mean_squared_logarithmic_error
+    kld = KLD = kullback_leibler_divergence
+    cosine = cosine_proximity
 分类
-categorical_crossentropy：多分
-binary_crossentropy：二分
-sparse_categorical_crossentropy
+    categorical_crossentropy：多分
+    binary_crossentropy：二分
+    sparse_categorical_crossentropy
 。。。
 </code></pre>
 
