@@ -431,7 +431,7 @@ texts_to_sequences(texts)                                # 文本转换成索引
     tokenizer = Tokenizer(num_words=num_words)
     tokenizer.fit_on_texts(dt_train[column])
 
-    # 对每一段话转换为数字列表，使用每个词的编号进行编号
+    # 对每一段话转换为数字列表，使用每个词的索引进行编号
     x_train_seq = tokenizer.texts_to_sequences(dt_train[column])
     x_test_seq = tokenizer.texts_to_sequences(dt_test[column])
 
