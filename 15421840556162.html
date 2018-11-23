@@ -354,7 +354,7 @@
 
 <p>keras的utils模块主要是提供建模流程的各种辅助操作，其中包括数据相关的，IO相关的，数据操作相关，网络层相关的操作具体如下：</p>
 
-<pre class="line-numbers"><code class="language-text">from .io_utils import HDF5Matrix
+<pre class="line-numbers"><code class="language-python">from .io_utils import HDF5Matrix
 from .data_utils import get_file
 from .data_utils import Sequence
 from .data_utils import GeneratorEnqueuer
@@ -485,7 +485,7 @@ nadam = Nadam
 
 <p>callback回调函数是用于在模型训练过程中对模型活着数据进行操作，最常用的是：</p>
 
-<pre class="line-numbers"><code class="language-text">ModelCheckpoint:训练的过程中不断的保存模型，是一种容错机制。
+<pre class="line-numbers"><code class="language-python">ModelCheckpoint:训练的过程中不断的保存模型，是一种容错机制。
 EarlyStopping:提前停止，一种降低训练时间和过拟合的策略。
 </code></pre>
 
@@ -493,12 +493,12 @@ EarlyStopping:提前停止，一种降低训练时间和过拟合的策略。
 
 <p>0、嵌入层</p>
 
-<pre class="line-numbers"><code class="language-text">Embedding:
+<pre class="line-numbers"><code class="language-python">Embedding:
 </code></pre>
 
 <p>1、核心层：</p>
 
-<pre class="line-numbers"><code class="language-text">Input:输入层，用于实例化Keras张量。
+<pre class="line-numbers"><code class="language-python">Input:输入层，用于实例化Keras张量。
 Dense：全链接层
 Activation：激活函数
 Dropout：随机失活，防止过拟合
@@ -516,7 +516,7 @@ SpatialDropout3D
 
 <p>2、卷积层：构成卷积神经网络的基础</p>
 
-<pre class="line-numbers"><code class="language-text">Conv1D:一维卷积
+<pre class="line-numbers"><code class="language-python">Conv1D:一维卷积
 Conv2D:二维卷积
 Conv3D:三维卷积
 
@@ -528,7 +528,7 @@ UpSampling3D:3D 输入的上采样层。
 
 <p>3、循环层：循环神经网路的基础</p>
 
-<pre class="line-numbers"><code class="language-text">RNN 
+<pre class="line-numbers"><code class="language-python">RNN 
 SimpleRNN
 GRU
 Lstm 
@@ -536,7 +536,7 @@ Lstm
 
 <p>4、池化层：</p>
 
-<pre class="line-numbers"><code class="language-text">最大池化层
+<pre class="line-numbers"><code class="language-python">最大池化层
     MaxPooling1D
     MaxPooling2D
     MaxPooling3D
@@ -556,7 +556,7 @@ Lstm
 
 <p>5、融合层：两个/多个层的数据进行某种计算进行融合</p>
 
-<pre class="line-numbers"><code class="language-text">Add:逐元素相加
+<pre class="line-numbers"><code class="language-python">Add:逐元素相加
 Subtract:逐元素相减
 Multiply：逐元素相乘
 Average：逐元素平均
@@ -567,20 +567,20 @@ Dot：点积
 
 <p>6、噪声层：缓解过拟合</p>
 
-<pre class="line-numbers"><code class="language-text">GaussianNoise:高斯噪声
+<pre class="line-numbers"><code class="language-python">GaussianNoise:高斯噪声
 GaussianDropout:
 AlphaDropout:
 </code></pre>
 
 <p>7、层封装器</p>
 
-<pre class="line-numbers"><code class="language-text">TimeDistributed:
+<pre class="line-numbers"><code class="language-python">TimeDistributed:
 Bidirectional:RNN的双向封装器，对序列进行前向和后向计算。
 </code></pre>
 
 <p>8、激活函数：用于对数据进行非线性变换</p>
 
-<pre class="line-numbers"><code class="language-text">sigmoid
+<pre class="line-numbers"><code class="language-python">sigmoid
 softmax
 hard_sigmoid
 linear:线性激活函数（即不做任何改变）

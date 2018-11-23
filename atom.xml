@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-11-23T13:50:33+08:00</updated>
+  <updated>2018-11-23T13:52:57+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -22,7 +22,7 @@
 <p>英文文本默认的是空格分割，不像中文以字成词组词成句，中间连贯。所以中文相较于英文来说就多了分词这一步，分词之后得到跟英文一样的格式就可以作为模型的输入数据了。<br/>
 示例：</p>
 
-<pre class="line-numbers"><code class="language-text">EN;
+<pre class="line-numbers"><code class="language-python">EN;
     I am chinese.
 ZH:
     我是中国人。=&gt; 我 是 中国 人
@@ -30,7 +30,7 @@ ZH:
 
 <p>分词部分使用中文分词器就可以实现。当然我们也可以采用其他的分隔符，如<code>-</code>,<code>|</code>,<code>&gt;</code>,只要不语文本内容冲突就可以。如果我们有N条文本，那么就得到一个N行的分词后的序列，如下：</p>
 
-<pre class="line-numbers"><code class="language-text">0   我 是 中国 人
+<pre class="line-numbers"><code class="language-python">0   我 是 中国 人
 1   我 是 中国 人
 2   我 是 中国 人
 ... 我 是 中国 人
@@ -47,13 +47,13 @@ N   我 是 中国 人
 
 <h1 id="toc_0">Keras中的文本处理</h1>
 
-<pre class="line-numbers"><code class="language-text">from keras.preprocessing.text import Tokenizer,sequence 
+<pre class="line-numbers"><code class="language-python">from keras.preprocessing.text import Tokenizer,sequence 
 from keras.utils import np_utils
 </code></pre>
 
 <p>数据操作：</p>
 
-<pre class="line-numbers"><code class="language-text"># 词元分割，数值化与选择
+<pre class="line-numbers"><code class="language-python"># 词元分割，数值化与选择
 tokenizer = Tokenizer(num_words=num_words)
 tokenizer.fit_on_texts(dt_train[column])
 
@@ -73,7 +73,7 @@ y_train = np_utils.to_categorical(dt_train[&#39;class&#39;], num_classes=num_cla
 
 <p>向量化文本预料，用于将文本转成整形的数值序列，他将预料数据按照特定的分隔符切分，并统计词频相关信息，构建词的序列词典，然后将每一条文本</p>
 
-<pre class="line-numbers"><code class="language-text">Tokenizer(num_words=None,                                # 选择多少个词（以词频排序选TOP num_words个）
+<pre class="line-numbers"><code class="language-python">Tokenizer(num_words=None,                                # 选择多少个词（以词频排序选TOP num_words个）
          filters=&#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~\t\n&#39;, # 过滤的字符，默认是英文标点符号
          lower=True,                                     # 是否转小写(True时候是英文)
          split=&#39; &#39;,                                      # 语料的分隔符，默认是空格，可以自行修改
@@ -87,7 +87,7 @@ texts_to_sequences(texts)                                # 文本转换成索引
 
 <p>文本长度参差不一，所以得到的向量也是不一样长的，必须将他们规整成相同长度的向量，长的截断，短的填充。</p>
 
-<pre class="line-numbers"><code class="language-text">sequence.pad_sequences(sequences, 
+<pre class="line-numbers"><code class="language-python">sequence.pad_sequences(sequences, 
                        maxlen=None,                       # 截取的最大长度，也是向量的最大长度
                        dtype=&#39;int32&#39;,
                        padding=&#39;pre&#39;,                     # pre:截取前面 post:截取后面，
@@ -98,7 +98,7 @@ texts_to_sequences(texts)                                # 文本转换成索引
 
 <p>把<code>「数值型」</code>的类别变量编码成shape=(n,)的类别向量，简单来说就是one_hot，但是他只支持数值型输入。</p>
 
-<pre class="line-numbers"><code class="language-text">np_utils.to_categorical(y, num_classes=None)               # num_classes表示类别数，y表示标签列   
+<pre class="line-numbers"><code class="language-python">np_utils.to_categorical(y, num_classes=None)               # num_classes表示类别数，y表示标签列   
 如下：
 0 1
 1 2
@@ -113,7 +113,7 @@ texts_to_sequences(texts)                                # 文本转换成索引
 
 <h1 id="toc_4">整个处理流程</h1>
 
-<pre class="line-numbers"><code class="language-text">def processing(dt_train, dt_test):
+<pre class="line-numbers"><code class="language-python">def processing(dt_train, dt_test):
     tokenizer = Tokenizer(num_words=num_words)
     tokenizer.fit_on_texts(dt_train[column])
 
@@ -162,7 +162,7 @@ texts_to_sequences(texts)                                # 文本转换成索引
 
 <p>keras的utils模块主要是提供建模流程的各种辅助操作，其中包括数据相关的，IO相关的，数据操作相关，网络层相关的操作具体如下：</p>
 
-<pre class="line-numbers"><code class="language-text">from .io_utils import HDF5Matrix
+<pre class="line-numbers"><code class="language-python">from .io_utils import HDF5Matrix
 from .data_utils import get_file
 from .data_utils import Sequence
 from .data_utils import GeneratorEnqueuer
@@ -293,7 +293,7 @@ nadam = Nadam
 
 <p>callback回调函数是用于在模型训练过程中对模型活着数据进行操作，最常用的是：</p>
 
-<pre class="line-numbers"><code class="language-text">ModelCheckpoint:训练的过程中不断的保存模型，是一种容错机制。
+<pre class="line-numbers"><code class="language-python">ModelCheckpoint:训练的过程中不断的保存模型，是一种容错机制。
 EarlyStopping:提前停止，一种降低训练时间和过拟合的策略。
 </code></pre>
 
@@ -301,12 +301,12 @@ EarlyStopping:提前停止，一种降低训练时间和过拟合的策略。
 
 <p>0、嵌入层</p>
 
-<pre class="line-numbers"><code class="language-text">Embedding:
+<pre class="line-numbers"><code class="language-python">Embedding:
 </code></pre>
 
 <p>1、核心层：</p>
 
-<pre class="line-numbers"><code class="language-text">Input:输入层，用于实例化Keras张量。
+<pre class="line-numbers"><code class="language-python">Input:输入层，用于实例化Keras张量。
 Dense：全链接层
 Activation：激活函数
 Dropout：随机失活，防止过拟合
@@ -324,7 +324,7 @@ SpatialDropout3D
 
 <p>2、卷积层：构成卷积神经网络的基础</p>
 
-<pre class="line-numbers"><code class="language-text">Conv1D:一维卷积
+<pre class="line-numbers"><code class="language-python">Conv1D:一维卷积
 Conv2D:二维卷积
 Conv3D:三维卷积
 
@@ -336,7 +336,7 @@ UpSampling3D:3D 输入的上采样层。
 
 <p>3、循环层：循环神经网路的基础</p>
 
-<pre class="line-numbers"><code class="language-text">RNN 
+<pre class="line-numbers"><code class="language-python">RNN 
 SimpleRNN
 GRU
 Lstm 
@@ -344,7 +344,7 @@ Lstm
 
 <p>4、池化层：</p>
 
-<pre class="line-numbers"><code class="language-text">最大池化层
+<pre class="line-numbers"><code class="language-python">最大池化层
     MaxPooling1D
     MaxPooling2D
     MaxPooling3D
@@ -364,7 +364,7 @@ Lstm
 
 <p>5、融合层：两个/多个层的数据进行某种计算进行融合</p>
 
-<pre class="line-numbers"><code class="language-text">Add:逐元素相加
+<pre class="line-numbers"><code class="language-python">Add:逐元素相加
 Subtract:逐元素相减
 Multiply：逐元素相乘
 Average：逐元素平均
@@ -375,20 +375,20 @@ Dot：点积
 
 <p>6、噪声层：缓解过拟合</p>
 
-<pre class="line-numbers"><code class="language-text">GaussianNoise:高斯噪声
+<pre class="line-numbers"><code class="language-python">GaussianNoise:高斯噪声
 GaussianDropout:
 AlphaDropout:
 </code></pre>
 
 <p>7、层封装器</p>
 
-<pre class="line-numbers"><code class="language-text">TimeDistributed:
+<pre class="line-numbers"><code class="language-python">TimeDistributed:
 Bidirectional:RNN的双向封装器，对序列进行前向和后向计算。
 </code></pre>
 
 <p>8、激活函数：用于对数据进行非线性变换</p>
 
-<pre class="line-numbers"><code class="language-text">sigmoid
+<pre class="line-numbers"><code class="language-python">sigmoid
 softmax
 hard_sigmoid
 linear:线性激活函数（即不做任何改变）
