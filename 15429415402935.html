@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  动态规划 - 不以刷题为目的的面试不是个好程序员
+  Keras中的数据预处理「文本」 - 不以刷题为目的的面试不是个好程序员
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -327,9 +327,116 @@
             </div>
             <div class="large-9 medium-9 columns">
  <div class="markdown-body">
-<h1>动态规划</h1>
+<h1>Keras中的数据预处理「文本」</h1>
 
-<h2 id="toc_0"></h2>
+<p>英文文本默认的是空格分割，不像中文以字成词组词成句，中间连贯。所以中文相较于英文来说就多了分词这一步，分词之后得到跟英文一样的格式就可以作为模型的输入数据了。<br/>
+示例：</p>
+
+<pre class="line-numbers"><code class="language-text">EN;
+    I am chinese.
+ZH:
+    我是中国人。=&gt; 我 是 中国 人
+</code></pre>
+
+<p>分词部分使用中文分词器就可以实现。当然我们也可以采用其他的分隔符，如<code>-</code>,<code>|</code>,<code>&gt;</code>,只要不语文本内容冲突就可以。如果我们有N条文本，那么就得到一个N行的分词后的序列，如下：</p>
+
+<pre class="line-numbers"><code class="language-text">0   我 是 中国 人
+1   我 是 中国 人
+2   我 是 中国 人
+... 我 是 中国 人
+N   我 是 中国 人
+</code></pre>
+
+<p>中文文本深度学习建模流程：</p>
+
+<pre class="line-numbers"><code class="language-mermaid">graph LR;
+  中文处理--&gt;数据处理;
+  数据处理--&gt;模型训练;
+  模型训练--&gt;模型优化;
+</code></pre>
+
+<h1 id="toc_0">Keras中的文本处理</h1>
+
+<pre class="line-numbers"><code class="language-text">from keras.preprocessing.text import Tokenizer,sequence 
+from keras.utils import np_utils
+</code></pre>
+
+<p>数据操作：</p>
+
+<pre class="line-numbers"><code class="language-text"># 词元分割，数值化与选择
+tokenizer = Tokenizer(num_words=num_words)
+tokenizer.fit_on_texts(dt_train[column])
+
+# 对每一段话转换为数字列表，使用每个词的编号进行编号
+x_train_seq = tokenizer.texts_to_sequences(dt_train[column])
+x_test_seq = tokenizer.texts_to_sequences(dt_test[column])
+
+# 序列截断于填充
+x_train = sequence.pad_sequences(x_train_seq, maxlen=maxlen)
+x_test = sequence.pad_sequences(x_test_seq, maxlen=maxlen)
+
+# 类别编码
+y_train = np_utils.to_categorical(dt_train[&#39;class&#39;], num_classes=num_classes)
+</code></pre>
+
+<h2 id="toc_1">Tokenizer：向量化</h2>
+
+<p>向量化文本预料，用于将文本转成整形的数值序列，他将预料数据按照特定的分隔符切分，并统计词频相关信息，构建词的序列词典，然后将每一条文本</p>
+
+<pre class="line-numbers"><code class="language-text">Tokenizer(num_words=None,                                # 选择多少个词（以词频排序选TOP num_words个）
+         filters=&#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~\t\n&#39;, # 过滤的字符，默认是英文标点符号
+         lower=True,                                     # 是否转小写(True时候是英文)
+         split=&#39; &#39;,                                      # 语料的分隔符，默认是空格，可以自行修改
+         char_level=False,                               # 是否进行字符级别的分隔
+         oov_token=None,)
+fit_on_texts(texts)                                      # 构建词典，并统计词频，排序
+texts_to_sequences(texts)                                # 文本转换成索引序列「仅包含在TOP num_words的词会进行序列转换」
+</code></pre>
+
+<h2 id="toc_2">sequence:序列修整</h2>
+
+<p>文本长度参差不一，所以得到的向量也是不一样长的，必须将他们规整成相同长度的向量，长的截断，短的填充。</p>
+
+<pre class="line-numbers"><code class="language-text">sequence.pad_sequences(sequences, 
+                       maxlen=None,                       # 截取的最大长度，也是向量的最大长度
+                       dtype=&#39;int32&#39;,
+                       padding=&#39;pre&#39;,                     # pre:截取前面 post:截取后面，
+                       truncating=&#39;pre&#39;, value=0.)        # pre:前面填充 post:后面填充，
+</code></pre>
+
+<h2 id="toc_3">to_categorical:类别编码</h2>
+
+<p>把<code>「数值型」</code>的类别变量编码成shape=(n,)的类别向量，简单来说就是one_hot，但是他只支持数值型输入。</p>
+
+<pre class="line-numbers"><code class="language-text">np_utils.to_categorical(y, num_classes=None)               # num_classes表示类别数，y表示标签列   
+如下：
+0 1
+1 2
+2 3
+3 2
+==&gt;
+0 1 0 0
+1 0 1 0
+2 0 0 1
+3 0 1 0
+</code></pre>
+
+<h1 id="toc_4">整个处理流程</h1>
+
+<pre class="line-numbers"><code class="language-text">def processing(dt_train, dt_test):
+    tokenizer = Tokenizer(num_words=num_words)
+    tokenizer.fit_on_texts(dt_train[column])
+
+    # 对每一段话转换为数字列表，使用每个词的编号进行编号
+    x_train_seq = tokenizer.texts_to_sequences(dt_train[column])
+    x_test_seq = tokenizer.texts_to_sequences(dt_test[column])
+
+    x_train = sequence.pad_sequences(x_train_seq, maxlen=maxlen)
+    x_test = sequence.pad_sequences(x_test_seq, maxlen=maxlen)
+
+    y_train = np_utils.to_categorical(dt_train[&#39;class&#39;], num_classes=num_classes)
+    return x_train,x_test,y_train
+</code></pre>
 
 
 </div>
@@ -341,15 +448,13 @@
   <div class="large-6 columns">
 	<div class="text-left" style="padding:15px 0px;">
 		
-	        <a href="15393053101796.html"  title="Previous Post: 回溯">&laquo; 回溯</a>
-	    
 	</div>
   </div>
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
-	        <a href="15392704711231.html" 
-	        title="Next Post: 贪心">贪心 &raquo;</a>
+	        <a href="15421840556162.html" 
+	        title="Next Post: 深度学习库keras">深度学习库keras &raquo;</a>
 	    
 	</div>
   </div>
@@ -362,7 +467,7 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		var currentURL = '15392704829367.html';
+		var currentURL = '15429415402935.html';
 		$('#side-nav a').each(function(){
 			if($(this).attr('href') == currentURL){
 				$(this).parent().addClass('active');
