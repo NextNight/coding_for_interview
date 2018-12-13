@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-11-23T13:52:57+08:00</updated>
+  <updated>2018-12-13T15:23:30+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://www.mweb.im">MWeb</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HMM到中文分词]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15446854936789.html"/>
+    <updated>2018-12-13T15:18:13+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15446854936789.html</id>
+    <content type="html"><![CDATA[
+<p><img src="media/15446854936789/Merkov_2.gif" alt="Merkov_2"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[文本分类TextCNN]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15434622232762.html"/>
+    <updated>2018-11-29T11:30:23+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15434622232762.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keras中的数据预处理「文本」]]></title>
@@ -116,7 +137,6 @@ texts_to_sequences(texts)                                # 文本转换成索引
 <pre class="line-numbers"><code class="language-python">def processing(dt_train, dt_test):
     tokenizer = Tokenizer(num_words=num_words)
     tokenizer.fit_on_texts(dt_train[column])
-
     # 对每一段话转换为数字列表，使用每个词的索引进行编号
     x_train_seq = tokenizer.texts_to_sequences(dt_train[column])
     x_test_seq = tokenizer.texts_to_sequences(dt_test[column])
@@ -404,7 +424,7 @@ softsign:x / (abs(x) + 1)
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[最想说的话]]></title>
+    <title type="html"><![CDATA[想对自己说的话]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15406404520470.html"/>
     <updated>2018-10-27T19:40:52+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15406404520470.html</id>
@@ -1032,38 +1052,6 @@ class LinkedList(object):
             return mid
     return -1
 </code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[排序问题]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392700147620.html"/>
-    <updated>2018-10-11T23:00:14+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392700147620.html</id>
-    <content type="html"><![CDATA[
-<p>在计算器科学与数学中，一个排序算法（英语：Sorting algorithm）是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法（例如搜索算法与合并算法）中是重要的，如此这些算法才能得到正确解答。排序算法也用在处理文字数据以及产生人类可读的输出结果。基本上，排序算法的输出必须遵守下列两个原则：</p>
-
-<ul>
-<li>输出结果为递增序列（递增是针对所需的排序顺序而言）</li>
-<li>输出结果是原输入的一种排列、或是重组<br/>
-虽然排序算法是一个简单的问题，但是从计算器科学发展以来，在此问题上已经有大量的研究。举例而言，冒泡排序在1956年就已经被研究。虽然大部分人认为这是一个已经被解决的问题，有用的新算法仍在不断的被发明。<a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">source：wiki</a></li>
-</ul>
-
-<h1 id="toc_0">排序算法的简单对比</h1>
-
-<p><img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[计数排序]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392716754828.html"/>
-    <updated>2018-10-11T23:27:55+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392716754828.html</id>
-    <content type="html"><![CDATA[
-<h2 id="toc_0"></h2>
 
 ]]></content>
   </entry>
