@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-12-19T14:20:43+08:00</updated>
+  <updated>2018-12-26T18:04:54+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -19,7 +19,112 @@
     <updated>2018-12-13T15:18:13+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15446854936789.html</id>
     <content type="html"><![CDATA[
-<p><img src="media/15446854936789/Merkov_2.gif" alt="Merkov_2"/></p>
+<p><img src="media/15446854936789/Merkov_2.gif" alt="Merkov_2"/> <br/>
+HMM隐马尔科夫模型一直是个很困扰，感觉上又很难的点，这是一篇个人理解的大白话文，去记录HMM是如何用于中文分词的。上面这张图展示的就是一个序列生成的过程，也是一个马尔科夫决策过程。这里说的是<code>「马尔科夫」</code>并不是<code>「隐马尔科夫」</code>。</p>
+
+<h1 id="toc_0">MM(马尔科夫)到HMM(隐马尔科夫)</h1>
+
+<p>上图中有两个状态：R，S,R状态可以变转变为S状态，R也可以转变为R，S也可以转变为S，加入一开始我们以某种概率选择一种状态R或者S，然后以这个状态为初始不断地选择下一个状态，这样就形成了一个观察到的状态序列，我们叫做观测序列。我们发现这个观测序列中的每一个状态都是状态状态集中的一种。那同样的当我们没办法直接观察到原始状态的时候，我们就说这个得到的状态序列是隐藏的。这就是「HMM(隐马尔科夫)」。而我们能观测到的观测序列是另一种状态，比如说r,s。简单来说：</p>
+
+<pre class="line-numbers"><code class="language-text"> MM:(R,S)——&gt;R,R,S,S,S,S,R,S....状态==观测
+ 
+HMM:(R,S)——&gt;?,?,?,?,?,?,?,?....状态(隐)
+            r,s,r,s,s,s,r,s....观测
+</code></pre>
+
+<p>这就是MM和HMM的区别。</p>
+
+<h1 id="toc_1">HMM中不得不说的五元组</h1>
+
+<p>开始的图中已经提到了<code>状态集</code>，<code>观测集</code>，而生成不同的序列取决于各个状态之间的<code>转移概率矩阵</code>,上图就是以如下的转移矩阵进行状态转换的：</p>
+
+<table>
+<thead>
+<tr>
+<th>转移概率</th>
+<th>R</th>
+<th>S</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>R</td>
+<td>0.9</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>S</td>
+<td>0.1</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+
+<p>当无法观测到状态序列的时候，状态序列和观测序列之间就存在一种概率关系，即：当观测为r时，状态为s的概率。这种概率关系计做<code>发射概率矩阵</code>如下：</p>
+
+<table>
+<thead>
+<tr>
+<th>发射概率</th>
+<th>r</th>
+<th>s</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>R</td>
+<td>0.8</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>S</td>
+<td>0.1</td>
+<td>0.9</td>
+</tr>
+</tbody>
+</table>
+
+<p>而最后一个就是<code>初始状态分布</code>,他决定了序列的开始，而开始总是结果有着一定的影响，那么他到底是如何影响的呢，这就与HMM的数学假设有关了。</p>
+
+<h1 id="toc_2">HMM的三个基本假设</h1>
+
+<p>数学中经常会用到很多的假设，因为在真实环境中影响问题的因素多种多样，假设通常用来简化问题，从而找到问题的解法。否则很多问题将无法求解。</p>
+
+<ul>
+<li>有限历史性假设：当前的状态取决于他前那一刻状态，这就为什么初始分布会对对状态序列有影响了。</li>
+<li>输出独立性假设：输出仅与当前状态有关，换句话说：观测序列当前值仅与其对应的状态序列当前值有关，再简单点来说：t时刻观测到r还是s,仅取决于t时刻状态时R还是S。</li>
+<li>齐次性假设：每个时刻的状态取决于前一刻的状态，而与时间没有关系。简单来说：状态不受时间影响。<br/>
+有了假设，有了HMM核心的五元组就可以解决三个问题，这其中就包括中文分词。</li>
+</ul>
+
+<h1 id="toc_3">HMM解决的三大问题</h1>
+
+<ul>
+<li>1、求解观察值序列：给定HMM其他的四元组求解一个观察序列的概率，</li>
+<li>2、求解状态值序列：给定HMM其他的四元组求解一个最有可能生成观测序列的状态序列。 如：<code>中文分词</code>，<code>语音识别</code>，采用<code>Viterbi</code>算法</li>
+<li>3、已知观测序列，去学习HMM模型。</li>
+</ul>
+
+<h1 id="toc_4">中文分词的解决方案</h1>
+
+<p>如上所述：中文分词就是HMM模型+一句话(观测序列)+viterbi算法去求解状态值序列。而中文分词的状态值序列就是一个状态集（B,E,M,S）的序列，S:单字成词，B:一个词的开头，E:一个词的结尾，M：一个词的中间。</p>
+
+<blockquote>
+<p>比如说：<code>我喜欢秦皇岛的阳光</code>这句话，我们得到一个最可能的状态序列：SBEBMESBE.这个状态序列表示的就是分词的结果，因此得到的分词结果就是：<code>我/喜欢/秦皇岛/的/阳光</code></p>
+</blockquote>
+
+<p>这里面有两个问题：</p>
+
+<ul>
+<li>HMM模型怎么来的？-&gt;预训练模型</li>
+<li>如何求解状态序列？-&gt;&#39;viterbi算法&#39;</li>
+</ul>
+
+<p>也就是说我们的分词算法调用一个已经训练好的HMM模型加上‘viterbi算法’就可以实现中文分词。</p>
+
+<h1 id="toc_5">中文分词的Viterbi算法</h1>
 
 ]]></content>
   </entry>
