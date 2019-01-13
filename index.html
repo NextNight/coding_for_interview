@@ -576,29 +576,32 @@ HMM:(R,S)——&gt;?,?,?,?,?,?,?,?....状态(隐)
 <td></td>
 </tr>
 </tbody>
-</table>
-<p>有了如上的五元组，我们就可以用Viterbi算法解出最可能的状态序列。以下是jieba分词中的Viterbi实现，参数就是五元组，</p>
-<pre class="line-numbers"><code class="language-python">&#39;&#39;&#39;jieba分词中的Viterbi实现&#39;&#39;&#39;
-def viterbi(obs, states, start_p, trans_p, emit_p):<br/>
-    V = [{}]  # tabular<br/>
-    path = {}<br/>
-    for y in states:  # init<br/>
-        V[0][y] = start_p[y] + emit_p[y].get(obs[0], MIN_FLOAT)<br/>
-        path[y] = [y]<br/>
-    for t in xrange(1, len(obs)):<br/>
-        V.append({})<br/>
-        newpath = {}<br/>
-        for y in states:<br/>
-            em_p = emit_p[y].get(obs[t], MIN_FLOAT)<br/>
-            (prob, state) = max(<br/>
-                [(V[t - 1][y0] + trans_p[y0].get(y, MIN_FLOAT) + em_p, y0) for y0 in PrevStatus[y]])<br/>
-            V[t][y] = prob<br/>
-            newpath[y] = path[state] + [y]<br/>
-        path = newpath<br/>
-    (prob, state) = max((V[len(obs) - 1][y], y) for y in &#39;ES&#39;)<br/>
-    return (prob, path[state])
-</code></pre></li>
+</table></li>
 </ol>
+
+<p>有了如上的五元组，我们就可以用Viterbi算法解出最可能的状态序列。以下是jieba分词中的Viterbi实现，参数就是五元组，</p>
+
+<pre class="line-numbers"><code class="language-python">&#39;&#39;&#39;jieba分词中的Viterbi实现&#39;&#39;&#39;
+def viterbi(obs, states, start_p, trans_p, emit_p):
+    V = [{}]  # tabular
+    path = {}
+    for y in states:  # init
+        V[0][y] = start_p[y] + emit_p[y].get(obs[0], MIN_FLOAT)
+        path[y] = [y]
+    for t in xrange(1, len(obs)):
+        V.append({})
+        newpath = {}
+        for y in states:
+            em_p = emit_p[y].get(obs[t], MIN_FLOAT)
+            (prob, state) = max(
+                [(V[t - 1][y0] + trans_p[y0].get(y, MIN_FLOAT) + em_p, y0) for y0 in PrevStatus[y]])
+            V[t][y] = prob
+            newpath[y] = path[state] + [y]
+        path = newpath
+
+    (prob, state) = max((V[len(obs) - 1][y], y) for y in &#39;ES&#39;)
+    return (prob, path[state])
+</code></pre>
 
 <p><strong>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的</strong></p>
 
