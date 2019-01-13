@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2018-12-26T18:33:27+08:00</updated>
+  <updated>2019-01-13T17:26:28+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -125,6 +125,149 @@ HMM:(R,S)——&gt;?,?,?,?,?,?,?,?....状态(隐)
 <p>也就是说我们的分词算法调用一个已经训练好的HMM模型加上‘viterbi算法’就可以实现中文分词,如下图：<img src="media/15446854936789/cutchinese.png" alt="cutchinese"/></p>
 
 <h1 id="toc_5">中文分词的Viterbi算法</h1>
+
+<blockquote>
+<p>Viterbi算法是一种<code>动态规划算法</code>，动态规范算法通常是用来求解最优化问题，而在中文分词中则用来求解最大化观测序列概率的状态序列。也就是说求解一个状态序列使得到的观测序列无限的接近于我们看到的序列。</p>
+</blockquote>
+
+<p>以上面的<strong>「我喜欢秦皇岛的阳光」</strong>为例，只有当我们生成的序列是「SBEBMESBE」的时候，生成<strong>『我喜欢秦皇岛的阳光』</strong>句子的概率才达到最大。此时『SBEBMESBE』就是我们要求的状态序列。为了方便后面的描述和代码下面更加精确的定义五元组：</p>
+
+<ol>
+<li>状态集：O(B,S,E,M)</li>
+<li>观测集：S(我，喜，欢，秦，皇，岛，的，阳，光)</li>
+<li>初始概率分布：PS(0.4,0.6,0,0)</li>
+<li><p>转移概率矩阵:当前时刻状态为某个值的时候下一刻状态为某个值得概率</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>S</th>
+<th>B</th>
+<th>M</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td>0.5</td>
+<td>0.5</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>B</td>
+<td>0</td>
+<td>0</td>
+<td>0.5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>M</td>
+<td>0</td>
+<td>0</td>
+<td>0.5</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>E</td>
+<td>0.4</td>
+<td>0.6</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>发射概率矩阵:状态为某个值的时候观测到某个值得概率</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>我</th>
+<th>喜</th>
+<th>欢</th>
+<th>秦</th>
+<th>皇</th>
+<th>导</th>
+<th>的</th>
+<th>阳</th>
+<th>光</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>B</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>M</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>有了如上的五元组，我们就可以用Viterbi算法解出最可能的状态序列。以下是jieba分词中的Viterbi实现，参数就是五元组，</p>
+<pre class="line-numbers"><code class="language-python">&#39;&#39;&#39;jieba分词中的Viterbi实现&#39;&#39;&#39;
+def viterbi(obs, states, start_p, trans_p, emit_p):<br/>
+V = [{}]  # tabular<br/>
+path = {}<br/>
+for y in states:  # init<br/>
+    V[0][y] = start_p[y] + emit_p[y].get(obs[0], MIN_FLOAT)<br/>
+    path[y] = [y]<br/>
+for t in xrange(1, len(obs)):<br/>
+    V.append({})<br/>
+    newpath = {}<br/>
+    for y in states:<br/>
+        em_p = emit_p[y].get(obs[t], MIN_FLOAT)<br/>
+        (prob, state) = max(<br/>
+            [(V[t - 1][y0] + trans_p[y0].get(y, MIN_FLOAT) + em_p, y0) for y0 in PrevStatus[y]])<br/>
+        V[t][y] = prob<br/>
+        newpath[y] = path[state] + [y]<br/>
+    path = newpath<br/>
+(prob, state) = max((V[len(obs) - 1][y], y) for y in &#39;ES&#39;)<br/>
+return (prob, path[state])
+</code></pre>
+<p><strong>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的</strong></p></li>
+</ol>
 
 ]]></content>
   </entry>
@@ -544,7 +687,7 @@ softsign:x / (abs(x) + 1)
 
 <p>「 但行好事，莫问前程。」</p>
 
-<p>「无钱莫入众，言轻莫劝人，待到功成后，把酒言初心。」</p>
+<p>「 无钱莫入众，言轻莫劝人，待到功成后，把酒言初心。」</p>
 
 ]]></content>
   </entry>
@@ -675,15 +818,13 @@ softsign:x / (abs(x) + 1)
     <content type="html"><![CDATA[
 <p>2018-10-10/by kala</p>
 
-<p>到底要经历怎样的生活才能回头对自己说我这一生没白来过。<br/>
-<img src="media/15391740524915/mylife.jpeg" alt="mylife"/><br/>
-你有没有曾问过自己，想要什么样的人生？我曾经很多次的问自己，想要的是什么，是寻找存在的意义还是寻找生活的乐趣，后来我发现，我想要的不过是活着，简单的活着。没有那么多烦恼，没有那么多的忧虑的活着。有的人除了活着还有梦想，还有向往，而有的人好像什么也没有。</p>
+<p>到底要经历怎样的生活才能回头对自己说我这一生没白来过。</p>
+
+<p>你有没有曾问过自己，想要什么样的人生？我曾经很多次的问自己，想要的是什么，是寻找存在的意义还是寻找生活的乐趣，后来我发现，我想要的不过是活着，简单的活着。没有那么多烦恼，没有那么多的忧虑的活着。有的人除了活着还有梦想，还有向往，而有的人好像什么也没有。</p>
 
 <p>无知而无畏，无欲则无求，而我想说的是无求则无欲，没有追求，没有向往，便没有了动力。一定要找到自己喜欢并想去做的东西，努力的做好它。这也许就是意义吧，时隔多年终于可以对自己说我做成过一件事。</p>
 
 <p>最近有看过《一千零一夜》这个纪录片的一部分，里面有一节讲的是《生命不能承受之轻》里面有这样一段话深深的触动了我「他吻她动人的唇，那时她患了感冒，却使得她的生意更沙哑，比平常更迷人，而盖茨无比抗拒的意识到『财富能囚住并保存青春和奥秘，还有只要拥有许多华服便能永葆清新亮丽』，他也深深意识到黛西的存在『她像银子般闪耀高居在无虞而得意的生活中与底下艰难搏斗的贫寒人家处于两个世界』」。从农村到城镇，从城镇到城市，从城市到一线城市，看过的经历过的深深让我意识到差距真的存在，不仅仅是地位与金钱，更多的是眼界与格局。</p>
-
-<p>从大学到程序员，开发到算法，接触AI，是对我人生一次很大的冲击，我切身感受到了长江后浪推前浪，永远有比你努力的人，永远有比你年轻比你强的人。</p>
 
 ]]></content>
   </entry>
