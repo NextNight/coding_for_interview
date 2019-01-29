@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-01-13T17:33:28+08:00</updated>
+  <updated>2019-01-29T20:11:36+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -271,7 +271,13 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
     return (prob, path[state])
 </code></pre>
 
-<p><strong>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的</strong></p>
+<blockquote>
+<p>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的。</p>
+</blockquote>
+
+<h1 id="toc_6">其他问题</h1>
+
+<p>当状态值是『B S E M』的时候，HMM可以用来做中文分词，同样的当状态值是『n,v,...』等词性的时候，HMM就可以用来解决词性标注的问题。同样的命名实体识别的问题也可以这样解决。</p>
 
 ]]></content>
   </entry>
@@ -282,6 +288,99 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
     <updated>2018-11-29T11:30:23+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15434622232762.html</id>
     <content type="html"><![CDATA[
+<p>about:<a href="https://arxiv.org/abs/1408.5882">&lt;<Convolutional Neural Networks for Sentence Classification>&gt;</a><br/>
+TextCNN即使用卷积神经网络来实现文本分类，CNN经常被用来做图像的分类，而图像在转化成像素点的时候，就变成了一个三维(彩色图片/三通道)的数字矩阵，同样的文本数据在向量化之后也是向量矩阵不过是个一维的/二维的(每个数据的维度取决于向量化的方式)，既然都是数值矩阵，那么是不是也可以像图像一样使用CNN来做呢，这就是TXTCNN要做的事情。</p>
+
+<h1 id="toc_0">TextCNN的网络结构</h1>
+
+<p><img src="media/15434622232762/15487625443034.jpg" alt="" style="width:615px;"/>上图非常清晰的展示了textcnn的整体结构，核心在于4个尺寸的卷积核,对输入数据进行卷积操作之后MaxPool+Flatten操作之后，得到四分数据（一个卷积核一份数据），用一个concat层将四分数据拼接成一份。在接dropout层之后接Dense全连接层进行非线性变换，最后接一层Dense层使用softmax激活函数进行输出分类。</p>
+
+<h1 id="toc_1">TextCNN的优点</h1>
+
+<p>1、首先作为深度学习模型，可以有效的运用预训练词向量带来效果的提升，相比于原始的文本向量化有很大优势<br/>
+2、CNN结构本身相比于其他的序列模型在训练上存在速度又是，TextCNN同样。<br/>
+3、TextCNN中采用的卷积核长度为词向量维度，多种宽度的组合，等同于N-gram操作。一定程度上保留了词之间的位置特征。</p>
+
+<h1 id="toc_2">TextCNN的keras实现</h1>
+
+<pre class="line-numbers"><code class="language-python">
+num_words = 200000
+maxlen = 1000  # 1000-&gt;2000
+max_features = 200000
+embed_size = 200  # 100
+num_classes = 20
+batch_size = 100
+epochs = 100
+filter_sizes = [2, 3, 4, 5]  # +6,7
+drop_late = 0.1
+
+def build_cnn():
+    # Inputs
+    input_seq = Input(shape=[maxlen], name=&#39;input_seq&#39;)
+    # Embeddings layers
+    emb_comment = Embedding(num_words, embed_size, embeddings_initializer=&#39;uniform&#39;,trainable = True)(input_seq)
+
+    # conv layers
+    convs = []
+    for ks in filter_sizes:
+        l_conv = Conv1D(filters=embed_size, kernel_size=ks, activation=&#39;relu&#39;)(emb_comment)
+        l_pool = MaxPooling1D(maxlen - ks + 1)(l_conv)
+        l_pool = Flatten()(l_pool)
+        convs.append(l_pool)
+    merge = concatenate(convs, axis=1)
+
+    drop = Dropout(drop_late)(merge)
+    Ds1 = Dense(64, activation=&#39;relu&#39;)(drop)
+    output = Dense(num_classes, activation=&#39;softmax&#39;)(Ds1)
+    model = Model([input_seq], output)
+    model.compile(loss=&quot;categorical_crossentropy&quot;, optimizer=&quot;nadam&quot;, metrics=[&#39;acc&#39;])
+    # 画出模型结构
+    plot_model(model, to_file=&#39;{}.png&#39;.format(path_model))
+    # 输出模型结构
+    print(model.summary())
+    return model
+
+def fit_cnn(model, X, y):
+    &quot;&quot;&quot;&quot;&quot;&quot;
+    # callback
+    early_stopping = EarlyStopping(monitor=&#39;val_loss&#39;,
+                                   patience=5)
+    checkpoint = ModelCheckpoint(path_model,
+                                 monitor=&#39;val_acc&#39;,
+                                 verbose=1,
+                                 save_best_only=True,
+                                 mode=&#39;max&#39;)
+    TB_plot = TensorBoard(log_dir=&#39;data/logs&#39;,
+                          batch_size=100,
+                          write_images=True)
+    # fit
+    hist = model.fit(X, y, validation_split=0.2,
+                     batch_size=batch_size,
+                     epochs=epochs,
+                     shuffle=True,
+                     callbacks=[early_stopping, checkpoint, TB_plot])
+
+    bst_fit_loss = min(hist.history[&#39;loss&#39;])
+    bst_fit_acc = max(hist.history[&#39;acc&#39;])
+
+    bst_val_loss = min(hist.history[&#39;val_loss&#39;])
+    bst_val_acc = max(hist.history[&#39;val_acc&#39;])
+
+    print(
+        &quot;bst_fit_loss:{}\nbst_fit_acc:{}\nbst_val_loss:{}\nbst_val_acc:{}&quot;.format(bst_fit_loss, bst_fit_acc,
+                                                                                  bst_val_loss,
+                                                                                  bst_val_acc))
+    return model
+</code></pre>
+
+<h1 id="toc_3">调参</h1>
+
+<p>参照：<a href="https://arxiv.org/pdf/1510.03820.pdf">&lt;<A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification>&gt;</a>textcnn调参指南。<br/>
+其实可以调整的参数不多，主要是卷积核的组合，dropout的失活率，其实更多的提升还是来自于对文本的处理和业务、任务的理解上。结合预训练词向量。</p>
+
+<h1 id="toc_4">总结：</h1>
+
+<p>TextCNN算是文本分类里面最简单也最易理解的模型，因为本身cnn就比较好理解，主要是在于理解卷积操作，在图像和文本上的差异，图像上卷积核更灵活，文本上卷积核长度必须是词向量长度，因为卷积核最小也必须覆盖一个字符。否则就会把一个字符的词向量拆开。</p>
 
 ]]></content>
   </entry>
