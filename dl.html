@@ -368,8 +368,7 @@ TextCNN即使用卷积神经网络来实现文本分类，CNN经常被用来做�
 
 <h1 id="toc_2">TextCNN的keras实现</h1>
 
-<pre class="line-numbers"><code class="language-python">
-num_words = 200000
+<pre class="line-numbers"><code class="language-python">num_words = 200000
 maxlen = 1000  # 1000-&gt;2000
 max_features = 200000
 embed_size = 200  # 100
@@ -380,6 +379,7 @@ filter_sizes = [2, 3, 4, 5]  # +6,7
 drop_late = 0.1
 
 def build_cnn():
+    &#39;&#39;&#39;build&#39;&#39;&#39;
     # Inputs
     input_seq = Input(shape=[maxlen], name=&#39;input_seq&#39;)
     # Embeddings layers
@@ -406,7 +406,7 @@ def build_cnn():
     return model
 
 def fit_cnn(model, X, y):
-    &quot;&quot;&quot;&quot;&quot;&quot;
+    &quot;&quot;&quot;fit&quot;&quot;&quot;
     # callback
     early_stopping = EarlyStopping(monitor=&#39;val_loss&#39;,
                                    patience=5)
@@ -440,7 +440,7 @@ def fit_cnn(model, X, y):
 
 <h1 id="toc_3">调参</h1>
 
-<p>参照：<a href="https://arxiv.org/pdf/1510.03820.pdf">&lt;<A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification>&gt;</a>textcnn调参指南。<br/>
+<p>参照：<a href="https://arxiv.org/pdf/1510.03820.pdf">《A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification》</a>textcnn调参指南。<br/>
 其实可以调整的参数不多，主要是卷积核的组合，dropout的失活率，其实更多的提升还是来自于对文本的处理和业务、任务的理解上。结合预训练词向量。</p>
 
 <h1 id="toc_4">总结：</h1>
