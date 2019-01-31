@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-01-30T15:18:39+08:00</updated>
+  <updated>2019-01-31T10:34:55+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,823 +14,20 @@
 
   
   <entry>
-    <title type="html"><![CDATA[HMM到中文分词]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15446854936789.html"/>
-    <updated>2018-12-13T15:18:13+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15446854936789.html</id>
+    <title type="html"><![CDATA[论文collections]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15488331878996.html"/>
+    <updated>2019-01-30T15:26:27+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15488331878996.html</id>
     <content type="html"><![CDATA[
-<p><img src="media/15446854936789/Merkov_2.gif" alt="Merkov_2"/> <br/>
-HMM隐马尔科夫模型一直是个很困扰，感觉上又很难的点，这是一篇个人理解的大白话文，去记录HMM是如何用于中文分词的。上面这张图展示的就是一个序列生成的过程，也是一个马尔科夫决策过程。这里说的是<code>「马尔科夫」</code>并不是<code>「隐马尔科夫」</code>。</p>
-
-<h1 id="toc_0">MM(马尔科夫)到HMM(隐马尔科夫)</h1>
-
-<p>上图中有两个状态：R，S,R状态可以变转变为S状态，R也可以转变为R，S也可以转变为S，加入一开始我们以某种概率选择一种状态R或者S，然后以这个状态为初始不断地选择下一个状态，这样就形成了一个观察到的状态序列，我们叫做<strong>观测序列</strong>。我们发现这个观测序列中的每一个状态都是状态集中的一种。那同样的当我们没办法直接观察到原始状态的时候，我们就说我们想得到的<strong>状态序列</strong>是隐藏的。这就是「HMM(隐马尔科夫)」。而我们能观测到的观测序列是另一种状态，比如说r,s。简单来说：</p>
-
-<pre class="line-numbers"><code class="language-text"> MM:(R,S)——&gt;R,R,S,S,S,S,R,S....状态==观测
- 
-HMM:(R,S)——&gt;?,?,?,?,?,?,?,?....状态(隐)
-            r,s,r,s,s,s,r,s....观测
-</code></pre>
-
-<p>这就是MM和HMM的区别。</p>
-
-<h1 id="toc_1">HMM中不得不说的五元组</h1>
-
-<p>开始的图中已经提到了<code>状态集</code>，<code>观测集</code>，而生成不同的序列取决于各个状态之间的<code>转移概率矩阵</code>,上图就是以如下的转移矩阵进行状态转换的：</p>
-
-<table>
-<thead>
-<tr>
-<th>转移概率</th>
-<th>R</th>
-<th>S</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>R</td>
-<td>0.9</td>
-<td>0.1</td>
-</tr>
-<tr>
-<td>S</td>
-<td>0.1</td>
-<td>0.9</td>
-</tr>
-</tbody>
-</table>
-
-<p>当无法观测到状态序列的时候，状态序列和观测序列之间就存在一种概率关系，即：当观测为r时，状态为s的概率。这种概率关系计做<code>发射概率矩阵</code>如下：</p>
-
-<table>
-<thead>
-<tr>
-<th>发射概率</th>
-<th>r</th>
-<th>s</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>R</td>
-<td>0.8</td>
-<td>0.2</td>
-</tr>
-<tr>
-<td>S</td>
-<td>0.1</td>
-<td>0.9</td>
-</tr>
-</tbody>
-</table>
-
-<p>而最后一个就是<code>初始状态分布</code>,他决定了序列的开始，而开始总是结果有着一定的影响，那么他到底是如何影响的呢，这就与HMM的数学假设有关了。</p>
-
-<h1 id="toc_2">HMM的三个基本假设</h1>
-
-<p>数学中经常会用到很多的假设，因为在真实环境中影响问题的因素多种多样，假设通常用来简化问题，从而找到问题的解法。否则很多问题将无法求解。</p>
-
-<ul>
-<li><strong>有限历史性假设</strong>：当前的状态取决于他前那一刻状态，这就为什么初始分布会对对状态序列有影响了。</li>
-<li><strong>输出独立性假设</strong>：输出仅与当前状态有关，换句话说：观测序列当前值仅与其对应的状态序列当前值有关，再简单点来说：t时刻观测到r还是s,仅取决于t时刻状态时R还是S。</li>
-<li><strong>齐次性假设</strong>：每个时刻的状态取决于前一刻的状态，而与时间没有关系。简单来说：状态不受时间影响。
-有了假设，有了HMM核心的五元组就可以解决三个问题，这其中就包括中文分词。</li>
-</ul>
-
-<h1 id="toc_3">HMM解决的三大问题</h1>
-
-<ul>
-<li><strong>1、求解观察值序列</strong>：给定HMM其他的四元组求解一个观察序列的概率，</li>
-<li><strong>2、求解状态值序列</strong>：给定HMM其他的四元组求解一个最有可能生成观测序列的状态序列。 如：<code>中文分词</code>，<code>语音识别</code>，采用<code>Viterbi</code>算法</li>
-<li><strong>3、学习HMM模型</strong>：已知观测序列，去学习HMM模型。</li>
-</ul>
-
-<h1 id="toc_4">中文分词的解决方案</h1>
-
-<p>如上所述：中文分词就是HMM模型+一句话(观测序列)+viterbi算法去求解状态值序列。而中文分词的状态值序列就是一个状态集（B,E,M,S）的序列，S:单字成词，B:一个词的开头，E:一个词的结尾，M：一个词的中间。</p>
-
-<blockquote>
-<p>比如说：<code>我喜欢秦皇岛的阳光</code>这句话，我们得到一个最可能的状态序列：SBEBMESBE.这个状态序列表示的就是分词的结果，因此得到的分词结果就是：<code>我/喜欢/秦皇岛/的/阳光</code></p>
-</blockquote>
-
-<p>这里面有两个问题：</p>
-
-<ul>
-<li>HMM模型怎么来的？-&gt;预训练模型</li>
-<li>如何求解状态序列？-&gt;&#39;viterbi算法&#39;</li>
-</ul>
-
-<p>也就是说我们的分词算法调用一个已经训练好的HMM模型加上‘viterbi算法’就可以实现中文分词,如下图：<img src="media/15446854936789/cutchinese.png" alt="cutchinese"/></p>
-
-<h1 id="toc_5">中文分词的Viterbi算法</h1>
-
-<blockquote>
-<p>Viterbi算法是一种<code>动态规划算法</code>，动态规范算法通常是用来求解最优化问题，而在中文分词中则用来求解最大化观测序列概率的状态序列。也就是说求解一个状态序列使得到的观测序列无限的接近于我们看到的序列。</p>
-</blockquote>
-
-<p>以上面的<strong>「我喜欢秦皇岛的阳光」</strong>为例，只有当我们生成的序列是「SBEBMESBE」的时候，生成<strong>『我喜欢秦皇岛的阳光』</strong>句子的概率才达到最大。此时『SBEBMESBE』就是我们要求的状态序列。为了方便后面的描述和代码下面更加精确的定义五元组：</p>
-
-<ol>
-<li>状态集：O(B,S,E,M)</li>
-<li>观测集：S(我，喜，欢，秦，皇，岛，的，阳，光)</li>
-<li>初始概率分布：PS(0.4,0.6,0,0)</li>
-<li><p>转移概率矩阵:当前时刻状态为某个值的时候下一刻状态为某个值得概率</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>S</th>
-<th>B</th>
-<th>M</th>
-<th>E</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>B</td>
-<td>0</td>
-<td>0</td>
-<td>0.5</td>
-<td>0.5</td>
-</tr>
-<tr>
-<td>M</td>
-<td>0</td>
-<td>0</td>
-<td>0.5</td>
-<td>0.5</td>
-</tr>
-<tr>
-<td>E</td>
-<td>0.4</td>
-<td>0.6</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>发射概率矩阵:状态为某个值的时候观测到某个值得概率</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>我</th>
-<th>喜</th>
-<th>欢</th>
-<th>秦</th>
-<th>皇</th>
-<th>导</th>
-<th>的</th>
-<th>阳</th>
-<th>光</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>B</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>M</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>E</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table></li>
-</ol>
-
-<p>有了如上的五元组，我们就可以用Viterbi算法解出最可能的状态序列。以下是jieba分词中的Viterbi实现，参数就是五元组，</p>
-
-<pre class="line-numbers"><code class="language-python">&#39;&#39;&#39;jieba分词中的Viterbi实现&#39;&#39;&#39;
-def viterbi(obs, states, start_p, trans_p, emit_p):
-    V = [{}]  # tabular
-    path = {}
-    for y in states:  # init
-        V[0][y] = start_p[y] + emit_p[y].get(obs[0], MIN_FLOAT)
-        path[y] = [y]
-    for t in xrange(1, len(obs)):
-        V.append({})
-        newpath = {}
-        for y in states:
-            em_p = emit_p[y].get(obs[t], MIN_FLOAT)
-            (prob, state) = max(
-                [(V[t - 1][y0] + trans_p[y0].get(y, MIN_FLOAT) + em_p, y0) for y0 in PrevStatus[y]])
-            V[t][y] = prob
-            newpath[y] = path[state] + [y]
-        path = newpath
-
-    (prob, state) = max((V[len(obs) - 1][y], y) for y in &#39;ES&#39;)
-    return (prob, path[state])
-</code></pre>
-
-<blockquote>
-<p>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的。</p>
-</blockquote>
-
-<h1 id="toc_6">其他问题</h1>
-
-<p>当状态值是『B S E M』的时候，HMM可以用来做中文分词，同样的当状态值是『n,v,...』等词性的时候，HMM就可以用来解决词性标注的问题。同样的命名实体识别的问题也可以这样解决。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[文本分类TextCNN]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15434622232762.html"/>
-    <updated>2018-11-29T11:30:23+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15434622232762.html</id>
-    <content type="html"><![CDATA[
-<p>about:<a href="https://arxiv.org/abs/1408.5882">《Convolutional Neural Networks for Sentence Classification》</a><br/>
-TextCNN即使用卷积神经网络来实现文本分类，CNN经常被用来做图像的分类，而图像在转化成像素点的时候，就变成了一个三维(彩色图片/三通道)的数字矩阵，同样的文本数据在向量化之后也是向量矩阵不过是个一维的/二维的(每个数据的维度取决于向量化的方式)，既然都是数值矩阵，那么是不是也可以像图像一样使用CNN来做呢，这就是TXTCNN要做的事情。</p>
-
-<h1 id="toc_0">TextCNN的网络结构</h1>
-
-<p><img src="media/15434622232762/15487625443034.jpg" alt="" style="width:615px;"/></p>
-
-<p>上图非常清晰的展示了textcnn的整体结构，核心在于4个尺寸的卷积核,对输入数据进行卷积操作之后MaxPool+Flatten操作之后，得到四分数据（一个卷积核一份数据），用一个concat层将四分数据拼接成一份。在接dropout层之后接Dense全连接层进行非线性变换，最后接一层Dense层使用softmax激活函数进行输出分类。</p>
-
-<h1 id="toc_1">TextCNN的优点</h1>
-
-<p>1、首先作为深度学习模型，可以有效的运用预训练词向量带来效果的提升，相比于原始的文本向量化有很大优势<br/>
-2、CNN结构本身相比于其他的序列模型在训练上存在速度优势，TextCNN同样。<br/>
-3、TextCNN中采用的卷积核长度为词向量维度，多种宽度的组合，等同于N-gram操作，一定程度上保留了词之间的位置特征。</p>
-
-<h1 id="toc_2">TextCNN的keras实现</h1>
-
-<pre class="line-numbers"><code class="language-python">num_words = 200000
-maxlen = 1000  # 1000-&gt;2000
-max_features = 200000
-embed_size = 200  # 100
-num_classes = 20
-batch_size = 100
-epochs = 100
-filter_sizes = [2, 3, 4, 5]  # +6,7
-drop_late = 0.1
-
-def build_cnn():
-    &#39;&#39;&#39;build&#39;&#39;&#39;
-    # Inputs
-    input_seq = Input(shape=[maxlen], name=&#39;input_seq&#39;)
-    # Embeddings layers
-    emb_comment = Embedding(num_words, embed_size, embeddings_initializer=&#39;uniform&#39;,trainable = True)(input_seq)
-
-    # conv layers
-    convs = []
-    for ks in filter_sizes:
-        l_conv = Conv1D(filters=embed_size, kernel_size=ks, activation=&#39;relu&#39;)(emb_comment)
-        l_pool = MaxPooling1D(maxlen - ks + 1)(l_conv)
-        l_pool = Flatten()(l_pool)
-        convs.append(l_pool)
-    merge = concatenate(convs, axis=1)
-
-    drop = Dropout(drop_late)(merge)
-    Ds1 = Dense(64, activation=&#39;relu&#39;)(drop)
-    output = Dense(num_classes, activation=&#39;softmax&#39;)(Ds1)
-    model = Model([input_seq], output)
-    model.compile(loss=&quot;categorical_crossentropy&quot;, optimizer=&quot;nadam&quot;, metrics=[&#39;acc&#39;])
-    # 画出模型结构
-    plot_model(model, to_file=&#39;{}.png&#39;.format(path_model))
-    # 输出模型结构
-    print(model.summary())
-    return model
-
-def fit_cnn(model, X, y):
-    &quot;&quot;&quot;fit&quot;&quot;&quot;
-    # callback
-    early_stopping = EarlyStopping(monitor=&#39;val_loss&#39;,
-                                   patience=5)
-    checkpoint = ModelCheckpoint(path_model,
-                                 monitor=&#39;val_acc&#39;,
-                                 verbose=1,
-                                 save_best_only=True,
-                                 mode=&#39;max&#39;)
-    TB_plot = TensorBoard(log_dir=&#39;data/logs&#39;,
-                          batch_size=100,
-                          write_images=True)
-    # fit
-    hist = model.fit(X, y, validation_split=0.2,
-                     batch_size=batch_size,
-                     epochs=epochs,
-                     shuffle=True,
-                     callbacks=[early_stopping, checkpoint, TB_plot])
-
-    bst_fit_loss = min(hist.history[&#39;loss&#39;])
-    bst_fit_acc = max(hist.history[&#39;acc&#39;])
-
-    bst_val_loss = min(hist.history[&#39;val_loss&#39;])
-    bst_val_acc = max(hist.history[&#39;val_acc&#39;])
-
-    print(
-        &quot;bst_fit_loss:{}\nbst_fit_acc:{}\nbst_val_loss:{}\nbst_val_acc:{}&quot;.format(bst_fit_loss, bst_fit_acc,
-                                                                                  bst_val_loss,
-                                                                                  bst_val_acc))
-    return model
-</code></pre>
-
-<h1 id="toc_3">调参</h1>
-
-<p>参照：<a href="https://arxiv.org/pdf/1510.03820.pdf">《A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification》</a>textcnn调参指南。<br/>
-其实可以调整的参数不多，主要是卷积核的组合，dropout的失活率，其实更多的提升还是来自于对文本的处理和业务、任务的理解上。结合预训练词向量。</p>
-
-<h1 id="toc_4">总结：</h1>
-
-<p>TextCNN算是文本分类里面最简单也最易理解的模型，因为本身cnn就比较好理解，主要是在于理解卷积操作，在图像和文本上的差异，图像上卷积核更灵活，文本上卷积核长度必须是词向量长度，因为卷积核最小也必须覆盖一个字符。否则就会把一个字符的词向量拆开。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Keras中的数据预处理「文本」]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15429415402935.html"/>
-    <updated>2018-11-23T10:52:20+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15429415402935.html</id>
-    <content type="html"><![CDATA[
-<p>英文文本默认的是空格分割，不像中文以字成词组词成句，中间连贯。所以中文相较于英文来说就多了分词这一步，分词之后得到跟英文一样的格式就可以作为模型的输入数据了。<br/>
-示例：</p>
-
-<pre class="line-numbers"><code class="language-python">EN;
-    I am chinese.
-ZH:
-    我是中国人。=&gt; 我 是 中国 人
-</code></pre>
-
-<p>分词部分使用中文分词器就可以实现。当然我们也可以采用其他的分隔符，如<code>-</code>,<code>|</code>,<code>&gt;</code>,只要不语文本内容冲突就可以。如果我们有N条文本，那么就得到一个N行的分词后的序列，如下：</p>
-
-<pre class="line-numbers"><code class="language-python">0   我 是 中国 人
-1   我 是 中国 人
-2   我 是 中国 人
-... 我 是 中国 人
-N   我 是 中国 人
-</code></pre>
-
-<p>中文文本深度学习建模流程：</p>
-
-<pre class="line-numbers"><code class="language-mermaid">graph LR;
-  中文处理--&gt;数据处理;
-  数据处理--&gt;模型训练;
-  模型训练--&gt;模型优化;
-</code></pre>
-
-<h1 id="toc_0">Keras中的文本处理</h1>
-
-<pre class="line-numbers"><code class="language-python">from keras.preprocessing.text import Tokenizer,sequence 
-from keras.utils import np_utils
-</code></pre>
-
-<p>数据操作：</p>
-
-<pre class="line-numbers"><code class="language-python"># 词元分割，数值化与选择
-tokenizer = Tokenizer(num_words=num_words)
-tokenizer.fit_on_texts(dt_train[column])
-
-# 对每一段话转换为数字列表，使用每个词的编号进行编号
-x_train_seq = tokenizer.texts_to_sequences(dt_train[column])
-x_test_seq = tokenizer.texts_to_sequences(dt_test[column])
-
-# 序列截断于填充
-x_train = sequence.pad_sequences(x_train_seq, maxlen=maxlen)
-x_test = sequence.pad_sequences(x_test_seq, maxlen=maxlen)
-
-# 类别编码
-y_train = np_utils.to_categorical(dt_train[&#39;class&#39;], num_classes=num_classes)
-</code></pre>
-
-<h2 id="toc_1">Tokenizer：向量化</h2>
-
-<p>向量化文本预料，用于将文本转成整形的数值序列，他将预料数据按照特定的分隔符切分，并统计词频相关信息，构建词的序列词典，然后将每一条文本</p>
-
-<pre class="line-numbers"><code class="language-python">Tokenizer(num_words=None,                                # 选择多少个词（以词频排序选TOP num_words个）
-         filters=&#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[\\]^_`{|}~\t\n&#39;, # 过滤的字符，默认是英文标点符号
-         lower=True,                                     # 是否转小写(True时候是英文)
-         split=&#39; &#39;,                                      # 语料的分隔符，默认是空格，可以自行修改
-         char_level=False,                               # 是否进行字符级别的分隔
-         oov_token=None,)
-fit_on_texts(texts)                                      # 构建词典，并统计词频，排序
-texts_to_sequences(texts)                                # 文本转换成索引序列「仅包含在TOP num_words的词会进行序列转换」
-</code></pre>
-
-<h2 id="toc_2">sequence:序列修整</h2>
-
-<p>文本长度参差不一，所以得到的向量也是不一样长的，必须将他们规整成相同长度的向量，长的截断，短的填充。</p>
-
-<pre class="line-numbers"><code class="language-python">sequence.pad_sequences(sequences, 
-                       maxlen=None,                       # 截取的最大长度，也是向量的最大长度
-                       dtype=&#39;int32&#39;,
-                       padding=&#39;pre&#39;,                     # pre:截取前面 post:截取后面，
-                       truncating=&#39;pre&#39;, value=0.)        # pre:前面填充 post:后面填充，
-</code></pre>
-
-<h2 id="toc_3">to_categorical:类别编码</h2>
-
-<p>把<code>「数值型」</code>的类别变量编码成shape=(n,)的类别向量，简单来说就是one_hot，但是他只支持数值型输入。</p>
-
-<pre class="line-numbers"><code class="language-python">np_utils.to_categorical(y, num_classes=None)               # num_classes表示类别数，y表示标签列   
-如下：
-0 1
-1 2
-2 3
-3 2
-==&gt;
-0 1 0 0
-1 0 1 0
-2 0 0 1
-3 0 1 0
-</code></pre>
-
-<h1 id="toc_4">整个处理流程</h1>
-
-<pre class="line-numbers"><code class="language-python">def processing(dt_train, dt_test):
-    tokenizer = Tokenizer(num_words=num_words)
-    tokenizer.fit_on_texts(dt_train[column])
-    # 对每一段话转换为数字列表，使用每个词的索引进行编号
-    x_train_seq = tokenizer.texts_to_sequences(dt_train[column])
-    x_test_seq = tokenizer.texts_to_sequences(dt_test[column])
-
-    x_train = sequence.pad_sequences(x_train_seq, maxlen=maxlen)
-    x_test = sequence.pad_sequences(x_test_seq, maxlen=maxlen)
-
-    y_train = np_utils.to_categorical(dt_train[&#39;class&#39;], num_classes=num_classes)
-    return x_train,x_test,y_train
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[深度学习库keras]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15421840556162.html"/>
-    <updated>2018-11-14T16:27:35+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15421840556162.html</id>
-    <content type="html"><![CDATA[
-<pre class="line-numbers"><code class="language-mermaid">graph LR;
-  数据处理--&gt;模型训练;
-  模型训练--&gt;模型优化;
-</code></pre>
-
-<p>深度学习整个的流程跟机器学习没什么差别，主要的区别在模型上，深度神经网络更复杂，更加多变，能力更强，「 简单快读的入门方式就是找到体系的流程快读的实现demo。而这个流程的一些问题和阻碍，以及应该注意的地方是我这里想说的。」</p>
-
-<h1 id="toc_0">keras相关的模块</h1>
-
-<p>涉及到机器学习总是离不开几个关键词<code>『数据』</code>，<code>『模型』</code>，<code>『评估函数』</code>，<code>『损失函数』</code>。同样的深度学习也以这几个关键词为基础。keras以主流的深度学习库为后端构建了简单易用的上层API以便我们使用。包括数据处理，评估函数，损失函数的实现，更是提供了各种网络层的实现和封装，通过简单的函数API和序列API进行各种网络层的堆叠就可以实现各式各样的神经网络结构。</p>
-
-<h2 id="toc_1">keras的预处理模块</h2>
-
-<p><code>from keras.preprocessing import sequence,text,image</code></p>
-
-<ul>
-<li>image：图像相关</li>
-<li>sequence：序列相关</li>
-<li>text：文本相关</li>
-</ul>
-
-<h2 id="toc_2">keras的Utils</h2>
-
-<p>keras的utils模块主要是提供建模流程的各种辅助操作，其中包括数据相关的，IO相关的，数据操作相关，网络层相关的操作具体如下：</p>
-
-<pre class="line-numbers"><code class="language-python">from .io_utils import HDF5Matrix
-from .data_utils import get_file
-from .data_utils import Sequence
-from .data_utils import GeneratorEnqueuer
-from .data_utils import OrderedEnqueuer
-from .generic_utils import CustomObjectScope
-from .generic_utils import custom_object_scope
-from .generic_utils import get_custom_objects
-from .generic_utils import serialize_keras_object
-from .generic_utils import deserialize_keras_object
-from .generic_utils import Progbar
-from .layer_utils import convert_all_kernels_in_model
-from .layer_utils import print_summary
-from .vis_utils import plot_model
-from .np_utils import to_categorical
-from .np_utils import normalize
-from .multi_gpu_utils import multi_gpu_model
-</code></pre>
-
-<p>而常用的主要是：<code>from keras.utils import np_utils, plot_model</code></p>
-
-<ul>
-<li>np_utils：
-<ul>
-<li>to_categorical：进行类别编码</li>
-<li>normalize：正则化</li>
-</ul></li>
-<li>plot_model:用与画出模型结构</li>
-</ul>
-
-<h2 id="toc_3">keras的Models</h2>
-
-<p>keras的models模块主要是实现模型相关的操作：</p>
-
-<ul>
-<li>load_model：模型加载，可以加在已经保存的训练好的模型直接用于预测</li>
-<li>save_model：模型保存，可以讲训练好的模型进行保存</li>
-<li>Sequential：顺序模型，可以直接使用此函数构建一个模型网络，顺序模型是多个网络层的线性堆叠。</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-python">from keras.models import Sequential
-from keras.layers import Dense, Activation
-model = Sequential([
-    Dense(32, input_shape=(784,)),
-    Activation(&#39;relu&#39;),
-    Dense(10),
-    Activation(&#39;softmax&#39;),
-])
-&#39;&#39;&#39;或&#39;&#39;&#39;
-model = Sequential()
-model.add(Dense(32, input_dim=784))
-model.add(Activation(&#39;relu&#39;))
-model.add(Dense(10))
-model.add(Activation(&#39;softmax&#39;))
-</code></pre>
-
-<h2 id="toc_4">keras的losses</h2>
-
-<p>losses即损失函数，也可以叫做目标函数，优化评分函数，它用来告诉我们模型该如何调整到最优，keras中的losses 实现如下：</p>
-
-<pre class="line-numbers"><code class="language-python">回归
-    mse = MSE = mean_squared_error
-    mae = MAE = mean_absolute_error
-    mape = MAPE = mean_absolute_percentage_error
-    msle = MSLE = mean_squared_logarithmic_error
-    kld = KLD = kullback_leibler_divergence
-    cosine = cosine_proximity
-分类
-    categorical_crossentropy：多分
-    binary_crossentropy：二分
-    sparse_categorical_crossentropy
-。。。
-</code></pre>
-
-<p>对于不同的问题需要选择不同的损失函数，二分勒，多分类，回归都需要不同的损失函数，模型才能正常训练。</p>
-
-<h2 id="toc_5">keras的metrics</h2>
-
-<p>评估函数是用来评估模型效果，与loss有很多公用的函数，keras中的metrics实现如下：</p>
-
-<pre class="line-numbers"><code class="language-python">误差：
-    mse = MSE = mean_squared_error
-    mae = MAE = mean_absolute_error
-    mape = MAPE = mean_absolute_percentage_error
-    msle = MSLE = mean_squared_logarithmic_error
-    cosine = cosine_proximity
-准确率：
-    binary_accuracy:
-    categorical_accuracy
-    sparse_categorical_accuracy
-。。。
-</code></pre>
-
-<blockquote>
-<p>如果没有我们需要的评价函数的话就需要自定义评价函数如：f1_score</p>
-</blockquote>
-
-<pre class="line-numbers"><code class="language-python">def f1_score(y_true, y_pred):
-    # Count positive samples.
-    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
-    # If there are no true samples, fix the F1 score at 0.
-    if c3 == 0:
-        return 0
-    # How many selected items are relevant?
-    precision = c1 / c2
-    # How many relevant items are selected?
-    recall = c1 / c3
-    # Calculate f1_score
-    f1_score = 2 * (precision * recall) / (precision + recall)
-    return f1_score
-</code></pre>
-
-<h2 id="toc_6">keras的「optimizer」优化器</h2>
-
-<p>optermizer优化器是用来根据误差不断调整参数使得目标函数预测值不断接近真实值的一种计算方法。耳熟能详的<code>梯度下降</code>就是其一，其他的还有牛顿法，共轭梯度法，keras中的优化器如下：</p>
-
-<pre class="line-numbers"><code class="language-python">sgd = SGD
-rmsprop = RMSprop
-adagrad = Adagrad
-adadelta = Adadelta
-adam = Adam
-adamax = Adamax
-nadam = Nadam
-</code></pre>
-
-<h2 id="toc_7">keras的callback</h2>
-
-<p>callback回调函数是用于在模型训练过程中对模型活着数据进行操作，最常用的是：</p>
-
-<pre class="line-numbers"><code class="language-python">ModelCheckpoint:训练的过程中不断的保存模型，是一种容错机制。
-EarlyStopping:提前停止，一种降低训练时间和过拟合的策略。
-</code></pre>
-
-<h2 id="toc_8">keras的layers「网络层」</h2>
-
-<p>0、嵌入层</p>
-
-<pre class="line-numbers"><code class="language-python">Embedding:
-</code></pre>
-
-<p>1、核心层：</p>
-
-<pre class="line-numbers"><code class="language-python">Input:输入层，用于实例化Keras张量。
-Dense：全链接层
-Activation：激活函数
-Dropout：随机失活，防止过拟合
-Faltten:输入展平
-Reshape：修改尺寸
-Permute：纬度置换
-RepeatVector：重复输入数据
-Lambda：将表达式封装为一个层，即自定义层
-ActivityRegularization：正则化
-Masking：
-SpatialDropout1D
-SpatialDropout2D
-SpatialDropout3D
-</code></pre>
-
-<p>2、卷积层：构成卷积神经网络的基础</p>
-
-<pre class="line-numbers"><code class="language-python">Conv1D:一维卷积
-Conv2D:二维卷积
-Conv3D:三维卷积
-
-UpSampling1D:1D 输入的上采样层。
-UpSampling2D:2D 输入的上采样层。
-UpSampling3D:3D 输入的上采样层。
-。。。
-</code></pre>
-
-<p>3、循环层：循环神经网路的基础</p>
-
-<pre class="line-numbers"><code class="language-python">RNN 
-SimpleRNN
-GRU
-Lstm 
-</code></pre>
-
-<p>4、池化层：</p>
-
-<pre class="line-numbers"><code class="language-python">最大池化层
-    MaxPooling1D
-    MaxPooling2D
-    MaxPooling3D
-平均池化层：
-    AveragePooling1D
-    AveragePooling2D
-    AveragePooling3D
-全局最大池化层
-    GlobalMaxPooling1D
-    GlobalMaxPooling2D
-    GlobalMaxPooling3D
-全局平均池化层：
-    GlobalAveragePooling1D
-    GlobalAveragePooling2D
-    GlobalAveragePooling3D
-</code></pre>
-
-<p>5、融合层：两个/多个层的数据进行某种计算进行融合</p>
-
-<pre class="line-numbers"><code class="language-python">Add:逐元素相加
-Subtract:逐元素相减
-Multiply：逐元素相乘
-Average：逐元素平均
-Maximum：逐元素最大值
-Concatenate：按轴拼接
-Dot：点积
-</code></pre>
-
-<p>6、噪声层：缓解过拟合</p>
-
-<pre class="line-numbers"><code class="language-python">GaussianNoise:高斯噪声
-GaussianDropout:
-AlphaDropout:
-</code></pre>
-
-<p>7、层封装器</p>
-
-<pre class="line-numbers"><code class="language-python">TimeDistributed:
-Bidirectional:RNN的双向封装器，对序列进行前向和后向计算。
-</code></pre>
-
-<p>8、激活函数：用于对数据进行非线性变换</p>
-
-<pre class="line-numbers"><code class="language-python">sigmoid
-softmax
-hard_sigmoid
-linear:线性激活函数（即不做任何改变）
-elu:指数线性单元。
-selu:可伸缩的指数线性单元（SELU）。
-relu:线性修正单元。
-tanh:双曲正切激活函数。
-softplus:log(exp(x) + 1)
-softsign:x / (abs(x) + 1)
-</code></pre>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[想对自己说的话]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15406404520470.html"/>
-    <updated>2018-10-27T19:40:52+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15406404520470.html</id>
-    <content type="html"><![CDATA[
-<p>「 25岁了，也许这是注定平凡的一生，但这又有什么关系，没有谁来到世上注定是伟大的。我也不过是这平凡的大多数中的一员。」</p>
-
-<p>「 不要总是否定自己，其实你已经超越了很多人，至少在走自己的路，也不要总是把目标定的那么高远，总觉得，过去了那么久好像自己还是那个样子，其实你已经成长了很多，真的。」</p>
-
-<p>「 世界那么大，多去看看。」</p>
-
-<p>「 阶段性的目标，学到自己想学到的东西就够了。」</p>
-
-<p>「 但行好事，莫问前程。」</p>
-
-<p>「 无钱莫入众，言轻莫劝人，待到功成后，把酒言初心。」</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[最近想做的事]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392402403847.html"/>
-    <updated>2018-10-11T14:44:00+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392402403847.html</id>
-    <content type="html"><![CDATA[
-<ul>
-<li>First：刷题，刷题，刷题，整理好这个网站，做好知识积累</li>
-<li>Second：做一个爬虫，爬取各个数据科学比赛网站的赛题，做分类，英文的做翻译，进行内容规则提取，结构化的在一个网页中展示出来，</li>
-<li>Third：NLP内容的学习，深度学习内容的学习</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的偶像]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392398597900.html"/>
-    <updated>2018-10-11T14:37:39+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392398597900.html</id>
-    <content type="html"><![CDATA[
-<p>「用偶像中这个词可能不太确切，但是好像偶像更能让我像个年轻人一样仿佛对生活充满了热情。」</p>
-
-<h1 id="toc_0"><span style="color:rgb(0,173,167)">「Andrew Ng」</span></h1>
-
-<p>吴恩达（英语：Andrew Ng，1976年－）是斯坦福大学计算机科学系和电气工程系的副教授，斯坦福人工智能实验室的主任。他还与达芙妮·科勒一起创建了在线教育平台Coursera。</p>
-
-<h1 id="toc_1"><span style="color:rgb(0,173,167)">「唐骏」</span></h1>
-
-<p>唐骏，是中国的著名职业经理人，曾留学日本和美国，有“打工皇帝”之称。他本科毕业于北京邮电大学，后前往日本名古屋大学深造取得工学硕士学位。1994年加入微软公司美国总部，先后担任微软全球技术中心总经理，微软中国公司总裁。2004年出任中国最大的互动娱乐公司盛大网络公司总裁，并帮助盛大公司在美国纳斯达克成功上市，被华尔街誉为中国资本的第一人。2008年唐骏先生以“十亿“身价转会新华都集团出任总裁兼CEO。</p>
-
-<h1 id="toc_2"><span style="color:rgb(0,173,167)">「陈天桥」</span></h1>
-
-<p>陈天桥，1973年5月生于浙江新昌。盛大网络董事会主席和首席执行官（CEO）。陈天桥是中国网络游戏产业的奠基人和领军人物，缔造了一个白手起家创业的神话，其影响力遍布国内及全球。</p>
+<p>词向量：<br/>
+    fasttext：<a href="https://arxiv.org/pdf/1607.01759v2.pdf">Bag of Tricks for Efficient Text Classification</a><br/>
+    word2vec:<a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Distributed Representations of Words and Phrases and their Compositionality</a><br/>
+预训练：<br/>
+    ELMO:<a href="https://arxiv.org/pdf/1802.05365.pdf">Deep contextualized word representations</a><br/>
+    BERT:<a href="https://arxiv.org/pdf/1810.04805.pdf">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a><br/>
+注意力：<br/>
+    Transformer:<a href="https://arxiv.org/pdf/1808.04444v1.pdf">Character-Level Language Modeling with Deeper Self-Attention</a><br/>
+    Attention:<a href="https://arxiv.org/pdf/1706.03762.pdf">Attention is all you need</a></p>
 
 ]]></content>
   </entry>
@@ -911,6 +108,65 @@ softsign:x / (abs(x) + 1)
 <p>这是我的故事，感谢我有这个机会能把我的故事写下来，也感谢前来阅读的人。ACM不是生活的全部，甚至连一小部分都算不上——就像，写完这些文字，我还得抓紧时间继续准备我的论文，继续我的研究工作。也确实是这样，一个人的生活应该是丰富的，充实的和多彩的。生活应当像浩瀚的宇宙，壮阔却又静谧，ACM不过是那绚烂星辰中的一颗。宇宙不应因为少了一颗星而暗淡，但是却可能因为多了一颗星而多了一段璀璨的文明。</p>
 
 <p>「把这篇文章放在这里呢，是真的喜欢这种人生，这种经历。偶然看到，有是一种莫名的感动。。」</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[最近想做的事]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392402403847.html"/>
+    <updated>2018-10-11T14:44:00+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392402403847.html</id>
+    <content type="html"><![CDATA[
+<ul>
+<li>First：刷题，刷题，刷题，整理好这个网站，做好知识积累</li>
+<li>Second：做一个爬虫，爬取各个数据科学比赛网站的赛题，做分类，英文的做翻译，进行内容规则提取，结构化的在一个网页中展示出来，</li>
+<li>Third：NLP内容的学习，深度学习内容的学习</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[想对自己说的话]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15406404520470.html"/>
+    <updated>2018-10-27T19:40:52+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15406404520470.html</id>
+    <content type="html"><![CDATA[
+<p>「 25岁了，也许这是注定平凡的一生，但这又有什么关系，没有谁来到世上注定是伟大的。我也不过是这平凡的大多数中的一员。」</p>
+
+<p>「 不要总是否定自己，其实你已经超越了很多人，至少在走自己的路，也不要总是把目标定的那么高远，总觉得，过去了那么久好像自己还是那个样子，其实你已经成长了很多，真的。」</p>
+
+<p>「 世界那么大，多去看看。」</p>
+
+<p>「 阶段性的目标，学到自己想学到的东西就够了。」</p>
+
+<p>「 但行好事，莫问前程。」</p>
+
+<p>「 无钱莫入众，言轻莫劝人，待到功成后，把酒言初心。」</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的偶像]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392398597900.html"/>
+    <updated>2018-10-11T14:37:39+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392398597900.html</id>
+    <content type="html"><![CDATA[
+<p>「用偶像中这个词可能不太确切，但是好像偶像更能让我像个年轻人一样仿佛对生活充满了热情。」</p>
+
+<h1 id="toc_0"><span style="color:rgb(0,173,167)">「Andrew Ng」</span></h1>
+
+<p>吴恩达（英语：Andrew Ng，1976年－）是斯坦福大学计算机科学系和电气工程系的副教授，斯坦福人工智能实验室的主任。他还与达芙妮·科勒一起创建了在线教育平台Coursera。</p>
+
+<h1 id="toc_1"><span style="color:rgb(0,173,167)">「唐骏」</span></h1>
+
+<p>唐骏，是中国的著名职业经理人，曾留学日本和美国，有“打工皇帝”之称。他本科毕业于北京邮电大学，后前往日本名古屋大学深造取得工学硕士学位。1994年加入微软公司美国总部，先后担任微软全球技术中心总经理，微软中国公司总裁。2004年出任中国最大的互动娱乐公司盛大网络公司总裁，并帮助盛大公司在美国纳斯达克成功上市，被华尔街誉为中国资本的第一人。2008年唐骏先生以“十亿“身价转会新华都集团出任总裁兼CEO。</p>
+
+<h1 id="toc_2"><span style="color:rgb(0,173,167)">「陈天桥」</span></h1>
+
+<p>陈天桥，1973年5月生于浙江新昌。盛大网络董事会主席和首席执行官（CEO）。陈天桥是中国网络游戏产业的奠基人和领军人物，缔造了一个白手起家创业的神话，其影响力遍布国内及全球。</p>
 
 ]]></content>
   </entry>
@@ -1403,6 +659,49 @@ class LinkedList(object):
             return mid
     return -1
 </code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[排序问题]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392700147620.html"/>
+    <updated>2018-10-11T23:00:14+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392700147620.html</id>
+    <content type="html"><![CDATA[
+<p>在计算器科学与数学中，一个排序算法（英语：Sorting algorithm）是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法（例如搜索算法与合并算法）中是重要的，如此这些算法才能得到正确解答。排序算法也用在处理文字数据以及产生人类可读的输出结果。基本上，排序算法的输出必须遵守下列两个原则：</p>
+
+<ul>
+<li>输出结果为递增序列（递增是针对所需的排序顺序而言）</li>
+<li>输出结果是原输入的一种排列、或是重组<br/>
+虽然排序算法是一个简单的问题，但是从计算器科学发展以来，在此问题上已经有大量的研究。举例而言，冒泡排序在1956年就已经被研究。虽然大部分人认为这是一个已经被解决的问题，有用的新算法仍在不断的被发明。<a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">source：wiki</a></li>
+</ul>
+
+<h1 id="toc_0">排序算法的简单对比</h1>
+
+<p><img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[计数排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392716754828.html"/>
+    <updated>2018-10-11T23:27:55+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392716754828.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[希尔排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392716677172.html"/>
+    <updated>2018-10-11T23:27:47+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392716677172.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
 
 ]]></content>
   </entry>

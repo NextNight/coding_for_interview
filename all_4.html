@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  想对自己说的话 - 不以刷题为目的的面试不是个好程序员
+  不以刷题为目的的面试不是个好程序员
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -348,60 +348,75 @@
               </div>
             </div>
             <div class="large-9 medium-9 columns">
- <div class="markdown-body">
-<h1>想对自己说的话</h1>
-
-<p>「 25岁了，也许这是注定平凡的一生，但这又有什么关系，没有谁来到世上注定是伟大的。我也不过是这平凡的大多数中的一员。」</p>
-
-<p>「 不要总是否定自己，其实你已经超越了很多人，至少在走自己的路，也不要总是把目标定的那么高远，总觉得，过去了那么久好像自己还是那个样子，其实你已经成长了很多，真的。」</p>
-
-<p>「 世界那么大，多去看看。」</p>
-
-<p>「 阶段性的目标，学到自己想学到的东西就够了。」</p>
-
-<p>「 但行好事，莫问前程。」</p>
-
-<p>「 无钱莫入众，言轻莫劝人，待到功成后，把酒言初心。」</p>
+ 
 
 
-</div>
+	
+		<div class="markdown-body">
+		<h1>逻辑回归</h1>
 
-<br /><br />
-<hr />
+		<h3 id="toc_0">概率推导</h3>
 
-<div class="row clearfix">
-  <div class="large-6 columns">
-	<div class="text-left" style="padding:15px 0px;">
-		
-	        <a href="15392402403847.html"  title="Previous Post: 最近想做的事">&laquo; 最近想做的事</a>
-	    
-	</div>
-  </div>
-  <div class="large-6 columns">
-	<div class="text-right" style="padding:15px 0px;">
-		
-	        <a href="15392398597900.html" 
-	        title="Next Post: 我的偶像">我的偶像 &raquo;</a>
-	    
-	</div>
-  </div>
-</div>
+<p>\[\begin{aligned}<br/>
+&amp;\Rightarrow {\color{DarkGreen} ln(\frac{p}{1-p})=z}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{z}=\frac{p}{1-p}}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1-p}{p}}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{-z}=\frac{1}{p}-1}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} e^{-z}+1=\frac{1}{p}}\\<br/>
+&amp;\Rightarrow {\color{DarkGreen} p=\frac{1}{e^{-z}+1}}\\<br/>
+\end{aligned}<br/>
+\]</p>
 
-<div class="row">
-<div style="padding:0px 0.93em;" class="share-comments">
+<h3 id="toc_1">损失函数推导</h3>
 
-</div>
-</div>
-<script type="text/javascript">
-	$(function(){
-		var currentURL = '15406404520470.html';
-		$('#side-nav a').each(function(){
-			if($(this).attr('href') == currentURL){
-				$(this).parent().addClass('active');
-			}
-		});
-	});
-</script>  
+<p>\[\begin{aligned}<br/>
+L(w)&amp;=\prod_{i=1}^n{p(y^i|x^i,w)}\\<br/>
+&amp;=\prod_{i=1}^n{h(z)^{y^i}.(1-h(z))^{1-y^i}}\\<br/>
+ln(L(w))&amp;=\sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))\\<br/>
+J(w) = -ln(L(w))&amp;=- \sum_{i=1}^{n}(y^iln(h(z)+(1-y^i)ln(1-h(z)))<br/>
+\end{aligned}<br/>
+\]</p>
+
+<h3 id="toc_2">梯度推导</h3>
+
+<p>\[<br/>
+\begin{aligned}<br/>
+\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
+&amp;=-\sum_ {i=1}^{n}({yln(h(z))+(1-y)ln(1-h(z)))}&#39; \\<br/>
+&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}{h(z)}&#39;+(1-y)\frac{1}{1-h(z)}{(1-h(z))}&#39; \\<br/>
+对h(z)求偏导：\\<br/>
+{h(z)}&#39; &amp;={ \frac{1}{1+e^{-wx}}}&#39;\\<br/>
+&amp;= {(1+e^{-wx})^{-1}}&#39;\\<br/>
+&amp;= (1+e^{-wx})^{-2} {(1+e^{-wx})}&#39;\\<br/>
+&amp;= (1+e^{-wx})^{-2}e^{-wx}{(-wx)}&#39;\\<br/>
+&amp;= - (1+e^{-wx})^{-2}e^{-wx}{(wx)}&#39;\\<br/>
+&amp;= -\frac{e^{-wx}}{(1+e^{-wx})^2} {(wx)}&#39;\\<br/>
+&amp;= -\frac{1}{(1+e^{-wx})}\frac{e^{-wx}}{(1+e^{-wx})} {(wx)}&#39;\\<br/>
+&amp;= -\frac{1}{(1+e^{-wx})}(1- \frac{1}{(1+e^{-wx})}){(wx)}&#39;\\<br/>
+&amp;= -h(z)(1-h(z)){(wx)}&#39;\\<br/>
+对1-h(z)求偏导：\\<br/>
+(1-{h(z)})&#39; &amp;=-{h(z)})&#39;\\<br/>
+&amp;=h(z)(1-h(z)){(wx)}&#39;\\<br/>
+\\<br/>
+\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;= {-ln(L(w))}&#39; \\<br/>
+&amp;=-\sum_ {i=1}^{n} y\frac{1}{h(z)}(-h(z)(1-h(z)){(wx)}&#39;)+(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
+&amp;=\sum_ {i=1}^{n} y\frac{1}{h(z)}(h(z)(1-h(z)){(wx)}&#39;)-(1-y)\frac{1}{1-h(z)}(h(z)(1-h(z)){(wx)}&#39;)\\<br/>
+&amp;=\sum_ {i=1}^{n}[y(1-h(z))-(1-y)h(z)]{(wx)}&#39;\\<br/>
+&amp;=\sum_ {i=1}^{n}[y-yh(z)-h(z)+yh(z)]{(wx)}&#39;\\<br/>
+&amp;=\sum_ {i=1}^{n}(y-h(z)){(wx)}&#39;\\<br/>
+&amp;=\sum_ {i=1}^{n}(y-h(z))x_j\\<br/>
+&amp;=(y-h(z))x_j\\<br/>
+\bigtriangledown =\frac {\partial J(w)}{\partial w_j}&amp;=\sum_ {i=1}^{n}(y^i-h(z)^i){x_j}^i\\<br/>
+其中i表示第i条数据，j表示第j维\\<br/>
+\end{aligned}<br/>
+\]</p>
+
+
+		</div>
+	
+
+  
+  
 </div></div>
 
 

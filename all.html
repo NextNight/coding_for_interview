@@ -74,22 +74,6 @@
       <li><a href="index.html">Home</a></li>
       
         <li class="divider"></li>
-        <li><label>开始瞎扯淡</label></li>
-
-          
-            <li><a title="想对自己说的话" href="15406404520470.html">想对自己说的话</a></li>
-          
-            <li><a title="最近想做的事" href="15392402403847.html">最近想做的事</a></li>
-          
-            <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
-          
-            <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
-          
-            <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
-          
-
-      
-        <li class="divider"></li>
         <li><label>数据结构</label></li>
 
           
@@ -195,6 +179,8 @@
         <li><label>论文相关</label></li>
 
           
+            <li><a title="论文collections" href="15488331878996.html">论文collections</a></li>
+          
             <li><a title="文本分类的注意力模型" href="15395117974496.html">文本分类的注意力模型</a></li>
           
 
@@ -204,6 +190,22 @@
 
           
             <li><a title="逻辑回归" href="15392705055223.html">逻辑回归</a></li>
+          
+
+      
+        <li class="divider"></li>
+        <li><label>开始瞎扯淡</label></li>
+
+          
+            <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
+          
+            <li><a title="最近想做的事" href="15392402403847.html">最近想做的事</a></li>
+          
+            <li><a title="想对自己说的话" href="15406404520470.html">想对自己说的话</a></li>
+          
+            <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
+          
+            <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
           
 
       
@@ -220,20 +222,6 @@
                 <div class="sidebar">
                 <nav>
                   <ul id="side-nav" class="side-nav">
-
-                    
-                      <li class="side-title"><span>开始瞎扯淡</span></li>
-                        
-                          <li><a title="想对自己说的话" href="15406404520470.html">想对自己说的话</a></li>
-                        
-                          <li><a title="最近想做的事" href="15392402403847.html">最近想做的事</a></li>
-                        
-                          <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
-                        
-                          <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
-                        
-                          <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
-                        
 
                     
                       <li class="side-title"><span>数据结构</span></li>
@@ -328,6 +316,8 @@
                     
                       <li class="side-title"><span>论文相关</span></li>
                         
+                          <li><a title="论文collections" href="15488331878996.html">论文collections</a></li>
+                        
                           <li><a title="文本分类的注意力模型" href="15395117974496.html">文本分类的注意力模型</a></li>
                         
 
@@ -335,6 +325,20 @@
                       <li class="side-title"><span>公式推导</span></li>
                         
                           <li><a title="逻辑回归" href="15392705055223.html">逻辑回归</a></li>
+                        
+
+                    
+                      <li class="side-title"><span>开始瞎扯淡</span></li>
+                        
+                          <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
+                        
+                          <li><a title="最近想做的事" href="15392402403847.html">最近想做的事</a></li>
+                        
+                          <li><a title="想对自己说的话" href="15406404520470.html">想对自己说的话</a></li>
+                        
+                          <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
+                        
+                          <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
                         
 
                     
@@ -349,267 +353,17 @@
 
 	
 		<div class="markdown-body">
-		<h1>HMM到中文分词</h1>
+		<h1>论文collections</h1>
 
-		<p><img src="media/15446854936789/Merkov_2.gif" alt="Merkov_2"/> <br/>
-HMM隐马尔科夫模型一直是个很困扰，感觉上又很难的点，这是一篇个人理解的大白话文，去记录HMM是如何用于中文分词的。上面这张图展示的就是一个序列生成的过程，也是一个马尔科夫决策过程。这里说的是<code>「马尔科夫」</code>并不是<code>「隐马尔科夫」</code>。</p>
-
-<h1 id="toc_0">MM(马尔科夫)到HMM(隐马尔科夫)</h1>
-
-<p>上图中有两个状态：R，S,R状态可以变转变为S状态，R也可以转变为R，S也可以转变为S，加入一开始我们以某种概率选择一种状态R或者S，然后以这个状态为初始不断地选择下一个状态，这样就形成了一个观察到的状态序列，我们叫做<strong>观测序列</strong>。我们发现这个观测序列中的每一个状态都是状态集中的一种。那同样的当我们没办法直接观察到原始状态的时候，我们就说我们想得到的<strong>状态序列</strong>是隐藏的。这就是「HMM(隐马尔科夫)」。而我们能观测到的观测序列是另一种状态，比如说r,s。简单来说：</p>
-
-<pre class="line-numbers"><code class="language-text"> MM:(R,S)——&gt;R,R,S,S,S,S,R,S....状态==观测
- 
-HMM:(R,S)——&gt;?,?,?,?,?,?,?,?....状态(隐)
-            r,s,r,s,s,s,r,s....观测
-</code></pre>
-
-<p>这就是MM和HMM的区别。</p>
-
-<h1 id="toc_1">HMM中不得不说的五元组</h1>
-
-<p>开始的图中已经提到了<code>状态集</code>，<code>观测集</code>，而生成不同的序列取决于各个状态之间的<code>转移概率矩阵</code>,上图就是以如下的转移矩阵进行状态转换的：</p>
-
-<table>
-<thead>
-<tr>
-<th>转移概率</th>
-<th>R</th>
-<th>S</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>R</td>
-<td>0.9</td>
-<td>0.1</td>
-</tr>
-<tr>
-<td>S</td>
-<td>0.1</td>
-<td>0.9</td>
-</tr>
-</tbody>
-</table>
-
-<p>当无法观测到状态序列的时候，状态序列和观测序列之间就存在一种概率关系，即：当观测为r时，状态为s的概率。这种概率关系计做<code>发射概率矩阵</code>如下：</p>
-
-<table>
-<thead>
-<tr>
-<th>发射概率</th>
-<th>r</th>
-<th>s</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>R</td>
-<td>0.8</td>
-<td>0.2</td>
-</tr>
-<tr>
-<td>S</td>
-<td>0.1</td>
-<td>0.9</td>
-</tr>
-</tbody>
-</table>
-
-<p>而最后一个就是<code>初始状态分布</code>,他决定了序列的开始，而开始总是结果有着一定的影响，那么他到底是如何影响的呢，这就与HMM的数学假设有关了。</p>
-
-<h1 id="toc_2">HMM的三个基本假设</h1>
-
-<p>数学中经常会用到很多的假设，因为在真实环境中影响问题的因素多种多样，假设通常用来简化问题，从而找到问题的解法。否则很多问题将无法求解。</p>
-
-<ul>
-<li><strong>有限历史性假设</strong>：当前的状态取决于他前那一刻状态，这就为什么初始分布会对对状态序列有影响了。</li>
-<li><strong>输出独立性假设</strong>：输出仅与当前状态有关，换句话说：观测序列当前值仅与其对应的状态序列当前值有关，再简单点来说：t时刻观测到r还是s,仅取决于t时刻状态时R还是S。</li>
-<li><strong>齐次性假设</strong>：每个时刻的状态取决于前一刻的状态，而与时间没有关系。简单来说：状态不受时间影响。
-有了假设，有了HMM核心的五元组就可以解决三个问题，这其中就包括中文分词。</li>
-</ul>
-
-<h1 id="toc_3">HMM解决的三大问题</h1>
-
-<ul>
-<li><strong>1、求解观察值序列</strong>：给定HMM其他的四元组求解一个观察序列的概率，</li>
-<li><strong>2、求解状态值序列</strong>：给定HMM其他的四元组求解一个最有可能生成观测序列的状态序列。 如：<code>中文分词</code>，<code>语音识别</code>，采用<code>Viterbi</code>算法</li>
-<li><strong>3、学习HMM模型</strong>：已知观测序列，去学习HMM模型。</li>
-</ul>
-
-<h1 id="toc_4">中文分词的解决方案</h1>
-
-<p>如上所述：中文分词就是HMM模型+一句话(观测序列)+viterbi算法去求解状态值序列。而中文分词的状态值序列就是一个状态集（B,E,M,S）的序列，S:单字成词，B:一个词的开头，E:一个词的结尾，M：一个词的中间。</p>
-
-<blockquote>
-<p>比如说：<code>我喜欢秦皇岛的阳光</code>这句话，我们得到一个最可能的状态序列：SBEBMESBE.这个状态序列表示的就是分词的结果，因此得到的分词结果就是：<code>我/喜欢/秦皇岛/的/阳光</code></p>
-</blockquote>
-
-<p>这里面有两个问题：</p>
-
-<ul>
-<li>HMM模型怎么来的？-&gt;预训练模型</li>
-<li>如何求解状态序列？-&gt;&#39;viterbi算法&#39;</li>
-</ul>
-
-<p>也就是说我们的分词算法调用一个已经训练好的HMM模型加上‘viterbi算法’就可以实现中文分词,如下图：<img src="media/15446854936789/cutchinese.png" alt="cutchinese"/></p>
-
-<h1 id="toc_5">中文分词的Viterbi算法</h1>
-
-<blockquote>
-<p>Viterbi算法是一种<code>动态规划算法</code>，动态规范算法通常是用来求解最优化问题，而在中文分词中则用来求解最大化观测序列概率的状态序列。也就是说求解一个状态序列使得到的观测序列无限的接近于我们看到的序列。</p>
-</blockquote>
-
-<p>以上面的<strong>「我喜欢秦皇岛的阳光」</strong>为例，只有当我们生成的序列是「SBEBMESBE」的时候，生成<strong>『我喜欢秦皇岛的阳光』</strong>句子的概率才达到最大。此时『SBEBMESBE』就是我们要求的状态序列。为了方便后面的描述和代码下面更加精确的定义五元组：</p>
-
-<ol>
-<li>状态集：O(B,S,E,M)</li>
-<li>观测集：S(我，喜，欢，秦，皇，岛，的，阳，光)</li>
-<li>初始概率分布：PS(0.4,0.6,0,0)</li>
-<li><p>转移概率矩阵:当前时刻状态为某个值的时候下一刻状态为某个值得概率</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>S</th>
-<th>B</th>
-<th>M</th>
-<th>E</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S</td>
-<td>0.5</td>
-<td>0.5</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>B</td>
-<td>0</td>
-<td>0</td>
-<td>0.5</td>
-<td>0.5</td>
-</tr>
-<tr>
-<td>M</td>
-<td>0</td>
-<td>0</td>
-<td>0.5</td>
-<td>0.5</td>
-</tr>
-<tr>
-<td>E</td>
-<td>0.4</td>
-<td>0.6</td>
-<td>0</td>
-<td>0</td>
-</tr>
-</tbody>
-</table></li>
-<li><p>发射概率矩阵:状态为某个值的时候观测到某个值得概率</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>我</th>
-<th>喜</th>
-<th>欢</th>
-<th>秦</th>
-<th>皇</th>
-<th>导</th>
-<th>的</th>
-<th>阳</th>
-<th>光</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>B</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>M</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>E</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table></li>
-</ol>
-
-<p>有了如上的五元组，我们就可以用Viterbi算法解出最可能的状态序列。以下是jieba分词中的Viterbi实现，参数就是五元组，</p>
-
-<pre class="line-numbers"><code class="language-python">&#39;&#39;&#39;jieba分词中的Viterbi实现&#39;&#39;&#39;
-def viterbi(obs, states, start_p, trans_p, emit_p):
-    V = [{}]  # tabular
-    path = {}
-    for y in states:  # init
-        V[0][y] = start_p[y] + emit_p[y].get(obs[0], MIN_FLOAT)
-        path[y] = [y]
-    for t in xrange(1, len(obs)):
-        V.append({})
-        newpath = {}
-        for y in states:
-            em_p = emit_p[y].get(obs[t], MIN_FLOAT)
-            (prob, state) = max(
-                [(V[t - 1][y0] + trans_p[y0].get(y, MIN_FLOAT) + em_p, y0) for y0 in PrevStatus[y]])
-            V[t][y] = prob
-            newpath[y] = path[state] + [y]
-        path = newpath
-
-    (prob, state) = max((V[len(obs) - 1][y], y) for y in &#39;ES&#39;)
-    return (prob, path[state])
-</code></pre>
-
-<blockquote>
-<p>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的。</p>
-</blockquote>
-
-<h1 id="toc_6">其他问题</h1>
-
-<p>当状态值是『B S E M』的时候，HMM可以用来做中文分词，同样的当状态值是『n,v,...』等词性的时候，HMM就可以用来解决词性标注的问题。同样的命名实体识别的问题也可以这样解决。</p>
+		<p>词向量：<br/>
+    fasttext：<a href="https://arxiv.org/pdf/1607.01759v2.pdf">Bag of Tricks for Efficient Text Classification</a><br/>
+    word2vec:<a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Distributed Representations of Words and Phrases and their Compositionality</a><br/>
+预训练：<br/>
+    ELMO:<a href="https://arxiv.org/pdf/1802.05365.pdf">Deep contextualized word representations</a><br/>
+    BERT:<a href="https://arxiv.org/pdf/1810.04805.pdf">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a><br/>
+注意力：<br/>
+    Transformer:<a href="https://arxiv.org/pdf/1808.04444v1.pdf">Character-Level Language Modeling with Deeper Self-Attention</a><br/>
+    Attention:<a href="https://arxiv.org/pdf/1706.03762.pdf">Attention is all you need</a></p>
 
 
 		</div>
