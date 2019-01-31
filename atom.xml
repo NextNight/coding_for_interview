@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-01-31T10:34:55+08:00</updated>
+  <updated>2019-01-31T12:04:13+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,427 +14,38 @@
 
   
   <entry>
-    <title type="html"><![CDATA[论文collections]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15488331878996.html"/>
-    <updated>2019-01-30T15:26:27+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15488331878996.html</id>
+    <title type="html"><![CDATA[数组：Array]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391804069666.html"/>
+    <updated>2018-10-10T22:06:46+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391804069666.html</id>
     <content type="html"><![CDATA[
-<p>词向量：<br/>
-    fasttext：<a href="https://arxiv.org/pdf/1607.01759v2.pdf">Bag of Tricks for Efficient Text Classification</a><br/>
-    word2vec:<a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">Distributed Representations of Words and Phrases and their Compositionality</a><br/>
-预训练：<br/>
-    ELMO:<a href="https://arxiv.org/pdf/1802.05365.pdf">Deep contextualized word representations</a><br/>
-    BERT:<a href="https://arxiv.org/pdf/1810.04805.pdf">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a><br/>
-注意力：<br/>
-    Transformer:<a href="https://arxiv.org/pdf/1808.04444v1.pdf">Character-Level Language Modeling with Deeper Self-Attention</a><br/>
-    Attention:<a href="https://arxiv.org/pdf/1706.03762.pdf">Attention is all you need</a></p>
+<p>在计算器科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，「分配一块连续的内存来存储」。利用元素的索引（index）可以计算出该元素对应的存储地址。</p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[吴翼：我的ACM参赛故事]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15391808991416.html"/>
-    <updated>2018-10-10T22:14:59+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15391808991416.html</id>
-    <content type="html"><![CDATA[
-<p><a href="https://www.cwzj.com/archives/1451">source: 吴翼：我的ACM参赛故事 | 我爱计算机 </a><br/>
-作者：吴翼，曾经两次拿过ACM/ICPC(国际大学生程序设计竞赛)的奖牌，保送清华大学姚班，毕业后前往加州伯克利攻读PHD，师从人工智能大神Stuart Russell。本文系转载。</p>
+<p>最简单的数据结构类型是一维数组。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。</p>
 
-<p>从我接触程序竞赛到现在应该有十多年了，单说ACM竞赛，从第一次非正式参赛到现在也差不多有7年多的样子。有太多的故事，想说的话，却一直没能有机会写下来。一方面是自己忙，一方面也是自己懒。所以很感谢能有人“逼”我来写点什么。想到会有很多人来读我写的文字，自己也觉得很开心。其实每个人的生活都是一部电影，只是没有那么多幸运的人有机会去诉说。这里，且说三个小故事。</p>
+<h2 id="toc_0">数组的特点</h2>
 
-<p>一个关于仰望，崇拜和梦想的故事</p>
-
-<p>2000年，有一个天才的高中生，在IMO（国际数学奥林匹克竞赛）中以满分获得了金牌并提前一年进入北大读书。在他前往北大之前，他受邀到他毕业的小学给了一个演讲。而听众里面有一个三年级的小正太，演讲啥也没记住，倒是在心里埋下了一个小小的梦想：“我也想代表中国去拿金牌”。</p>
-
-<p>10年后这个天才高中生博士毕业，并受邀回到他毕业的高中又给了一个演讲，当年的小正太变成了少年，又恰好在听众席里。这个少年刚刚入选了信息学奥林匹克中国国家队，将代表中国去加拿大参加国际比赛。</p>
-
-<p>这个天才高中生叫恽之玮，拉马努金奖得主，目前在斯坦福大学任教；而那个小正太，也就是那个少年，后来非常丢人的拿到了国际比赛的银牌，又在ACM竞赛圈子里晃悠了一圈，现在也跑到美国读博士了。很不幸，世界没能狗血到再度产生一个莫扎特和贝多芬的故事。少年自然没法和天才相比拟，不过起码在需要写写文字的时候，少年的故事可以这样开头：“我有一个梦想”。</p>
-
-<p>小学的时候参加计算机兴趣小组，从那里接触了编程。不过，要说真正被带入了程序竞赛这条不归路，那还得归功于我的恩师，常州高级中学的曹文老师的顶级忽悠能力。</p>
-
-<p>我从初一开始跟着曹老师学习信息学竞赛，曹老师最喜欢有事没事的扯他过去的学生的故事，以及竞赛圈里的八卦。也正是那个时候，从曹老师的口中，我知道了世界上还有ACM这么个玩意。还记得某一天，曹老师又在胡侃：“ACM比赛一共有4所大学夺得过2次世界冠军：上海交通大学，圣彼得堡ITMO，华沙大学还有斯坦福大学。”说出来不怕笑话，这也是我第一次听到斯坦福大学这个名字。所以斯坦福大学给我的第一印象就是：两次世界冠军的学校！说句题外话：因为恽之玮的原因，我喜欢了北大很长时间，也因为曹老师的这句胡侃，让斯坦福成了我最向往的大学；不过造化弄人，我的本科在北大的隔壁度过，而博士，又跑到了斯坦福的隔壁。</p>
-
-<p>曹老师八卦的性格，也潜移默化的影响了我。平时没事的时候，就特别喜欢翻阅往年的OI比赛的成绩单，还有ACM世界总决赛的名单。直到现在，我都可以如数家珍的说出之前近10年的信息学竞赛中国国家队（甚至美国国家队）的队员名单，或者ACM世界总决赛清华，交大的队员名字，以及他们的名次。对于一个初中的孩子，翻着这些名字，听着这些故事，我无法用言语描述那是我心中的激动，好像这些故事，发生在一个无与伦比的，广阔的世界，而这些名字，就犹如夜空中的星星一样，闪耀，夺目。后来的很多年中，我很有幸几乎全部见过或者</p>
-
-<p>接触过了这些当年在我心中犹如浩瀚星辰般的神们。他们应该很难想象，当我第一次见到他们的激动的心情。那种感觉，和歌迷见到他们的偶像一样。那时候心中埋藏很多年的小小的执念，也不过就是见他们一次。甚至直到现在，对一些人，还是这样。</p>
-
-<p>初中的时候最喜欢参加省里的夏令营，冬令营，那时候年纪小，最喜欢跟在师兄的后面，听着师兄们讲着我听不懂的算法，打着我没玩过的游戏（我对仙剑的执念也是从那个时候开始的）；初三的暑假我有幸到了上海交通大学ACM队训练了一个月，作为一个初中生，我第一次见到了，国内顶尖的大学，顶尖的大学生是怎么样的，也遇到了我无比尊敬和感恩的，上海交通大学ACM班的俞勇老师；到了高中开始以非正式队伍的身份参加ACM区域赛，也就总算可以亲眼看一看，那些传说中的人，还可以冲上去和他们合一张影，然后激动的晚上睡不着觉；上了大学，大二暑假我到美国Facebook公司总部实习，在湾区见到了更老一辈的，那些如雷贯耳的名字。</p>
-
-<p>光阴荏苒，时光匆匆流逝，好些画面在心里依然是那么清晰。讲讲那些名字吧。初中每次参加省里组织的信息学冬令营夏令营都会嚷嚷，我要是能见一面朱泽园（IOI金牌，ACM总决赛亚军，MIT博士）就好了，后来高二时在ACM杭州赛区总算见到了，当时还见到了他的两位队友：楼天成（楼教主，圈内人士应该都很熟悉）和周源（IOI满分，ACM总决赛亚军，CMU博士），当时捧着那张合影，简直比拿了冠军还激动；初三暑假在交大，第一次在机房里见到了仰慕已久的戴文渊（ACM世界冠军，目前就职于华为诺亚方舟实验室），后来每次只要有机会都要蹦蹦跳跳的跑去找戴文渊合影；高一在ACM南京赛区，第一次见到了唐文斌（ACM总决赛世界第六，Face++ CEO），以及他的两个队友王栋（IOI金牌）和龙凡（IOI金牌，MIT博士），当然还见到了因为比砸了心情不好而拒绝我合影请求的郭华阳（IOI金牌，就职于Facebook）。当时我可能做梦也想不到，过了若干年，我会和唐文斌一起坐在火车的餐车地上打牌，会和郭华阳在纽约曼哈顿睡上下铺。后来进了大学，和贝小辉成了好朋友，楼天成成了我的助教，胡伟栋（IOI金牌，ACM世界亚军）会请我吃饭；我更不会想到，再后来，张一飞（IOI两枚金牌得主，就职于Facebook）会给我推荐简历，我会和符文杰（中国唯一IOI，IMO双国家队成员，就职于Facebook）一起吃饭，和侯启明（NOI历史上唯一的满分，IOI金牌，浙江大学副教授）一起扯淡。当然了，进入大学以后，我不会再端着相机四处合影了。</p>
-
-<p>现在看，这些名字也很普通，也很平常，很多过去的故事，可能在茶余饭后都不会被提起了。但是世界上毕竟有这么一个小故事曾发生过：在很多很多年前，曾经有一个小正太，每天念叨着这些名字，在心里埋下小小的梦想，然后一步一步的，他见到了这些他成天念叨的人，和他们成了朋友。多年以后，他的梦想本身，也许此时正化作一个淡然的微笑。</p>
-
-<p>一个关于固执，坚持和自信的故事</p>
-
-<p>从小学开始参加信息学比赛，高一开始参加ACM区域赛，一直到现在博士还在参赛。这么多年了，有时自己都会感慨。每年参加比赛这件事情，好像已经快成为我生活的一部分了。记得有一次在ACM区域赛的时候发言，我说ACM是我的初恋，现在看，可能ACM成了我的生活了吧。懵懂，热烈，坚持，淡然，其实爱情也不过如此，最后所有的一切，都化作了生活。</p>
-
-<p>很多人问我，这么多年了你怎么还在参赛呢，花费这么多精力，时间，到底是为什么呢？其实我也快说不清楚了。很小很小的时候，那时候教数学奥赛的老师嫌我贪玩训斥我鄙视我的智商。小孩子自尊心总是特别强，想着我换个地方证明我比那些你喜欢的人都厉害，最后差不多是做到了；到了初中，我想比那些师兄师姐们都厉害，要做全国一流的选手，后来差不多也做到了；到了高中发现好像在我身边的师兄，同学超不过了（提一下，有一个高中师兄叫金斌，TCO世界冠军，ACM总决赛冠军亚军各一次，还有一个高中师兄叫吴卓杰，ACM总决赛冠军，目前都就职于Google），我就想我可以到了大学参加ACM，在ACM赛场上超过他们；到了大学，做工程的不断实习做项目，做科研的一篇接一篇的发论文，刷GPA的几乎每门课都是满分。我看看自己似乎没有一样能做到最好的，于是就想，要不然就做一个科研界ACM比的最好的，而ACM界又科研做的最好的人吧；再到后来，我知道世界上还有Percy Liang （斯坦福大学助理教授，ACM总决赛亚军）， Matei Zaharia（MIT助理教授，Spark的开发者，ACM总决赛第四）这些人，遂发现自己实在是差距太大了，实在连个理由都编不出了（也许可能是常州方言讲的最好的？）。可能这个时候，ACM对我而言，更像是对自己的敬礼。毕竟，自己已经坚持了很久很久，从江南，到帝都，再到美利坚加利福尼亚。就像唱一首歌，跳一支舞，写一段文字，哪怕根本没有观众，也总希望</p>
-
-<p>能够最后落下伴着微笑的句点。做一件事不一定非要有一个意义，因为坚持的本身，就有意义，也因为，坚持总能伴着一份感动，时不时的在心中翻涌。</p>
-
-<p>坚持是要有信念的，信念是什么？当然是“赢”。想想还挺不容易也挺可笑的，到现在还在乎着输赢，尤其输赢已经早就没有了意义。不过也不那么可笑，因为我并不执念。 “赢”也许只是对生活的热情的简写吧。小时候想打败所有的人，做最好的选手，结果过了十年参加国际比赛拿了块丢人的银牌，在中国队里垫了底；高中参加ACM，每次都为击败一支清华的队伍感到振奋，而当自己到了清华，第一次参赛就在清华内部排在了最后；大学幻想着以自己作为队伍的核心战斗力，代表清华拿冠军，参加总决赛，结果连续拿到了4次区域赛的亚军（清华的规矩是，只有冠军才有资格代表学校参加总决赛），并且其中三次都是在最后时刻被反超，同题数输罚时；大三那年总算进了总决赛，幻想着能够屌丝逆袭一次进个前八，结果最后惊险拿到了领奖队伍的最后一名（总决赛一共12支队伍可以获得奖牌，金银铜各4支，我在2013年的总决赛获得第12名），并且还输给了CMU（后来在CMU遇到了他们的教练，被调侃：“Oh, we beat you, right?”）；大四练了很久的俄罗斯风格的题目，想着再去一次在俄罗斯举办的总决赛，证明一下自己，结果在最后一次区域赛输给了当时完美发挥的交大，最后甚至连亚军都没有拿到。今年8月我在加州大学伯克利分校开始了自己博士生涯。很有幸，我找到了两个老朋友作为自己的队友，然后我们轻松的拿到了西北太平洋赛区的冠军。于是，我可以代表加州大学伯克利分校，参加5月份的ACM世界总决赛了。这是我的第二次总决赛，也将是最后一次。不过我希望后面的故事不要再继续按照之前的走势了。</p>
-
-<p>这里着重说一下我大三那年（2012）参加ACM的经历。当年我们的队名叫Again And Again，理由很简单，队里面三个人，我，毛杰明（IOI金牌，目前在普林斯顿读博士），莫涛（NOI第一，目前在香港中文读博士），在过去的2年里（2010和2011）分别参加过8个不同的赛区，一共获得了其中的6个亚军，并且又在2012年的长春赛区，一起携手拿到了我们的第7个亚军。9次比赛7次亚军，我想这个记录也是挺难超越的了。</p>
-
-<p>我是一个固执的人，一旦认定的事情很难再被改变；我也是一个幸运的人，大部分我认定的事情都起码没有失败。也许，老天真的会偏爱一个愿意一直仅仅因为喜欢而坚持的人吧。中学的时候，大部分时间都是我一个人呆在机房里，或者一个人在家里抱着电脑想问题，那时候参加编程比赛是有理有据的，因为可以保送大学，可以给学校争光，家长和学校也都支持。到了清华，事情就不一样了。我知道，现在参加程序比赛越来越多的有了功利性，拿奖可以保研，可以找工作，或者给学校给领导争光。不过这些理由在清华，都是不成立的。我的大部分天才同学们，都在北美最好的学校读博士，至于给学校和领导争光，我想也许我们拿到了世界冠军，可能会有机会上一次清华首页吧，不过这也只是我的猜测——毕竟清华从来没有在ACM总决赛上夺冠过。清华没有什么ACM队，没有ACM训练或者选拔，也没有什么奖金或者评优加分。在清华，ACM不过是众多学生活动中普通的一项。我们这些老人有一个老笑话：“如何在开幕式迅速识别出清华的学生？在那里做作业的！”在很多学校，也许有很多ACM队的黑话，传统，故事；而清华也有他自己的故事，这些故事可能最特别也最普通。特别在于，清华也有与众不同的故事，不过这些故事几乎没有单纯关于ACM的：比如鬲融的故事（清华的一段传说，计算机系历史最高GPA，IOI金牌，ACM总决赛亚军，普林斯顿大学博士），周源的故事，或者楼天成的故事；普通在于，这些故事并没有一个明确的标签，ACM比赛只是这些故事里面，很小很小的一部分。大家是清华人，要做最好的学生，要发论文，要搞好课业，要跑3000米，只是大家都喜欢ACM，觉得她有趣。</p>
-
-<p>“有趣”二字，说来轻巧，可是，我似乎也找不出更好的词汇来评价ACM这项活动了。读博士了之后很多人劝我说：“你都读博士了还玩这些年轻人的活动。”我同意这个观点。不过因为我还是觉得参加ACM很有趣，所以我又固执的接着参加了。于是作为一个老博士，我又得继续忽悠着同为博士的队友们在周末抽出时间来训练，继续在闲着无聊的时候作着我自己关于“赢”的春秋大梦。</p>
-
-<p>一个关于青春，热情和友谊的故事</p>
-
-<p>参加ACM ICPC竞赛，给了我太多太多美好的回忆，让我收获了太多太多宝贵的友谊。每当回忆翻涌，总会感慨当时的纯粹，热情和真挚——自己也算，有一段奋斗过的青春。</p>
-
-<p>初三的暑假和两个师兄，吴沛凡（目前在纽约大学读经济博士）和金斌在上海交大ACM队训练了一个月。期间每天上午做一套真题，下午修订和讨论。还记得那时候金斌第一次洗冷水澡的时候爆发出的惊人惨叫；记得最</p>
-
-<p>后一部哈利波特问世，我晚上拽着沛凡给我恶补哈利波特；记得第一次知道交大的BBS叫未名，清华的BBS叫水木；记得第一次知道了当时还得审核大学生身份的人人网，当时吴卓杰还用人人网的bug玩上面买车位的网页游戏；记得第一次去问交大师姐一道题怎么做的时候红着脸踌躇了好半天；记得当时更老的师兄们骑车载着我们去吃盖浇饭；更记得第一次三人组队赢了交大一队时候的兴奋和激动；也记得第一次见到交大ACM班的俞勇老师时候的胆怯和害羞……那段时光是我整个中学生涯中最好的时光，每天都很快乐，每天都有进步。我不得不承认，从那时候开始，交大成了我高中时期最向往的地方：为了去交大而不去清华，我还在高三的时候和我的妈妈进行了接近三个月的激烈斗争。好多好多年过去了，当年的ACM队师兄师姐们，早就工作，或者快博士毕业了；三个坐在后座的小屁孩，现在两个在读博士，一个拿了世界冠军，去了谷歌；俞勇老师老了很多岁。据我很多交大的同学说，俞勇老师很严厉。也许正因为我没真正做过俞老师的学生，所以起码在我这里，俞老师给我的印象是一个温和负责的导师，每次我参加比赛见到俞老师，都会特别亲切的打招呼，交谈。也许我应该对我去了清华感到庆幸吧，因为，从此交大在我心里就只留下了她最美好的样子。</p>
-
-<p>大学在清华碰到了毛杰明和莫涛两个死党，一起吃外卖，一起互黑，一起旅游。那时候我自封后勤队长（其实我在每一个队伍里的角色都是这个），负责研究去什么赛区，每次协调大家什么时候训练，训练什么题，还负责代购火车票飞机票以及和教练沟通，并且乐此不疲。他俩也待我不薄，因为毛杰明，我在大学里少走了很多弯路，又因为莫涛，让我多了一个特别铁杆的基友。</p>
-
-<p>2011年福州赛区，只要另一支清华的队伍不能在30分钟内通过最后一题，我和毛杰明就能晋级总决赛。只是很可惜，20分钟后，那支队伍前，升起了对应颜色的气球。我还清楚的记得，在回程的飞机上，心情郁闷的我和厦门航空的空乘吵了起来。毛杰明不停的安慰我不用跟人一般见识。我后来又去过不少次福建，不过也再没做过厦门航空的飞机。</p>
-
-<p>2012年我和毛杰明还有莫涛组队。那年的长春赛区，比赛前我们三个吃牛排刮出了一张奖励2元钱的发票，要知道当时我们已经拿了6次亚军了。莫涛觉得2元钱太晦气，还刻意第二天早上给服务员送出1元的小费希望讨个吉利。结果赛场上，我们站在中山大学的身后，近距离目睹了他们在比赛结束后5分钟得到系统返回的一个YES，并以罚时优势将我们反超并夺冠的欣喜若狂。更狗血的是，在接下来的由中山大学负责命题的天津赛区，有一道题目和之前在长春赛区中山反超我们的那题一模一样。于是，在中大的好心保送下，我们总算拿到了冠军。</p>
-
-<p>2013年圣彼得堡的总决赛，从来不喝咖啡的我在赛前喝了咖啡，不过似乎咖啡对于紧张没有什么好的疗效。虽然这么多年来我每逢ACM比赛都会紧张，心跳加速，血压升高，不过那一天似乎大家都紧张的特别严重：场上三个人对着两道题看了1个多小时居然都不会做，而一出赛场就都会了。回忆到当时看结果公布时自己的焦虑和不安，我觉得以后估计也不会有机会能够让自己的心律比那个时候更快一点了。记得比赛入场的时候我和我的一个俄罗斯朋友，当时莫斯科大学的选手Sergey握了一个手，然后那一年莫斯科大学和我们都拿了铜牌。毛杰明和莫涛都说，估计是我吸来了莫斯科大学的仙气，把人家拉成了铜牌，把我们从胸牌，提到了奖牌。这事我后来一直没好意思和Sergey说，希望他不会在心里骂我。</p>
-
-<p>2013年下半年，毛杰明去了普林斯顿读博士，我和莫涛拉来了陈高远（Topcoder Target，USC硕士在读）。我们三个大四狗组了个队，唤作“老流氓”。作为流氓头子，我愣是自己联系，办理手续，然后忽悠另外两个老家伙们掏出了之前的比赛的奖金买了飞往日本的机票，使我们队成为了近10年来清华第一支参加海外ACM赛区的队伍（清华由于经费不够，加上一些历史原因，是不参加海外赛区的）。比赛比的很糟，不过三个老家伙在富士山下泡温泉，在东京米其林餐厅吃寿司，爬东京塔也是挺值得怀念的。还记得当时莫涛痴迷某日剧（具体原因我后来黑了他好久），我们被忽悠着整个一天东京的行程都按照剧里男主和女主的约会路线进行。傍晚，在东京的台场，莫涛望着远处的彩虹桥，掏出了他的iTouch和我说：“你看，剧里就是这个位置，这个角度，这个时间！”那荡漾的眼神，一定会成为未来很多很多年，一个关于莫涛的经典槽点。</p>
-
-<p>2014年，我来到了加州伯克利大学读博士。很幸运，我遇到了两个也再读博士的中国队友，姜碧野（NOI2009金牌，在清华ACM区域赛和莫涛一起拿过3次亚军，代表伯克利参加了2014年ACM总决赛）和赖陆航（数学博士，IOI2010金牌，代表北大参加了2011年ACM总决赛），组成了伯克利中国队。于是我又开始了我后勤部长兼队内主码的身份——反正我对这个角色早已驾轻就熟。我们很轻松的晋级了2015年5月份将在摩洛哥举行的ACM总决赛。这对我们三个人来说，都是第二次，也是最后一次总决赛，也将是竞赛生涯的最后一场比赛了。想想时间过得真快，从一个小孩到一个博士，关于青春的故事，也终要画上句号了。</p>
-
-<p>这段青春里，有太多有趣的事，有趣的人。很多很多年以后，这些说不完、道不尽，也都化为老友相聚时的调侃和相逢一笑。我觉得，这也许就是生活里，最美的喜剧。</p>
-
-<p>最后的一些话</p>
-
-<p>这是我的故事，感谢我有这个机会能把我的故事写下来，也感谢前来阅读的人。ACM不是生活的全部，甚至连一小部分都算不上——就像，写完这些文字，我还得抓紧时间继续准备我的论文，继续我的研究工作。也确实是这样，一个人的生活应该是丰富的，充实的和多彩的。生活应当像浩瀚的宇宙，壮阔却又静谧，ACM不过是那绚烂星辰中的一颗。宇宙不应因为少了一颗星而暗淡，但是却可能因为多了一颗星而多了一段璀璨的文明。</p>
-
-<p>「把这篇文章放在这里呢，是真的喜欢这种人生，这种经历。偶然看到，有是一种莫名的感动。。」</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[最近想做的事]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392402403847.html"/>
-    <updated>2018-10-11T14:44:00+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392402403847.html</id>
-    <content type="html"><![CDATA[
 <ul>
-<li>First：刷题，刷题，刷题，整理好这个网站，做好知识积累</li>
-<li>Second：做一个爬虫，爬取各个数据科学比赛网站的赛题，做分类，英文的做翻译，进行内容规则提取，结构化的在一个网页中展示出来，</li>
-<li>Third：NLP内容的学习，深度学习内容的学习</li>
+<li>连续的内存</li>
+<li>同一类型</li>
+<li>相同大小</li>
+<li>随机读取</li>
+<li>插入删除耗时</li>
+<li>初始化必须知道大小</li>
+<li>扩容消耗时间，空间</li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[想对自己说的话]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15406404520470.html"/>
-    <updated>2018-10-27T19:40:52+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15406404520470.html</id>
-    <content type="html"><![CDATA[
-<p>「 25岁了，也许这是注定平凡的一生，但这又有什么关系，没有谁来到世上注定是伟大的。我也不过是这平凡的大多数中的一员。」</p>
+<h2 id="toc_1">数组应用</h2>
 
-<p>「 不要总是否定自己，其实你已经超越了很多人，至少在走自己的路，也不要总是把目标定的那么高远，总觉得，过去了那么久好像自己还是那个样子，其实你已经成长了很多，真的。」</p>
-
-<p>「 世界那么大，多去看看。」</p>
-
-<p>「 阶段性的目标，学到自己想学到的东西就够了。」</p>
-
-<p>「 但行好事，莫问前程。」</p>
-
-<p>「 无钱莫入众，言轻莫劝人，待到功成后，把酒言初心。」</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我的偶像]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392398597900.html"/>
-    <updated>2018-10-11T14:37:39+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392398597900.html</id>
-    <content type="html"><![CDATA[
-<p>「用偶像中这个词可能不太确切，但是好像偶像更能让我像个年轻人一样仿佛对生活充满了热情。」</p>
-
-<h1 id="toc_0"><span style="color:rgb(0,173,167)">「Andrew Ng」</span></h1>
-
-<p>吴恩达（英语：Andrew Ng，1976年－）是斯坦福大学计算机科学系和电气工程系的副教授，斯坦福人工智能实验室的主任。他还与达芙妮·科勒一起创建了在线教育平台Coursera。</p>
-
-<h1 id="toc_1"><span style="color:rgb(0,173,167)">「唐骏」</span></h1>
-
-<p>唐骏，是中国的著名职业经理人，曾留学日本和美国，有“打工皇帝”之称。他本科毕业于北京邮电大学，后前往日本名古屋大学深造取得工学硕士学位。1994年加入微软公司美国总部，先后担任微软全球技术中心总经理，微软中国公司总裁。2004年出任中国最大的互动娱乐公司盛大网络公司总裁，并帮助盛大公司在美国纳斯达克成功上市，被华尔街誉为中国资本的第一人。2008年唐骏先生以“十亿“身价转会新华都集团出任总裁兼CEO。</p>
-
-<h1 id="toc_2"><span style="color:rgb(0,173,167)">「陈天桥」</span></h1>
-
-<p>陈天桥，1973年5月生于浙江新昌。盛大网络董事会主席和首席执行官（CEO）。陈天桥是中国网络游戏产业的奠基人和领军人物，缔造了一个白手起家创业的神话，其影响力遍布国内及全球。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[我这一生]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15391740524915.html"/>
-    <updated>2018-10-10T20:20:52+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15391740524915.html</id>
-    <content type="html"><![CDATA[
-<p>2018-10-10/by kala</p>
-
-<p>到底要经历怎样的生活才能回头对自己说我这一生没白来过。</p>
-
-<p>你有没有曾问过自己，想要什么样的人生？我曾经很多次的问自己，想要的是什么，是寻找存在的意义还是寻找生活的乐趣，后来我发现，我想要的不过是活着，简单的活着。没有那么多烦恼，没有那么多的忧虑的活着。有的人除了活着还有梦想，还有向往，而有的人好像什么也没有。</p>
-
-<p>无知而无畏，无欲则无求，而我想说的是无求则无欲，没有追求，没有向往，便没有了动力。一定要找到自己喜欢并想去做的东西，努力的做好它。这也许就是意义吧，时隔多年终于可以对自己说我做成过一件事。</p>
-
-<p>最近有看过《一千零一夜》这个纪录片的一部分，里面有一节讲的是《生命不能承受之轻》里面有这样一段话深深的触动了我「他吻她动人的唇，那时她患了感冒，却使得她的生意更沙哑，比平常更迷人，而盖茨无比抗拒的意识到『财富能囚住并保存青春和奥秘，还有只要拥有许多华服便能永葆清新亮丽』，他也深深意识到黛西的存在『她像银子般闪耀高居在无虞而得意的生活中与底下艰难搏斗的贫寒人家处于两个世界』」。从农村到城镇，从城镇到城市，从城市到一线城市，看过的经历过的深深让我意识到差距真的存在，不仅仅是地位与金钱，更多的是眼界与格局。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[文章结构]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392326678534.html"/>
-    <updated>2018-10-11T12:37:47+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392326678534.html</id>
-    <content type="html"><![CDATA[
 <ul>
-<li>数据结构介绍，相关实现，应用</li>
-<li>数据结构的操作图示</li>
-<li>数据结构的相关实现</li>
-<li>树的相关操作</li>
-<li>数据结构的相关解题思路</li>
-<li>数据结构的相关题目：链接Leetcode的题目<br/>
-# 示例</li>
+<li>实现List：List这种数据结构就是通过数组实现的</li>
+<li>实现String：字符串这种数据结构就是通过字符数组实现的</li>
+<li>实现：队列，堆，树，栈。</li>
 </ul>
 
-<h2 id="toc_0">树</h2>
+<h2 id="toc_2">数组相关的题目</h2>
 
-<p>树是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：</p>
-
-<ul>
-<li>每个节点有零个或多个子节点；</li>
-<li>没有父节点的节点称为根节点；</li>
-<li>每一个非根节点有且只有一个父节点；</li>
-<li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
-</ul>
-
-<h2 id="toc_1">树的实现方式</h2>
-
-<ul>
-<li>二维数组：每个数组是树的一个节点node,每个node存储了当前节点的数据和它的父节点索引。</li>
-<li>字典实现：</li>
-</ul>
-
-<h2 id="toc_2">树的应用</h2>
-
-<ul>
-<li>二叉树
-<ul>
-<li>AVL：平衡二叉树，当且仅当任何节点的两棵子树的高度差不大于1的二叉树；</li>
-<li>BST：排序二叉树，二叉查找树</li>
-</ul></li>
-<li>Huffman树：带权路径最短的二叉树称为哈夫曼树或最优二叉树</li>
-<li>B树：一种对读写操作进行优化的自平衡的二叉查找树，能够保持数据有序，拥有多于两个子树。</li>
-<li>B+树：B树的优化</li>
-<li>RBT红黑树：</li>
-<li>堆Heap：二叉堆，斐波那契堆</li>
-<li>Trie树：</li>
-</ul>
-
-<h2 id="toc_3">二叉树的python实现</h2>
-
-<pre class="line-numbers"><code class="language-text">def 
-</code></pre>
-
-<h2 id="toc_4">二叉树的各种操作</h2>
-
-<ul>
-<li>层次遍历</li>
-<li>之字形遍历</li>
-<li>先序遍历</li>
-<li>中序遍历</li>
-<li>后序遍历</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[堆：Heap]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392363328863.html"/>
-    <updated>2018-10-11T13:38:52+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392363328863.html</id>
-    <content type="html"><![CDATA[
-<p>堆（英语：Heap）是计算机科学中的一种特别的树状数据结构。若是满足以下特性，即可称为堆：“给定堆中任意节点 P 和 C，若 P 是 C 的母节点，那么 P 的值会小于等于（或大于等于） C 的值”。若母节点的值恒小于等于子节点的值，此堆称为最小堆（英语：min heap）；反之，若母节点的值恒大于等于子节点的值，此堆称为最大堆（英语：max heap）。在堆中最顶端的那一个节点，称作根节点（英语：root node），根节点本身没有母节点（英语：parent node）。</p>
-
-<p>堆始于 W. J. Williams 在 1964 年发表的堆排序（英语：heap sort），当时他提出了二叉堆树作为此算法的数据结构。堆在戴克斯特拉算法（英语：Dijkstra&#39;s algorithm）中亦为重要的关键。</p>
-
-<p>在队列中，调度程序反复提取队列中第一个作业并运行，因为实际情况中某些时间较短的任务将等待很长时间才能结束，或者某些不短小，但具有重要性的作业，同样应当具有优先权。堆即为解决此类问题设计的一种数据结构「『优先级队列』」。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[图：Graph]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392292553953.html"/>
-    <updated>2018-10-11T11:40:55+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392292553953.html</id>
-    <content type="html"><![CDATA[
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[哈希表：Hash]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392292427453.html"/>
-    <updated>2018-10-11T11:40:42+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392292427453.html</id>
-    <content type="html"><![CDATA[
-<p>。。。</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[树：Tree]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392291769523.html"/>
-    <updated>2018-10-11T11:39:36+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392291769523.html</id>
-    <content type="html"><![CDATA[
-<p>树是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：</p>
-
-<ul>
-<li>每个节点有零个或多个子节点；</li>
-<li>没有父节点的节点称为根节点；</li>
-<li>每一个非根节点有且只有一个父节点；</li>
-<li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
-</ul>
-
-<h1 id="toc_0">树的实现方式</h1>
-
-<ul>
-<li>二维数组：每个数组是树的一个节点node,每个node存储了当前节点的数据和它的父节点索引。</li>
-<li>字典实现：</li>
-</ul>
-
-<h1 id="toc_1">树的应用</h1>
-
-<ul>
-<li>二叉树
-<ul>
-<li>AVL：平衡二叉树，当且仅当任何节点的两棵子树的高度差不大于1的二叉树；</li>
-<li>BST：排序二叉树，二叉查找树</li>
-</ul></li>
-<li>Huffman树：带权路径最短的二叉树称为哈夫曼树或最优二叉树</li>
-<li>B树：一种对读写操作进行优化的自平衡的二叉查找树，能够保持数据有序，拥有多于两个子树。</li>
-<li>B+树：B树的优化</li>
-<li>RBT红黑树：</li>
-<li>堆Heap：二叉堆，斐波那契堆</li>
-<li>Trie树：</li>
-</ul>
-
-<h1 id="toc_2">二叉树的python实现</h1>
-
-<pre class="line-numbers"><code class="language-text">def 
-</code></pre>
-
-<h1 id="toc_3">二叉树的基本操作</h1>
-
-<ul>
-<li>层次遍历</li>
-<li>之字形遍历</li>
-<li>先序遍历</li>
-<li>中序遍历</li>
-<li>后序遍历</li>
-</ul>
-
-<h1 id="toc_4">二叉树的相关题目</h1>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[栈：Stack]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15392291360952.html"/>
-    <updated>2018-10-11T11:38:56+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15392291360952.html</id>
-    <content type="html"><![CDATA[
-<p>栈（英语：stack）又称为栈或堆叠，是计算机科学中一种特殊的串列形式的抽象数据类型，其特殊之处在于只能允许在链表或数组的一端（称为堆栈顶端指针，英语：top）进行加入数据（英语：push）和输出数据（英语：pop）的运算。另外栈也可以用一维数组或链表的形式来完成。堆栈的另外一个相对的操作方式称为队列。</p>
-
-<p>由于堆栈数据结构只允许在一端进行操作，因而按照后进先出（LIFO, Last In First Out）的原理运作</p>
-
-<h1 id="toc_0">栈的操作</h1>
-
-<p>堆栈数据结构使用两种基本操作：推入（压栈，push）和弹出（弹栈，pop）：</p>
-
-<ul>
-<li>推入：将数据放入堆栈的顶端（数组形式或串列形式），堆栈顶端top指针加一。</li>
-<li>弹出：将顶端数据数据输出（回传），堆栈顶端数据减一。</li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[队列：Queue]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15391808453198.html"/>
-    <updated>2018-10-10T22:14:05+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15391808453198.html</id>
-    <content type="html"><![CDATA[
-<p>队列是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
-
-<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。</p>
-
-<h1 id="toc_0">队列的特点</h1>
-
-<ul>
-<li>先入先出</li>
-</ul>
-
-<h1 id="toc_1">队列的应用</h1>
-
-<p>对于需要顺序执行的任务尝试用队列这种结构实现。</p>
-
-<h1 id="toc_2">队列的简单实现</h1>
-
-<h4 id="toc_3">1. Python List实现固定长度的队列,同样的方式可以实现双端队列</h4>
-
-<pre class="line-numbers"><code class="language-python">class Queue(object):
-    def __init__(self, init_size):
-        self._data = [None] * init_size
-        self._head = -1
-        self._tail = -1
-        self._size = init_size
-
-    def add(self, item):
-        if self._tail &gt;= self._size-1:
-            print(&quot;queue full&quot;)
-        else:
-            self._tail += 1
-            self._data[self._tail] = item
-
-    def poll(self):
-        if self._head &gt;= self._tail:
-            print(&quot;queue empty&quot;)
-        else:
-            self._head += 1
-            top = self._data[self._head]
-            self._data[self._head] = None
-            return top
-
-    def foreach(self):
-        rs = []
-        while self._head &lt;= self._tail-1:
-            top = self.poll()
-            rs.append(top)
-        return rs
-</code></pre>
-
-<h4 id="toc_4">2. 两个栈实现队列</h4>
-
-<pre class="line-numbers"><code class="language-text">
-</code></pre>
-
-<h1 id="toc_5">队列相关题目</h1>
+<p><a href="15392386512557.html">两数之和</a></p>
 
 ]]></content>
   </entry>
@@ -564,38 +175,182 @@ class LinkedList(object):
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[数组：Array]]></title>
-    <link href="http://atlasbl.cn/coding_for_interview/15391804069666.html"/>
-    <updated>2018-10-10T22:06:46+08:00</updated>
-    <id>http://atlasbl.cn/coding_for_interview/15391804069666.html</id>
+    <title type="html"><![CDATA[栈：Stack]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392291360952.html"/>
+    <updated>2018-10-11T11:38:56+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392291360952.html</id>
     <content type="html"><![CDATA[
-<p>在计算器科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，「分配一块连续的内存来存储」。利用元素的索引（index）可以计算出该元素对应的存储地址。</p>
+<p>栈（英语：stack）又称为栈或堆叠，是计算机科学中一种特殊的串列形式的抽象数据类型，其特殊之处在于只能允许在链表或数组的一端（称为堆栈顶端指针，英语：top）进行加入数据（英语：push）和输出数据（英语：pop）的运算。另外栈也可以用一维数组或链表的形式来完成。堆栈的另外一个相对的操作方式称为队列。</p>
 
-<p>最简单的数据结构类型是一维数组。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。</p>
+<p>由于堆栈数据结构只允许在一端进行操作，因而按照后进先出（LIFO, Last In First Out）的原理运作</p>
 
-<h2 id="toc_0">数组的特点</h2>
+<h1 id="toc_0">栈的操作</h1>
 
-<ul>
-<li>连续的内存</li>
-<li>同一类型</li>
-<li>相同大小</li>
-<li>随机读取</li>
-<li>插入删除耗时</li>
-<li>初始化必须知道大小</li>
-<li>扩容消耗时间，空间</li>
-</ul>
-
-<h2 id="toc_1">数组应用</h2>
+<p>堆栈数据结构使用两种基本操作：推入（压栈，push）和弹出（弹栈，pop）：</p>
 
 <ul>
-<li>实现List：List这种数据结构就是通过数组实现的</li>
-<li>实现String：字符串这种数据结构就是通过字符数组实现的</li>
-<li>实现：队列，堆，树，栈。</li>
+<li>推入：将数据放入堆栈的顶端（数组形式或串列形式），堆栈顶端top指针加一。</li>
+<li>弹出：将顶端数据数据输出（回传），堆栈顶端数据减一。</li>
 </ul>
 
-<h2 id="toc_2">数组相关的题目</h2>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[队列：Queue]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391808453198.html"/>
+    <updated>2018-10-10T22:14:05+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391808453198.html</id>
+    <content type="html"><![CDATA[
+<p>队列是先进先出（FIFO, First-In-First-Out）的线性表。在具体应用中通常用链表或者数组来实现。队列只允许在后端（称为rear）进行插入操作，在前端（称为front）进行删除操作。</p>
 
-<p><a href="15392386512557.html">两数之和</a></p>
+<p>队列的操作方式和堆栈类似，唯一的区别在于队列只允许新数据在后端进行添加。</p>
+
+<h1 id="toc_0">队列的特点</h1>
+
+<ul>
+<li>先入先出</li>
+</ul>
+
+<h1 id="toc_1">队列的应用</h1>
+
+<p>对于需要顺序执行的任务尝试用队列这种结构实现。</p>
+
+<h1 id="toc_2">队列的简单实现</h1>
+
+<h4 id="toc_3">1. Python List实现固定长度的队列,同样的方式可以实现双端队列</h4>
+
+<pre class="line-numbers"><code class="language-python">class Queue(object):
+    def __init__(self, init_size):
+        self._data = [None] * init_size
+        self._head = -1
+        self._tail = -1
+        self._size = init_size
+
+    def add(self, item):
+        if self._tail &gt;= self._size-1:
+            print(&quot;queue full&quot;)
+        else:
+            self._tail += 1
+            self._data[self._tail] = item
+
+    def poll(self):
+        if self._head &gt;= self._tail:
+            print(&quot;queue empty&quot;)
+        else:
+            self._head += 1
+            top = self._data[self._head]
+            self._data[self._head] = None
+            return top
+
+    def foreach(self):
+        rs = []
+        while self._head &lt;= self._tail-1:
+            top = self.poll()
+            rs.append(top)
+        return rs
+</code></pre>
+
+<h4 id="toc_4">2. 两个栈实现队列</h4>
+
+<pre class="line-numbers"><code class="language-text">
+</code></pre>
+
+<h1 id="toc_5">队列相关题目</h1>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[堆：Heap]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392363328863.html"/>
+    <updated>2018-10-11T13:38:52+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392363328863.html</id>
+    <content type="html"><![CDATA[
+<p>堆（英语：Heap）是计算机科学中的一种特别的树状数据结构。若是满足以下特性，即可称为堆：“给定堆中任意节点 P 和 C，若 P 是 C 的母节点，那么 P 的值会小于等于（或大于等于） C 的值”。若母节点的值恒小于等于子节点的值，此堆称为最小堆（英语：min heap）；反之，若母节点的值恒大于等于子节点的值，此堆称为最大堆（英语：max heap）。在堆中最顶端的那一个节点，称作根节点（英语：root node），根节点本身没有母节点（英语：parent node）。</p>
+
+<p>堆始于 W. J. Williams 在 1964 年发表的堆排序（英语：heap sort），当时他提出了二叉堆树作为此算法的数据结构。堆在戴克斯特拉算法（英语：Dijkstra&#39;s algorithm）中亦为重要的关键。</p>
+
+<p>在队列中，调度程序反复提取队列中第一个作业并运行，因为实际情况中某些时间较短的任务将等待很长时间才能结束，或者某些不短小，但具有重要性的作业，同样应当具有优先权。堆即为解决此类问题设计的一种数据结构「『优先级队列』」。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[图：Graph]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392292553953.html"/>
+    <updated>2018-10-11T11:40:55+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392292553953.html</id>
+    <content type="html"><![CDATA[
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[哈希表：Hash]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392292427453.html"/>
+    <updated>2018-10-11T11:40:42+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392292427453.html</id>
+    <content type="html"><![CDATA[
+<p>。。。</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[树：Tree]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392291769523.html"/>
+    <updated>2018-10-11T11:39:36+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392291769523.html</id>
+    <content type="html"><![CDATA[
+<p>树是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：</p>
+
+<ul>
+<li>每个节点有零个或多个子节点；</li>
+<li>没有父节点的节点称为根节点；</li>
+<li>每一个非根节点有且只有一个父节点；</li>
+<li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
+</ul>
+
+<h1 id="toc_0">树的实现方式</h1>
+
+<ul>
+<li>二维数组：每个数组是树的一个节点node,每个node存储了当前节点的数据和它的父节点索引。</li>
+<li>字典实现：</li>
+</ul>
+
+<h1 id="toc_1">树的应用</h1>
+
+<ul>
+<li>二叉树
+<ul>
+<li>AVL：平衡二叉树，当且仅当任何节点的两棵子树的高度差不大于1的二叉树；</li>
+<li>BST：排序二叉树，二叉查找树</li>
+</ul></li>
+<li>Huffman树：带权路径最短的二叉树称为哈夫曼树或最优二叉树</li>
+<li>B树：一种对读写操作进行优化的自平衡的二叉查找树，能够保持数据有序，拥有多于两个子树。</li>
+<li>B+树：B树的优化</li>
+<li>RBT红黑树：</li>
+<li>堆Heap：二叉堆，斐波那契堆</li>
+<li>Trie树：</li>
+</ul>
+
+<h1 id="toc_2">二叉树的python实现</h1>
+
+<pre class="line-numbers"><code class="language-text">def 
+</code></pre>
+
+<h1 id="toc_3">二叉树的基本操作</h1>
+
+<ul>
+<li>层次遍历</li>
+<li>之字形遍历</li>
+<li>先序遍历</li>
+<li>中序遍历</li>
+<li>后序遍历</li>
+</ul>
+
+<h1 id="toc_4">二叉树的相关题目</h1>
 
 ]]></content>
   </entry>
@@ -702,6 +457,347 @@ class LinkedList(object):
     <id>http://atlasbl.cn/coding_for_interview/15392716677172.html</id>
     <content type="html"><![CDATA[
 <h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[桶排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392715483846.html"/>
+    <updated>2018-10-11T23:25:48+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392715483846.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[归并排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392715143262.html"/>
+    <updated>2018-10-11T23:25:14+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392715143262.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[快速排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392714966006.html"/>
+    <updated>2018-10-11T23:24:56+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392714966006.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[冒泡排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392714719077.html"/>
+    <updated>2018-10-11T23:24:31+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392714719077.html</id>
+    <content type="html"><![CDATA[
+<h2 id="toc_0"></h2>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[插入排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15392697680749.html"/>
+    <updated>2018-10-11T22:56:08+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15392697680749.html</id>
+    <content type="html"><![CDATA[
+<p>插入排序是一种直观的排序算法，通过不管的构建将为排序元素与有序元素比较找到正确的位置构建新的有序序列来最终得到一个有序序列，它只需使用O(1)的额外空间，但是每个元素都要跟有序元素进行比较，时间复杂度是O(n<sup>2)</sup></p>
+
+<h1 id="toc_0">插入排序的复杂度：</h1>
+
+<p>最坏时间复杂度 \({\displaystyle O(n^{2})}\)<br/>
+最优时间复杂度 \({\displaystyle O(n)}\)<br/>
+平均时间复杂度 \({\displaystyle O(n^{2})}\)<br/>
+最坏空间复杂度 \({\displaystyle O(n)}\)<br/>
+需要辅助空间     \({\displaystyle O(1)}\)</p>
+
+<h1 id="toc_1">插入排序的过程</h1>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" alt=""/></p>
+
+<h1 id="toc_2">插入排序的实现</h1>
+
+<pre class="line-numbers"><code class="language-python">def insert_sort(nums):
+    if len(nums) &lt;= 1 or nums == None:
+        return nums
+    for i in range(1,len(nums)):
+        for j in range(i, 0, -1):
+            if nums[j] &lt; nums[j-1]:
+                nums[j-1],nums[j] = nums[j],nums[j-1]
+            else:
+                break
+    return nums
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Markdown语法]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391839924703.html"/>
+    <updated>2018-10-10T23:06:32+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391839924703.html</id>
+    <content type="html"><![CDATA[
+<p>我们理解您需要更便捷更高效的工具记录思想，整理笔记、知识，并将其中承载的价值传播给他人，<strong>Cmd Markdown</strong> 是我们给出的答案 —— 我们为记录思想和分享知识提供更专业的工具。 您可以使用 Cmd Markdown：</p>
+
+<blockquote>
+<ul>
+<li>整理知识，学习笔记</li>
+<li>发布日记，杂文，所见所想</li>
+<li>撰写发布技术文稿（代码支持）</li>
+<li>撰写发布学术论文（LaTeX 公式支持）</li>
+</ul>
+</blockquote>
+
+<p><img src="https://www.zybuluo.com/static/img/logo.png" alt="cmd-markdown-logo"/></p>
+
+<p>除了您现在看到的这个 Cmd Markdown 在线版本，您还可以前往以下网址下载：</p>
+
+<h3 id="toc_0"><a href="https://www.zybuluo.com/cmd/">Windows/Mac/Linux 全平台客户端</a></h3>
+
+<blockquote>
+<p>请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 <i class="icon-file"></i> <strong>新文稿</strong> 或者使用快捷键 <code>Ctrl+Alt+N</code>。</p>
+</blockquote>
+
+<h2 id="toc_1">什么是 Markdown</h2>
+
+<p>Markdown 是一种方便记忆、书写的纯文本标记语言，用户可以使用这些标记符号以最小的输入代价生成极富表现力的文档：譬如您正在阅读的这份文档。它使用简单的符号标记不同的标题，分割不同的段落，<strong>粗体</strong> 或者 <em>斜体</em> 某些文字，更棒的是，它还可以</p>
+
+<h3 id="toc_2">1. 制作一份待办事宜 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#13-%E5%BE%85%E5%8A%9E%E4%BA%8B%E5%AE%9C-todo-%E5%88%97%E8%A1%A8">Todo 列表</a></h3>
+
+<ul>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 支持以 PDF 格式导出文稿</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" /> 改进 Cmd 渲染算法，使用局部渲染技术提高渲染效率</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked /> 新增 Todo 列表功能</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked /> 修复 LaTex 公式渲染问题</li>
+<li class="task-list-item"><input disabled="disabled" type="checkbox" checked /> 新增 LaTex 公式编号功能</li>
+</ul>
+
+<h3 id="toc_3">2. 书写一个质能守恒公式<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></h3>
+
+<p>\[E=mc^2\]</p>
+
+<h3 id="toc_4">3. 高亮一段代码<sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup></h3>
+
+<pre class="line-numbers"><code class="language-python">@requires_authorization
+class SomeClass:
+    pass
+
+if __name__ == &#39;__main__&#39;:
+    # A comment
+    print &#39;hello world&#39;
+</code></pre>
+
+<pre class="line-numbers"><code class="language-python">def swap_bin(num, i, j):
+    &quot;&quot;&quot;x&amp;1 表示最后一位是什么
+    (0b0000110 &gt;&gt; 1) &amp;1 # 1
+    (0b0000110 &gt;&gt; 2) &amp;1 # 1
+    (0b0000110 &gt;&gt; 3) &amp;1 # 0
+
+    (1 &lt;&lt; num) | (1 &lt;&lt; j)表示交换i,j的值
+    &quot;&quot;&quot;
+    if (num &gt;&gt; i) &amp; 1 != (num &gt;&gt; j) &amp; j:
+        num = num ^ (1 &lt;&lt; num) | (1 &lt;&lt; j)
+
+    return num
+</code></pre>
+
+<h3 id="toc_5">4. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#7-%E6%B5%81%E7%A8%8B%E5%9B%BE">流程图</a></h3>
+
+<pre class="line-numbers"><code class="language-mermaid">graph TD;
+  A--&gt;B;
+  A--&gt;C;
+  B--&gt;D;
+  C--&gt;D;
+</code></pre>
+
+<h3 id="toc_6">5. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#8-%E5%BA%8F%E5%88%97%E5%9B%BE">序列图</a></h3>
+
+<pre class="line-numbers"><code class="language-mermaid">sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice-&gt;John: Hello John, how are you?
+    loop Healthcheck
+        John-&gt;John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts &lt;br&gt;prevail...
+    John--&gt;Alice: Great!
+    John-&gt;Bob: How about you?
+    Bob--&gt;John: Jolly good!
+</code></pre>
+
+<h3 id="toc_7">6. 高效绘制 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#9-%E7%94%98%E7%89%B9%E5%9B%BE">甘特图</a></h3>
+
+<pre class="line-numbers"><code class="language-mermaid">gantt
+    title 项目开发流程
+    section 项目确定
+        需求分析       :a1, 2016-06-22, 3d
+        可行性报告     :after a1, 5d
+        概念验证       : 5d
+    section 项目实施
+        概要设计      :2016-07-05  , 5d
+        详细设计      :2016-07-08, 10d
+        编码          :2016-07-15, 10d
+        测试          :2016-07-22, 5d
+    section 发布验收
+        发布: 2d
+        验收: 3d
+</code></pre>
+
+<h3 id="toc_8">7. 绘制表格</h3>
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align: right">价格</th>
+<th style="text-align: center">数量</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align: right">$1600</td>
+<td style="text-align: center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align: right">$12</td>
+<td style="text-align: center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align: right">$1</td>
+<td style="text-align: center">234</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_9">8. 更详细语法说明</h3>
+
+<p>想要查看更详细的语法说明，可以参考我们准备的 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown">Cmd Markdown 简明语法手册</a>，进阶用户可以参考 <a href="https://www.zybuluo.com/mdeditor?url=https://www.zybuluo.com/static/editor/md-help.markdown#cmd-markdown-%E9%AB%98%E9%98%B6%E8%AF%AD%E6%B3%95%E6%89%8B%E5%86%8C">Cmd Markdown 高阶语法手册</a> 了解更多高级功能。</p>
+
+<p>总而言之，不同于其它 <em>所见即所得</em> 的编辑器：你只需使用键盘专注于书写文本内容，就可以生成印刷级的排版格式，省却在键盘和工具栏之间来回切换，调整内容和格式的麻烦。<strong>Markdown 在流畅的书写和印刷级的阅读体验之间找到了平衡。</strong> 目前它已经成为世界上最大的技术分享网站 GitHub 和 技术问答网站 StackOverFlow 的御用书写格式。</p>
+
+<hr/>
+
+<h2 id="toc_10">什么是 Cmd Markdown</h2>
+
+<p>您可以使用很多工具书写 Markdown，但是 Cmd Markdown 是这个星球上我们已知的、最好的 Markdown 工具——没有之一 ：）因为深信文字的力量，所以我们和你一样，对流畅书写，分享思想和知识，以及阅读体验有极致的追求，我们把对于这些诉求的回应整合在 Cmd Markdown，并且一次，两次，三次，乃至无数次地提升这个工具的体验，最终将它演化成一个 <strong>编辑/发布/阅读</strong> Markdown 的在线平台——您可以在任何地方，任何系统/设备上管理这里的文字。</p>
+
+<h3 id="toc_11">1. 实时同步预览</h3>
+
+<p>我们将 Cmd Markdown 的主界面一分为二，左边为<strong>编辑区</strong>，右边为<strong>预览区</strong>，在编辑区的操作会实时地渲染到预览区方便查看最终的版面效果，并且如果你在其中一个区拖动滚动条，我们有一个巧妙的算法把另一个区的滚动条同步到等价的位置，超酷！</p>
+
+<h3 id="toc_12">2. 编辑工具栏</h3>
+
+<p>也许您还是一个 Markdown 语法的新手，在您完全熟悉它之前，我们在 <strong>编辑区</strong> 的顶部放置了一个如下图所示的工具栏，您可以使用鼠标在工具栏上调整格式，不过我们仍旧鼓励你使用键盘标记格式，提高书写的流畅度。</p>
+
+<p><img src="https://www.zybuluo.com/static/img/toolbar-editor.png" alt="tool-editor"/></p>
+
+<h3 id="toc_13">3. 编辑模式</h3>
+
+<p>完全心无旁骛的方式编辑文字：点击 <strong>编辑工具栏</strong> 最右侧的拉伸按钮或者按下 <code>Ctrl + M</code>，将 Cmd Markdown 切换到独立的编辑模式，这是一个极度简洁的写作环境，所有可能会引起分心的元素都已经被挪除，超清爽！</p>
+
+<h3 id="toc_14">4. 实时的云端文稿</h3>
+
+<p>为了保障数据安全，Cmd Markdown 会将您每一次击键的内容保存至云端，同时在 <strong>编辑工具栏</strong> 的最右侧提示 <code>已保存</code> 的字样。无需担心浏览器崩溃，机器掉电或者地震，海啸——在编辑的过程中随时关闭浏览器或者机器，下一次回到 Cmd Markdown 的时候继续写作。</p>
+
+<h3 id="toc_15">5. 离线模式</h3>
+
+<p>在网络环境不稳定的情况下记录文字一样很安全！在您写作的时候，如果电脑突然失去网络连接，Cmd Markdown 会智能切换至离线模式，将您后续键入的文字保存在本地，直到网络恢复再将他们传送至云端，即使在网络恢复前关闭浏览器或者电脑，一样没有问题，等到下次开启 Cmd Markdown 的时候，她会提醒您将离线保存的文字传送至云端。简而言之，我们尽最大的努力保障您文字的安全。</p>
+
+<h3 id="toc_16">6. 管理工具栏</h3>
+
+<p>为了便于管理您的文稿，在 <strong>预览区</strong> 的顶部放置了如下所示的 <strong>管理工具栏</strong>：</p>
+
+<p><img src="https://www.zybuluo.com/static/img/toolbar-manager.jpg" alt="tool-manager"/></p>
+
+<p>通过管理工具栏可以：</p>
+
+<p><i class="icon-share"></i> 发布：将当前的文稿生成固定链接，在网络上发布，分享<br/>
+<i class="icon-file"></i> 新建：开始撰写一篇新的文稿<br/>
+<i class="icon-trash"></i> 删除：删除当前的文稿<br/>
+<i class="icon-cloud"></i> 导出：将当前的文稿转化为 Markdown 文本或者 Html 格式，并导出到本地<br/>
+<i class="icon-reorder"></i> 列表：所有新增和过往的文稿都可以在这里查看、操作<br/>
+<i class="icon-pencil"></i> 模式：切换 普通/Vim/Emacs 编辑模式</p>
+
+<h3 id="toc_17">7. 阅读工具栏</h3>
+
+<p><img src="https://www.zybuluo.com/static/img/toolbar-reader.jpg" alt="tool-manager"/></p>
+
+<p>通过 <strong>预览区</strong> 右上角的 <strong>阅读工具栏</strong>，可以查看当前文稿的目录并增强阅读体验。</p>
+
+<p>工具栏上的五个图标依次为：</p>
+
+<p><i class="icon-list"></i> 目录：快速导航当前文稿的目录结构以跳转到感兴趣的段落<br/>
+<i class="icon-chevron-sign-left"></i> 视图：互换左边编辑区和右边预览区的位置<br/>
+<i class="icon-adjust"></i> 主题：内置了黑白两种模式的主题，试试 <strong>黑色主题</strong>，超炫！<br/>
+<i class="icon-desktop"></i> 阅读：心无旁骛的阅读模式提供超一流的阅读体验<br/>
+<i class="icon-fullscreen"></i> 全屏：简洁，简洁，再简洁，一个完全沉浸式的写作和阅读环境</p>
+
+<h3 id="toc_18">8. 阅读模式</h3>
+
+<p>在 <strong>阅读工具栏</strong> 点击 <i class="icon-desktop"></i> 或者按下 <code>Ctrl+Alt+M</code> 随即进入独立的阅读模式界面，我们在版面渲染上的每一个细节：字体，字号，行间距，前背景色都倾注了大量的时间，努力提升阅读的体验和品质。</p>
+
+<h3 id="toc_19">9. 标签、分类和搜索</h3>
+
+<p>在编辑区任意行首位置输入以下格式的文字可以标签当前文档：</p>
+
+<p>标签： 未分类</p>
+
+<p>标签以后的文稿在【文件列表】（Ctrl+Alt+F）里会按照标签分类，用户可以同时使用键盘或者鼠标浏览查看，或者在【文件列表】的搜索文本框内搜索标题关键字过滤文稿，如下图所示：</p>
+
+<p><img src="https://www.zybuluo.com/static/img/file-list.png" alt="file-list"/></p>
+
+<h3 id="toc_20">10. 文稿发布和分享</h3>
+
+<p>在您使用 Cmd Markdown 记录，创作，整理，阅读文稿的同时，我们不仅希望它是一个有力的工具，更希望您的思想和知识通过这个平台，连同优质的阅读体验，将他们分享给有相同志趣的人，进而鼓励更多的人来到这里记录分享他们的思想和知识，尝试点击 <i class="icon-share"></i> (Ctrl+Alt+P) 发布这份文档给好友吧！</p>
+
+<hr/>
+
+<p>再一次感谢您花费时间阅读这份欢迎稿，点击 <i class="icon-file"></i> (Ctrl+Alt+N) 开始撰写新的文稿吧！祝您在这里记录、阅读、分享愉快！</p>
+
+<p>作者 <a href="http://weibo.com/ghosert">@ghosert</a><br/><br/>
+2016 年 07月 07日<br/><br/>
+[TOC]</p>
+
+<div class="footnotes">
+<hr/>
+<ol>
+
+<li id="fn1">
+<p>支持 <strong>LaTeX</strong> 编辑显示支持，例如：\(\sum_{i=1}^n a_i=0\)， 访问 <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">MathJax</a> 参考更多使用方法。&nbsp;<a href="#fnref1" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn2">
+<p>代码高亮功能支持包括 Java, Python, JavaScript 在内的，<strong>四十一</strong>种主流编程语言。&nbsp;<a href="#fnref2" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[选择排序]]></title>
+    <link href="http://atlasbl.cn/coding_for_interview/15391804641073.html"/>
+    <updated>2018-10-10T22:07:44+08:00</updated>
+    <id>http://atlasbl.cn/coding_for_interview/15391804641073.html</id>
+    <content type="html"><![CDATA[
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Selection_sort_animation.gif" alt=""/></p>
 
 ]]></content>
   </entry>

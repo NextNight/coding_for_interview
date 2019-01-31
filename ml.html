@@ -77,7 +77,13 @@
         <li><label>数据结构</label></li>
 
           
-            <li><a title="文章结构" href="15392326678534.html">文章结构</a></li>
+            <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
+          
+            <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
+          
+            <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
+          
+            <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
           
             <li><a title="堆：Heap" href="15392363328863.html">堆：Heap</a></li>
           
@@ -86,14 +92,6 @@
             <li><a title="哈希表：Hash" href="15392292427453.html">哈希表：Hash</a></li>
           
             <li><a title="树：Tree" href="15392291769523.html">树：Tree</a></li>
-          
-            <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
-          
-            <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
-          
-            <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
-          
-            <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
           
 
       
@@ -226,7 +224,13 @@
                     
                       <li class="side-title"><span>数据结构</span></li>
                         
-                          <li><a title="文章结构" href="15392326678534.html">文章结构</a></li>
+                          <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
+                        
+                          <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
+                        
+                          <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
+                        
+                          <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
                         
                           <li><a title="堆：Heap" href="15392363328863.html">堆：Heap</a></li>
                         
@@ -235,14 +239,6 @@
                           <li><a title="哈希表：Hash" href="15392292427453.html">哈希表：Hash</a></li>
                         
                           <li><a title="树：Tree" href="15392291769523.html">树：Tree</a></li>
-                        
-                          <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
-                        
-                          <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
-                        
-                          <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
-                        
-                          <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
                         
 
                     
@@ -608,12 +604,16 @@ def viterbi(obs, states, start_p, trans_p, emit_p):
 </code></pre>
 
 <blockquote>
-<p>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的。</p>
+<p>核心部分就是从第一个时刻开始(即顺序遍历观测集)，对于每一个时刻(每一个观测值)计算出得到这个观测值最大概率P,和对应的状态值，有了这个概率和状态值，就可以求得下一时刻的最大概率P和对应的状态值，知道遍历完这个观测值序列，我们就得到了一个值得最终概率最大的状态值序列，而这个序列就是我们所求的。(每一时刻的最大不代表全局最大，我们要找的是全局概率最大的路径。)</p>
 </blockquote>
 
 <h1 id="toc_6">其他问题</h1>
 
 <p>当状态值是『B S E M』的时候，HMM可以用来做中文分词，同样的当状态值是『n,v,...』等词性的时候，HMM就可以用来解决词性标注的问题。同样的命名实体识别的问题也可以这样解决。</p>
+
+<blockquote>
+<p>HMM中当假设当前时刻状态只与前一刻状态相关的时候，我们称之为“一阶隐马尔科夫模型”，当假设当前时刻状态与前两刻状态有关的时候我们称之为“二阶隐马”。介数越高，复杂度越高，计算量越大，同时越接近真实的语言场景。</p>
+</blockquote>
 
 
 		</div>

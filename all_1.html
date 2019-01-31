@@ -77,7 +77,13 @@
         <li><label>数据结构</label></li>
 
           
-            <li><a title="文章结构" href="15392326678534.html">文章结构</a></li>
+            <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
+          
+            <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
+          
+            <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
+          
+            <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
           
             <li><a title="堆：Heap" href="15392363328863.html">堆：Heap</a></li>
           
@@ -86,14 +92,6 @@
             <li><a title="哈希表：Hash" href="15392292427453.html">哈希表：Hash</a></li>
           
             <li><a title="树：Tree" href="15392291769523.html">树：Tree</a></li>
-          
-            <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
-          
-            <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
-          
-            <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
-          
-            <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
           
 
       
@@ -226,7 +224,13 @@
                     
                       <li class="side-title"><span>数据结构</span></li>
                         
-                          <li><a title="文章结构" href="15392326678534.html">文章结构</a></li>
+                          <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
+                        
+                          <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
+                        
+                          <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
+                        
+                          <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
                         
                           <li><a title="堆：Heap" href="15392363328863.html">堆：Heap</a></li>
                         
@@ -235,14 +239,6 @@
                           <li><a title="哈希表：Hash" href="15392292427453.html">哈希表：Hash</a></li>
                         
                           <li><a title="树：Tree" href="15392291769523.html">树：Tree</a></li>
-                        
-                          <li><a title="栈：Stack" href="15392291360952.html">栈：Stack</a></li>
-                        
-                          <li><a title="队列：Queue" href="15391808453198.html">队列：Queue</a></li>
-                        
-                          <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
-                        
-                          <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
                         
 
                     
@@ -353,56 +349,19 @@
 
 	
 		<div class="markdown-body">
-		<h1>树：Tree</h1>
+		<h1>排序问题</h1>
 
-		<p>树是一种抽象数据类型（ADT）或是实现这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&gt;0）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：</p>
+		<p>在计算器科学与数学中，一个排序算法（英语：Sorting algorithm）是一种能将一串数据依照特定排序方式进行排列的一种算法。最常用到的排序方式是数值顺序以及字典顺序。有效的排序算法在一些算法（例如搜索算法与合并算法）中是重要的，如此这些算法才能得到正确解答。排序算法也用在处理文字数据以及产生人类可读的输出结果。基本上，排序算法的输出必须遵守下列两个原则：</p>
 
 <ul>
-<li>每个节点有零个或多个子节点；</li>
-<li>没有父节点的节点称为根节点；</li>
-<li>每一个非根节点有且只有一个父节点；</li>
-<li>除了根节点外，每个子节点可以分为多个不相交的子树；</li>
+<li>输出结果为递增序列（递增是针对所需的排序顺序而言）</li>
+<li>输出结果是原输入的一种排列、或是重组<br/>
+虽然排序算法是一个简单的问题，但是从计算器科学发展以来，在此问题上已经有大量的研究。举例而言，冒泡排序在1956年就已经被研究。虽然大部分人认为这是一个已经被解决的问题，有用的新算法仍在不断的被发明。<a href="https://zh.wikipedia.org/wiki/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95">source：wiki</a></li>
 </ul>
 
-<h1 id="toc_0">树的实现方式</h1>
+<h1 id="toc_0">排序算法的简单对比</h1>
 
-<ul>
-<li>二维数组：每个数组是树的一个节点node,每个node存储了当前节点的数据和它的父节点索引。</li>
-<li>字典实现：</li>
-</ul>
-
-<h1 id="toc_1">树的应用</h1>
-
-<ul>
-<li>二叉树
-<ul>
-<li>AVL：平衡二叉树，当且仅当任何节点的两棵子树的高度差不大于1的二叉树；</li>
-<li>BST：排序二叉树，二叉查找树</li>
-</ul></li>
-<li>Huffman树：带权路径最短的二叉树称为哈夫曼树或最优二叉树</li>
-<li>B树：一种对读写操作进行优化的自平衡的二叉查找树，能够保持数据有序，拥有多于两个子树。</li>
-<li>B+树：B树的优化</li>
-<li>RBT红黑树：</li>
-<li>堆Heap：二叉堆，斐波那契堆</li>
-<li>Trie树：</li>
-</ul>
-
-<h1 id="toc_2">二叉树的python实现</h1>
-
-<pre class="line-numbers"><code class="language-text">def 
-</code></pre>
-
-<h1 id="toc_3">二叉树的基本操作</h1>
-
-<ul>
-<li>层次遍历</li>
-<li>之字形遍历</li>
-<li>先序遍历</li>
-<li>中序遍历</li>
-<li>后序遍历</li>
-</ul>
-
-<h1 id="toc_4">二叉树的相关题目</h1>
+<p><img src="media/15392697680749/15392699931786.jpg" alt="" style="width:1449px;"/></p>
 
 
 		</div>
