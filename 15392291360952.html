@@ -129,6 +129,8 @@
         <li><label>算法思想</label></li>
 
           
+            <li><a title="时间复杂度与空间复杂度" href="15500647845613.html">时间复杂度与空间复杂度</a></li>
+          
             <li><a title="分治" href="15393053301597.html">分治</a></li>
           
             <li><a title="回溯" href="15393053101796.html">回溯</a></li>
@@ -272,6 +274,8 @@
                     
                       <li class="side-title"><span>算法思想</span></li>
                         
+                          <li><a title="时间复杂度与空间复杂度" href="15500647845613.html">时间复杂度与空间复杂度</a></li>
+                        
                           <li><a title="分治" href="15393053301597.html">分治</a></li>
                         
                           <li><a title="回溯" href="15393053101796.html">回溯</a></li>
@@ -359,6 +363,38 @@
 <li>推入：将数据放入堆栈的顶端（数组形式或串列形式），堆栈顶端top指针加一。</li>
 <li>弹出：将顶端数据数据输出（回传），堆栈顶端数据减一。</li>
 </ul>
+
+<h1 id="toc_1">栈的实现</h1>
+
+<pre class="line-numbers"><code class="language-python">class Stack(object):
+    &#39;&#39;&#39;数组实现&#39;&#39;&#39;
+    def __init__(self, init_size):
+        self._data = [None] * init_size
+        self._tail = -1
+        self._size = init_size
+
+    def isempty(self):
+        if self._tail==-1:
+            return True
+        else:
+            return False
+
+    def push(self, item):
+        if self._tail&gt;=self._size-1:
+            print(&quot;stack full&quot;)
+        else:
+            self._tail += 1
+            self._data[self._tail] = item
+
+    def pop(self):
+        if self._tail == -1:
+            print(&quot;stack empty&quot;)
+            return None
+        top = self._data[self._tail-1]
+        self._data[self._tail-1] = None
+        self._tail -= 1
+        return top
+</code></pre>
 
 
 </div>
