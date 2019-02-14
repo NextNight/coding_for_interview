@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-02-13T22:31:19+08:00</updated>
+  <updated>2019-02-14T16:09:28+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -75,9 +75,10 @@
     <updated>2018-10-10T22:06:46+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15391804069666.html</id>
     <content type="html"><![CDATA[
-<p>在计算器科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由相同类型的元素（element）的集合所组成的数据结构，「分配一块连续的内存来存储」。利用元素的索引（index）可以计算出该元素对应的存储地址。</p>
+<p>在计算器科学中，数组数据结构（英语：array data structure），简称数组（英语：Array），是由_相同类型_的元素（element）的集合所组成的数据结构，「_分配一块连续的内存来存储_」。利用元素的索引（index）可以计算出该元素对应的存储地址。</p>
 
-<p>最简单的数据结构类型是一维数组。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。</p>
+<p>最简单的数据结构类型是一维数组。例如，索引为0到9的32位整数数组，可作为在存储器地址2000，2004，2008，...2036中，存储10个变量，因此索引为i的元素即在存储器中的2000+4×i地址。数组第一个元素的存储器地址称为第一地址或基础地址。<br/>
+<img src="media/15391804069666/15501317583804.jpg" alt="" style="width:815px;"/></p>
 
 <h2 id="toc_0">数组的特点</h2>
 
@@ -85,7 +86,7 @@
 <li>连续的内存</li>
 <li>同一类型</li>
 <li>相同大小</li>
-<li>随机读取</li>
+<li>随机访问</li>
 <li>插入删除耗时</li>
 <li>初始化必须知道大小</li>
 <li>扩容消耗时间，空间</li>
