@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-02-14T16:09:28+08:00</updated>
+  <updated>2019-02-14T16:16:50+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -37,11 +37,11 @@
 
 <blockquote>
 <p>以上的<code>line_search</code>最好的时间复杂度是：<code>O(1)</code>,最坏是：<code>O（N）</code>,但是每个nums数组的每个索引上都有可能知道key，同时也可能所有位置都找不到，假设：找到找不到的概率分别是0.5，那么加权平均复杂度就是：0.5<em>($\sum _{ i }<sup>{</sup> N }{ 1</em>{ p }_{ i } }$)+0.5</p>
+</blockquote>
 
 <ul>
 <li>均摊时间复杂度：均摊时间复杂度指的是在某种情况下会偶尔出现复杂度较高的情况，大部分时间都是较低的复杂度，此时可以将这个较高的复杂度均摊到这些复杂度较低的步骤上，这样复杂度均摊之后就近似于低复杂度的情况：</li>
 </ul>
-</blockquote>
 
 <h1 id="toc_1">时间复杂度的常见量级</h1>
 
@@ -59,12 +59,12 @@
 
 <blockquote>
 <p>以下两种量级的复杂度，随数据量的增长急剧上升，截至目前没有对这类问题有一个好的解决方案，又称为NP问题。</p>
+</blockquote>
 
 <ul>
 <li>O(2<sup>n):指数介</sup></li>
 <li>O(n!):阶乘介</li>
 </ul>
-</blockquote>
 
 ]]></content>
   </entry>
