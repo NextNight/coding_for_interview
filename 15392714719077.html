@@ -119,9 +119,9 @@
           
             <li><a title="插入排序" href="15392697680749.html">插入排序</a></li>
           
-            <li><a title="Markdown语法" href="15391839924703.html">Markdown语法</a></li>
-          
             <li><a title="选择排序" href="15391804641073.html">选择排序</a></li>
+          
+            <li><a title="Markdown语法" href="15391839924703.html">Markdown语法</a></li>
           
 
       
@@ -266,9 +266,9 @@
                         
                           <li><a title="插入排序" href="15392697680749.html">插入排序</a></li>
                         
-                          <li><a title="Markdown语法" href="15391839924703.html">Markdown语法</a></li>
-                        
                           <li><a title="选择排序" href="15391804641073.html">选择排序</a></li>
+                        
+                          <li><a title="Markdown语法" href="15391839924703.html">Markdown语法</a></li>
                         
 
                     
@@ -351,7 +351,44 @@
  <div class="markdown-body">
 <h1>冒泡排序</h1>
 
-<h2 id="toc_0"></h2>
+<p>冒泡排序（英语：Bubble Sort）是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
+
+<h1 id="toc_0">冒泡排序的复杂度：</h1>
+
+<p>最坏时间复杂度：\({\displaystyle O(n^{2})}\)<br/>
+最优时间复杂度：\({\displaystyle O(n)}\)<br/>
+平均时间复杂度：\({\displaystyle O(n^{2})}\)<br/>
+最坏空间复杂度：总共\({\displaystyle O(n)}\)，需要辅助空间 \({\displaystyle O(1)}\)</p>
+
+<h1 id="toc_1">冒泡排序的过程</h1>
+
+<p><img src="https://zh.wikipedia.org/wiki/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F#/media/File:Bubble_sort_animation.gif" alt=""/></p>
+
+<h1 id="toc_2">冒泡排序的特点：</h1>
+
+<ul>
+<li>每次把序列的最大值放到最后</li>
+<li>稳定排序：(元素相同的时候不交换顺序)<br/>
+# 冒泡排序的实现：<br/>
+```python<br/>
+def bubble_sort(nums):<br/>
+&#39;&#39;&#39;冒泡排序&#39;&#39;&#39;<br/>
+if len(nums)&lt;=1 or nums==None:<br/>
+    return nums<br/>
+for i,num in enumerate(nums):<br/>
+    for j in range(0,len(nums)-i-1):<br/>
+        if nums[j]&gt;nums[j+1]:<br/>
+            nums[j],nums[j+1] = nums[j+1],nums[j]<br/>
+return nums</li>
+</ul>
+
+<p>if <strong>name</strong> == &#39;__main__&#39;:<br/>
+    nums = [6,3,4,2,1,5,7]<br/>
+    bubble_sort(nums)<br/>
+    print(nums)</p>
+
+<pre class="line-numbers"><code class="language-text">
+</code></pre>
 
 
 </div>
