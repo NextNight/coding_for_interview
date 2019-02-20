@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-02-20T15:23:43+08:00</updated>
+  <updated>2019-02-20T22:26:01+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -165,14 +165,6 @@ class LinkedList(object):
 
 <p><a href="">『删除链表中的节点』</a>,<a href="">『删除链表的倒数第N个节点』</a>,<a href="">『反转链表』</a>,<a href="">『合并两个有序链表』</a>,<a href="">『回文链表』</a>,<a href="">『环形链表』</a>,<a href="">『链表排序』</a></p>
 
-<h4 id="toc_5">中等</h4>
-
-<p>``</p>
-
-<h4 id="toc_6">困难</h4>
-
-<p>``</p>
-
 ]]></content>
   </entry>
   
@@ -197,34 +189,91 @@ class LinkedList(object):
 
 <h1 id="toc_1">栈的实现</h1>
 
+<ul>
+<li>栈可以用数组实现(顺序栈）：需要面对动态扩容的问题，最坏的情况是扩容数组需要O（n）时间复杂度。</li>
+</ul>
+
 <pre class="line-numbers"><code class="language-python">class Stack(object):
     &#39;&#39;&#39;数组实现&#39;&#39;&#39;
     def __init__(self, init_size):
-        self._data = [None] * init_size
-        self._tail = -1
+        self._data = [0] * init_size
+        self._top = 0
         self._size = init_size
 
     def isempty(self):
-        if self._tail==-1:
-            return True
-        else:
-            return False
+        return self._top==0
 
     def push(self, item):
-        if self._tail&gt;=self._size-1:
+        if self._top&gt;=self._size-1:
             print(&quot;stack full&quot;)
         else:
-            self._tail += 1
-            self._data[self._tail] = item
+            self._top += 1
+            self._data[self._top] = item
 
     def pop(self):
-        if self._tail == -1:
+        if self.isempty():
             print(&quot;stack empty&quot;)
             return None
-        top = self._data[self._tail-1]
-        self._data[self._tail-1] = None
-        self._tail -= 1
-        return top
+        else:
+            top = self._data[self._top]
+            self._top -= 1
+            return top
+</code></pre>
+
+<ul>
+<li>也可以用链表实现（链式栈）：入栈，出栈时间复杂度都是O（1）。<br/>
+```python<br/>
+class Node(object):<br/>
+&quot;&quot;&quot;定义链表的节点&quot;&quot;&quot;<br/>
+def <strong>init</strong>(self, data):<br/>
+    self.data_ = data<br/>
+    self.next_ = None</li>
+</ul>
+
+<p>class Stack_imp_linkedlist(object):<br/>
+    &#39;&#39;&#39;链表实现栈&#39;&#39;&#39;<br/>
+    def <strong>init</strong>(self,):<br/>
+        self.Link = Node(None)<br/>
+        self.top = None<br/>
+        self.len = 0</p>
+
+<pre class="line-numbers"><code class="language-text">def push(self,item):
+    p = Node(item)
+    p.next_=self.Link.next_
+    self.Link.next_=p
+    self.top=p
+    self.len+=1
+
+def pop(self):
+    if self.len&gt;0:
+        data = self.top.data_
+        self.Link.next_ = self.top.next_
+        self.top = self.Link.next_
+        self.len-=1
+        return data
+    else:
+        print(&#39;Stack empty&#39;)
+        return None
+</code></pre>
+
+<pre class="line-numbers"><code class="language-text"># 栈的应用
+### 线程栈帧中的函数调用栈
+每个线程都会分配一块独立的内存空间，这块空间被组织成`栈`这种结构，用来存储函数调用的是的临时变量。每执行一个函数，都会将其中的临时变量作为一个栈帧入栈，执行完之后，则会将这个函数对应的栈帧出栈。
+
+### 表达式求值
+如：3+4*5-2
+编译器通过两个栈来实现表达式求值，一个栈存储操作数，一个存储操作符，
+
+### 括号匹配
+使用栈来检查表达式中的括号是否匹配，括号必须是成对出现的。而且不能交叉嵌套，
+
+### 浏览器的前进后退
+两个栈来实现浏览器的前进和后退功能，同样链表和数组也可以实现这个功能(因为链表和数组可以实现栈🙄)。
+
+
+
+
+
 </code></pre>
 
 ]]></content>
@@ -246,13 +295,9 @@ class LinkedList(object):
 <li>先入先出</li>
 </ul>
 
-<h1 id="toc_1">队列的应用</h1>
+<h1 id="toc_1">队列的简单实现</h1>
 
-<p>对于需要顺序执行的任务尝试用队列这种结构实现。</p>
-
-<h1 id="toc_2">队列的简单实现</h1>
-
-<h4 id="toc_3">1. Python List实现固定长度的队列,同样的方式可以实现双端队列</h4>
+<h4 id="toc_2">1. Python List实现固定长度的队列,同样的方式可以实现双端队列</h4>
 
 <pre class="line-numbers"><code class="language-python">class Queue(object):
     def __init__(self, init_size):
@@ -285,10 +330,14 @@ class LinkedList(object):
         return rs
 </code></pre>
 
-<h4 id="toc_4">2. 两个栈实现队列</h4>
+<h4 id="toc_3">2. 两个栈实现队列</h4>
 
 <pre class="line-numbers"><code class="language-text">
 </code></pre>
+
+<h1 id="toc_4">队列的应用</h1>
+
+<p>对于需要顺序执行的任务尝试用队列这种结构实现。</p>
 
 <h1 id="toc_5">队列相关题目</h1>
 
