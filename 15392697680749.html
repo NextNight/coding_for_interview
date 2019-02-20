@@ -201,10 +201,6 @@
           
             <li><a title="Plan" href="15392402403847.html">Plan</a></li>
           
-            <li><a title="speaking self" href="15406404520470.html">speaking self</a></li>
-          
-            <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
-          
             <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
           
 
@@ -334,10 +330,6 @@
                         
                           <li><a title="Plan" href="15392402403847.html">Plan</a></li>
                         
-                          <li><a title="speaking self" href="15406404520470.html">speaking self</a></li>
-                        
-                          <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
-                        
                           <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
                         
 
@@ -368,15 +360,17 @@
 <h1 id="toc_2">插入排序的实现</h1>
 
 <pre class="line-numbers"><code class="language-python">def insert_sort(nums):
+    &#39;&#39;&#39;插入排序&#39;&#39;&#39;
     if len(nums) &lt;= 1 or nums == None:
         return nums
     for i in range(1,len(nums)):
         for j in range(i, 0, -1):
             if nums[j] &lt; nums[j-1]:
                 nums[j-1],nums[j] = nums[j],nums[j-1]
-            else:
-                break
     return nums
+if __name__ == &#39;__main__&#39;:
+    nums = [6, 3, 2, 4, 1]
+    print(insert_sort(nums))
 </code></pre>
 
 

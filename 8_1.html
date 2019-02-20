@@ -201,10 +201,6 @@
           
             <li><a title="Plan" href="15392402403847.html">Plan</a></li>
           
-            <li><a title="speaking self" href="15406404520470.html">speaking self</a></li>
-          
-            <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
-          
             <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
           
 
@@ -334,10 +330,6 @@
                         
                           <li><a title="Plan" href="15392402403847.html">Plan</a></li>
                         
-                          <li><a title="speaking self" href="15406404520470.html">speaking self</a></li>
-                        
-                          <li><a title="我的偶像" href="15392398597900.html">我的偶像</a></li>
-                        
                           <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
                         
 
@@ -355,7 +347,36 @@
 		<div class="markdown-body">
 		<h1>选择排序</h1>
 
-		<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Selection_sort_animation.gif" alt=""/></p>
+		<p><strong>选择排序</strong>（Selection sort）是一种简单直观的排序算法。它的工作原理如下。<br/>
+1、首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，<br/>
+2、然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。<br/>
+3、循环第二步，直到所有元素均排序完毕。</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Selection_sort_animation.gif" alt=""/></p>
+
+<h1 id="toc_0">选择排序的特点：</h1>
+
+<p>选择排序的主要优点与数据移动有关。如果某个元素位于正确的最终位置上，则它不会被移动。选择排序每次交换一对元素，它们当中至少有一个将被移到其最终位置上，因此对 \({\displaystyle n}\) 个元素的表进行排序总共进行至多\({\displaystyle n-1}\)次交换。在所有的完全依靠交换去移动元素的排序方法中，选择排序属于非常好的一种。</p>
+
+<h1 id="toc_1">选择排序的实现</h1>
+
+<pre class="line-numbers"><code class="language-python">def select_sort(nums):
+    &#39;&#39;&#39;选择排序：&#39;&#39;&#39;
+    if nums==None or len(nums)&lt;=1:
+        return nums
+    for i in range(len(nums)):
+        min_index=i
+        for j in range(i+1,len(nums)):
+            if nums[j]&lt;nums[min_index]:
+                min_index = j
+        if min_index!=i:
+            nums[i],nums[min_index] = nums[min_index],nums[i]
+        print(&quot;i:%s\t min:%s\t nums:%s&quot; % (i,min_index,nums,))
+
+if __name__ == &#39;__main__&#39;:
+    nums = [17, 23, 20, 14, 12, 25, 1, 20, 81, 14, 11, 12]
+    select_sort(nums)
+</code></pre>
 
 
 		</div>
