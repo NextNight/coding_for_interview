@@ -4,7 +4,7 @@
   <title><![CDATA[不以刷题为目的的面试不是个好程序员]]></title>
   <link href="http://atlasbl.cn/coding_for_interview/atom.xml" rel="self"/>
   <link href="http://atlasbl.cn/coding_for_interview/"/>
-  <updated>2019-02-20T15:20:13+08:00</updated>
+  <updated>2019-02-20T15:23:43+08:00</updated>
   <id>http://atlasbl.cn/coding_for_interview/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -390,7 +390,7 @@ class LinkedList(object):
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[查找问题]]></title>
+    <title type="html"><![CDATA[🐱 查找问题]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15393054098142.html"/>
     <updated>2018-10-12T08:50:09+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15393054098142.html</id>
@@ -455,7 +455,7 @@ class LinkedList(object):
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[排序问题]]></title>
+    <title type="html"><![CDATA[🐱 排序问题]]></title>
     <link href="http://atlasbl.cn/coding_for_interview/15392700147620.html"/>
     <updated>2018-10-11T23:00:14+08:00</updated>
     <id>http://atlasbl.cn/coding_for_interview/15392700147620.html</id>
