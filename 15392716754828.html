@@ -77,6 +77,8 @@
         <li><label>数据结构</label></li>
 
           
+            <li><a title="数据结构" href="15510643590406.html">数据结构</a></li>
+          
             <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
           
             <li><a title="链表：LinkedList" href="15391807987921.html">链表：LinkedList</a></li>
@@ -199,7 +201,7 @@
           
             <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
           
-            <li><a title="Plan" href="15392402403847.html">Plan</a></li>
+            <li><a title="" href="15392402403847.html"></a></li>
           
             <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
           
@@ -221,6 +223,8 @@
 
                     
                       <li class="side-title"><span>数据结构</span></li>
+                        
+                          <li><a title="数据结构" href="15510643590406.html">数据结构</a></li>
                         
                           <li><a title="数组：Array" href="15391804069666.html">数组：Array</a></li>
                         
@@ -328,7 +332,7 @@
                         
                           <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
                         
-                          <li><a title="Plan" href="15392402403847.html">Plan</a></li>
+                          <li><a title="" href="15392402403847.html"></a></li>
                         
                           <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
                         
@@ -343,7 +347,50 @@
  <div class="markdown-body">
 <h1>计数排序</h1>
 
-<h2 id="toc_0"></h2>
+<p>计数排序（Counting sort）是一种稳定的线性时间排序算法。计数排序使用一个额外的数组 \({\displaystyle C}\) ，其中第i个元素是待排序数组 \({\displaystyle A}\)中值等于 \({\displaystyle i}\)的元素的个数。然后根据数组 \({\displaystyle C}\) 来将 \({\displaystyle A}\)中的元素排到正确的位置。</p>
+
+<h1 id="toc_0">计数排序的时间复杂度</h1>
+
+<p>O（n+k）</p>
+
+<h1 id="toc_1">计数排序的优缺点</h1>
+
+<ul>
+<li>非比较排序，比任何比较排序的速度都快</li>
+<li>不适合数据范围特别大的数据排序（数据量少，数据跨度大，会造成大量的空间浪费）<br/>
+# 计数排序的思想<br/>
+用数组的下标来表述要排序的数据，比如：数据3就给下标为3的位置+1，所以需要一个长度为数组中最大数值+1的一个数组来存储数据，步骤如下：<br/>
+1、创建空间一个待排数组中最大值+1的数组numsk，这个数组的下标表示排序的数据，初始值为0，代表这个数字出现0次<br/>
+2、遍历待排序数组nums，每个数num就给numsk中下表为num的数据+1,即数据num出现了一次。<br/>
+3、遍历完之后数组numsk表示从0到K,每个数出现的次数。因为0-k是顺序的，则只需要遍历这个数组，用数组的下标*当前下标的数值(次数)，就得到了排序的结果。<br/>
+# 计数排序的实现
+<code>python
+def countingSort(nums):<br/>
+&#39;&#39;&#39;计数排序&#39;&#39;&#39;<br/>
+k = max(nums) + 1<br/>
+numsk = [0] * k<br/>
+for num in nums:<br/>
+    numsk[num] += 1<br/>
+numsn = []<br/>
+for i,num in enumerate(numsk):<br/>
+    numsn.extend([i]*num)<br/>
+return numsn
+</code>
+# 案例解析：
+<code>
+nums = [3,6,2,8,3,5,1,10]<br/>
+k = 10+1<br/>
+numsk = [0,0,0,0,0,0,0,0,0,0,0]<br/>
+numsk = [0,1,1,2,0,0,1,0,1,0,1]<br/>
+numsn = [1,2,3,3,6,8,10]
+</code>
+# 存在的问题：<br/>
+1、当数据的最小值不是从0开始的时候就会浪费大量的数组空间，比如：[90,92,94],只有3个数却要创建一个长度为95的数组<br/>
+2、稳定性的问题，某个数出现了多次，<code>无法保证相对顺序</code>。<br/>
+3、用数组的下标来表示一个数，就限制了需要排序的数据必须是<code>正整数</code>.</li>
+</ul>
+
+<h1 id="toc_2">改进</h1>
 
 
 </div>
