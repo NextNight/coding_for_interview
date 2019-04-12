@@ -420,7 +420,7 @@ P_s = P(w_1,w_2...w_n) = \prod _{ i=2 }^{ n }{ P(w_i|w_{i-1}) } \tag{Bigrams:基
 以上是基于马尔科夫模型的Bigrams:假设当前词的概率依赖于前一个词的概率，那这个句子的概率就是单词、字的条件概率积。这种模型相比于前面的Unigrams提供更多上下文和语序信息。</p>
 
 <blockquote>
-<p>以上就是我们所说的<code>N-gram</code>语言模型，N表示当前词的概率依赖于前N-1个词。在这里我们知道了如何去计算了一个句子的概率，那么我们需要如何去训练整改率呢??「『即如何使得这个概率最大化』」</p>
+<p>以上就是我们所说的<code>N-gram</code>语言模型，N表示当前词的概率依赖于前N-1个词。在这里我们知道了如何去计算了一个句子的概率，那么我们需要如何去训练这个概率呢??「『即如何使得这个概率最大化』」</p>
 </blockquote>
 
 <h2 id="toc_11">word2vec两种训练算法：</h2>
@@ -462,10 +462,9 @@ P_s = P(w_1,w_2...w_n) = \prod _{ i=2 }^{ n }{ P(w_i|w_{i-1}) } \tag{Bigrams:基
 <h2 id="toc_13">损失函数与目标函数</h2>
 
 <p>目标函数:最大化上下文预测的中心词的概率。<br/>
-\[\begin{aligned}<br/>
-skip-gram-obj&amp;= \prod_{j=0}^{2m} P(W_{c-m+j...c-m+j}|W_i)\\<br/>
-context-bow-obj&amp;= P(W_i|W_{c-m+j...c-m+j}) <br/>
-\end{aligned}<br/>
+\[\begin{aligned} <br/>
+\text {skip-gram}-obj &amp;=\prod_{j=0}^{2 m} P\left(W_{c-m+j} | W_{i}\right) \\ <br/>
+\text { context-bow}-obj&amp;=P\left(W_{i} | W_{c-m+j}\right) \end{aligned}<br/>
 \]<br/>
 m表示上下文窗口大小m=2就是上下文各选2个词</p>
 
@@ -473,14 +472,11 @@ m表示上下文窗口大小m=2就是上下文各选2个词</p>
 \[\begin{aligned}<br/>
 skip-gram H(y,y&#39;)&amp;= -ylog(y&#39;)\\<br/>
 &amp;=-1*log(y&#39;) \\<br/>
-&amp;=-log{P(W_{c-m...c-m}|W_c)} \\<br/>
+&amp;=-log{P(W_{c-m...c+m}|W_c)} \\<br/>
 &amp;=-log{\prod_{j=0,j\neq m}^{2m}P(W_{c-m+j}|W_c)} \\<br/>
 &amp;=-log{\prod_{j=0,j\neq m}^{2m}P(u_{c-m+j}|v&#39;)}\\<br/>
 &amp;=-log\prod_{j=0,j\neq m}^{2m}(\frac {exp^{u_{c-m+j}^Tv&#39;}}{\sum_{k=0}^{V}exp^{u_k^Tv&#39;}})\\<br/>
 J&amp;=-\sum_{j=0,j\neq m}^{2m} u_{c-m+j}^Tv&#39;+log \sum_{i=0}^{V}exp^{u_i^Tv&#39;}\\<br/>
-\end{aligned}<br/>
-\]<br/>
-\[\begin{aligned}<br/>
 context-bow H(y,y&#39;)&amp;= -ylog(y&#39;)\\<br/>
 &amp;=-1*log(y&#39;) \\<br/>
 &amp;=-log{P(W_c|W_{c-m...c+m})} \\<br/>
@@ -497,6 +493,40 @@ J&amp;=-u_c^Tv&#39;+log{\sum_{i=0}^{V}{u_i^Tv&#39;}}\\<br/>
 <li>hierarchical softmax：层次化softmax</li>
 <li>Negative sampling：负采样</li>
 </ul>
+
+<blockquote>
+<p>为什么要使用优化算法：原因在于使用softmax去计算概率的时候需要计算单词向量与整个词汇表词向量的点积，计算量非常大，并且与词汇表大小线性相关，同时更新两个词向量矩阵也非常耗时。导致计算缓慢。为了解决这一问题因此提出了优化算法。</p>
+</blockquote>
+
+<h3 id="toc_15">hierarchical softmax</h3>
+
+<p>层次化softmax抛弃softmax求解目标词的概率的方法，构建一颗由词汇表V所有词以词频为权重构建的Huffman树，词频越高路径越短，搜索越快。而每个叶子节点都是一个词汇表中的词w，因此求解目标词w的概率就变成了求这条路径的概率。这里采用左子树编码1,右子树编码为0的规则，而每一次分叉采用sigma函数来计算概率。即P(0)=σ(wx+b),这里0表示正例1，表示负例。那么如果单词w的路径为：01011，则他的概率P=\(P(d|x,\theta)=\prod_{\theta=1}^{\theta=4}\sigma(\theta x+b)\),即每一次分叉的概率积。那么这个概率就是目标词的概率p。根据cbow,目标词的概率应该为1，那么他的误差就是1-p,有了这个p。就有了梯度，就可以进行反向传播，更新参数。<br/>
+那么这里的参数就是只有θ，而<code>x</code>是一个向量，这个向量就是上下文词向量的向量和。这里不再去乘以词向量矩阵了。而是直接经过hierarchical softmax计算目标词得概率。</p>
+
+<h3 id="toc_16">Negative sampling</h3>
+
+<p>负采样也是一种优化训练过程的方式，在我们更新参数的时候只有一个向量是跟目标词相关的，那么我们可以在其他的此中随机选择几个进行参数的更新，避免所有的参数更新，大大降低了计算量和空间消耗。。<br/>
+假设：<code>NEG(w)</code>：w的负样本。<code>u</code>表示正样本\(w + NEG(w)\),\(L^{w}(\widetilde{w}\):表示的是\(\widetilde{w}\)为正样本和负样本的概率<br/>
+\[<br/>
+L^{w}(\widetilde{w})=\left\{\begin{array}{ll}{1,} &amp; {\widetilde{w}=w} \\ {0,} &amp; {\widetilde{w} \neq w}\end{array}\right.<br/>
+\]<br/>
+得到此时的负采样的目标是最大化如下的函数：<br/>
+\[<br/>
+g(w)=\prod_{u \in\{w\} \cup N E G(w)} p(u | \text { Context }(w))<br/>
+\]<br/>
+\[<br/>
+p(u | \text { Context }(w))=\left[\sigma\left(\mathbf{x}_{w}^{\top} \theta^{u}\right)\right]^{L^{w_{(u)}}} \cdot\left[1-\sigma\left(\mathbf{x}_{w}^{\top} \theta^{u}\right)\right]^{1-L^{w}(u)}<br/>
+\]<br/>
+得到最终的关于负采样的最大化目标函数：<br/>
+\[<br/>
+g(w)=\sigma\left(\mathbf{x}_{w}^{\top} \theta^{w}\right) \prod_{u \in N E G(w)}\left[1-\sigma\left(\mathbf{x}_{w}^{\top} \theta^{u}\right)\right]<br/>
+\]<br/>
+以上表示CBOW的负采样，这个结构清晰地展示我们的目标：<code>最大化正样本概率【左侧】，最小化负样本概率【右侧】</code>。</p>
+
+<p>既然是采样，那么负样本被采样的概率是多少呢？，这里出现了另一个问题，就是次品的不同所带来的采样概率的问题，如何才能得到一个合理的负样本集，其实就是<code>加权采样</code>：<em>用一个线段表示所有样本，分成N段(每一个线段表示一个单词)，线段的长度由词频的0.75次幂决定。</em><br/>
+\[<br/>
+\operatorname{len}(w)=\frac{[\operatorname{counter}(w)]^{0.75}}{\sum_{u \in \mathcal{D}}[\operatorname{counter}(u)]^{0.75}}<br/>
+\]</p>
 
 
 </div>
