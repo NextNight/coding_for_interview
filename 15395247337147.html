@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  词向量 - Kaka
+  词向量发展历程<一> - Kaka
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -159,11 +159,13 @@
           
             <li><a title="深度学习库keras" href="15421840556162.html">深度学习库keras</a></li>
           
-            <li><a title="Keras中的数据预处理「文本」" href="15429415402935.html">Keras中的数据预处理「文本」</a></li>
+            <li><a title="数据预处理「文本」" href="15429415402935.html">数据预处理「文本」</a></li>
           
             <li><a title="文本分类TextCNN" href="15434622232762.html">文本分类TextCNN</a></li>
           
-            <li><a title="词向量" href="15395247337147.html">词向量</a></li>
+            <li><a title="词向量发展历程<一>" href="15395247337147.html">词向量发展历程<一></a></li>
+          
+            <li><a title="词向量发展历程<二>" href="15560941732047.html">词向量发展历程<二></a></li>
           
             <li><a title="文本分类模型" href="15395241741886.html">文本分类模型</a></li>
           
@@ -200,8 +202,6 @@
 
           
             <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
-          
-            <li><a title="" href="15392402403847.html"></a></li>
           
             <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
           
@@ -298,11 +298,13 @@
                         
                           <li><a title="深度学习库keras" href="15421840556162.html">深度学习库keras</a></li>
                         
-                          <li><a title="Keras中的数据预处理「文本」" href="15429415402935.html">Keras中的数据预处理「文本」</a></li>
+                          <li><a title="数据预处理「文本」" href="15429415402935.html">数据预处理「文本」</a></li>
                         
                           <li><a title="文本分类TextCNN" href="15434622232762.html">文本分类TextCNN</a></li>
                         
-                          <li><a title="词向量" href="15395247337147.html">词向量</a></li>
+                          <li><a title="词向量发展历程<一>" href="15395247337147.html">词向量发展历程<一></a></li>
+                        
+                          <li><a title="词向量发展历程<二>" href="15560941732047.html">词向量发展历程<二></a></li>
                         
                           <li><a title="文本分类模型" href="15395241741886.html">文本分类模型</a></li>
                         
@@ -332,8 +334,6 @@
                         
                           <li><a title="吴翼：我的ACM参赛故事" href="15391808991416.html">吴翼：我的ACM参赛故事</a></li>
                         
-                          <li><a title="" href="15392402403847.html"></a></li>
-                        
                           <li><a title="我这一生" href="15391740524915.html">我这一生</a></li>
                         
 
@@ -345,7 +345,7 @@
             </div>
             <div class="large-9 medium-9 columns">
  <div class="markdown-body">
-<h1>词向量</h1>
+<h1>词向量发展历程<一></h1>
 
 <p>在所有的自然语言任务中向量化是必不可少的一步，也是所有任务的第一步，只有将数据编码成数值向量才能进行后续的任务，一个好的向量化表示方法能够表示更多的内涵意义，从而让词包含更多的信息。</p>
 
@@ -548,7 +548,23 @@ P\left(w_{i}\right)&amp;=1-\left(\sqrt{\frac{\text {sample} * N_{W}}{v_{w_{i}}}}
 \]<br/>
 其中：NW是参与训练的单词总数，包含重复单词，实质即词频累加；vwi是词wi的词频。在gensim的实现中，对sample&lt;1和sample≥1的情况区分对待。</p>
 
-<p><a href="http://qiancy.com/2016/08/17/word2vec-hierarchical-softmax/">http://qiancy.com/2016/08/17/word2vec-hierarchical-softmax/</a></p>
+<h1 id="toc_18">全局词向量表示GLOVE</h1>
+
+<p>glove：</p>
+
+<h1 id="toc_19">参考内容</h1>
+
+<ul>
+<li>cs224n2019课程笔记</li>
+<li>word2vec论文；
+<ul>
+<li>1、<a href="">Efficient Estimation of Word Representations in Vector Space</a></li>
+<li>2、<a href="">distributed-representations-of-words-and-phrases-and-their-compositionality</a></li>
+</ul></li>
+<li>word2vec数学原理</li>
+<li>一文读懂word2vec</li>
+<li><a href="http://qiancy.com/2016/08/17/word2vec-hierarchical-softmax/">http://qiancy.com/2016/08/17/word2vec-hierarchical-softmax/</a></li>
+</ul>
 
 
 </div>
@@ -567,8 +583,8 @@ P\left(w_{i}\right)&amp;=1-\left(\sqrt{\frac{\text {sample} * N_{W}}{v_{w_{i}}}}
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
-	        <a href="15395241741886.html" 
-	        title="Next Post: 文本分类模型">文本分类模型 &raquo;</a>
+	        <a href="15560941732047.html" 
+	        title="Next Post: 词向量发展历程<二>">词向量发展历程<二> &raquo;</a>
 	    
 	</div>
   </div>
