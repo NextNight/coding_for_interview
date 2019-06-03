@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  时间复杂度与空间复杂度 - Kaka
+  深度学习中的优化器 - Kaka
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -357,53 +357,11 @@
             </div>
             <div class="large-9 medium-9 columns">
  <div class="markdown-body">
-<h1>时间复杂度与空间复杂度</h1>
-
-<p>时间复杂度和空间复杂度是衡量算法性能好还的标准，在代码为执行前进行分析可以得到时间和空间消耗的预估，而一个好的算法必然能在二者之间得到平衡。复杂度通常书取决于执行次数最多的代码。</p>
-
-<h1 id="toc_0">时间复杂度的几种类型</h1>
-
-<pre class="line-numbers"><code class="language-python">def line_search(nums,key):
-    for i,num in enumerate(nums):
-        if num==key:
-            return i
-    return None
-</code></pre>
+<h1>深度学习中的优化器</h1>
 
 <ul>
-<li>最好，最坏时间复杂度：两种极端情况，代码最少执行的次数和代码最多次数。</li>
-<li>加权平均复杂度：当一段代码执行次数的可能性有多种的时候，代码复杂度不能用最好最坏这种极端的情况来表示，此时可以用每种可能性的概率*次数在求和/可能性的个数 就可以得到加权平均复杂度。</li>
-</ul>
-
-<blockquote>
-<p>以上的<code>line_search</code>最好的时间复杂度是：<code>O(1)</code>,最坏是：<code>O（N）</code>,但是每个nums数组的每个索引上都有可能知道key，同时也可能所有位置都找不到，假设：找到找不到的概率分别是0.5，那么加权平均复杂度就是：0.5<em>($\sum _{ i }<sup>{</sup> N }{ 1</em>{ p }_{ i } }$)+0.5</p>
-</blockquote>
-
-<ul>
-<li>均摊时间复杂度：均摊时间复杂度指的是在某种情况下会偶尔出现复杂度较高的情况，大部分时间都是较低的复杂度，此时可以将这个较高的复杂度均摊到这些复杂度较低的步骤上，这样复杂度均摊之后就近似于低复杂度的情况：</li>
-</ul>
-
-<h1 id="toc_1">时间复杂度的常见量级</h1>
-
-<h2 id="toc_2">多项式量级</h2>
-
-<ul>
-<li>O(1):常数量级，不管是1，2，3还是更多次，只要是固定的不随数据量n而改变的就常数量级的复杂度</li>
-<li>O(n):线性量级,复杂度与数据量n成线性关系，无论是(O(a*n)，a为常数，统称为O(n))</li>
-<li>O(n<sup>2):K次方介，复杂度是数据量的k次方</sup></li>
-<li>O(nlogn)：线性多数介</li>
-<li>O(logn)：对数介，不论底数是2，3，4，5。。。都表示为logn,对数可以使用换底公式都转换成常数*logn的形式。</li>
-</ul>
-
-<h2 id="toc_3">非多项式量级</h2>
-
-<blockquote>
-<p>以下两种量级的复杂度，随数据量的增长急剧上升，截至目前没有对这类问题有一个好的解决方案，又称为NP问题。</p>
-</blockquote>
-
-<ul>
-<li>O(2<sup>n):指数介</sup></li>
-<li>O(n!):阶乘介</li>
+<li>sgd</li>
+<li>adam</li>
 </ul>
 
 
@@ -416,15 +374,15 @@
   <div class="large-6 columns">
 	<div class="text-left" style="padding:15px 0px;">
 		
-	        <a href="15391839924703.html"  title="Previous Post: Markdown语法">&laquo; Markdown语法</a>
+	        <a href="15577405434359.html"  title="Previous Post: 深度学习中的防止过拟合机制">&laquo; 深度学习中的防止过拟合机制</a>
 	    
 	</div>
   </div>
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
-	        <a href="15393053301597.html" 
-	        title="Next Post: 分治">分治 &raquo;</a>
+	        <a href="15577404400424.html" 
+	        title="Next Post: 深度学习中的激活函数">深度学习中的激活函数 &raquo;</a>
 	    
 	</div>
   </div>
@@ -437,7 +395,7 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		var currentURL = '15500647845613.html';
+		var currentURL = '15577404931077.html';
 		$('#side-nav a').each(function(){
 			if($(this).attr('href') == currentURL){
 				$(this).parent().addClass('active');

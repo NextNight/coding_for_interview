@@ -157,6 +157,14 @@
         <li><label>深度学习</label></li>
 
           
+            <li><a title="深度学习中的防止过拟合机制" href="15577405434359.html">深度学习中的防止过拟合机制</a></li>
+          
+            <li><a title="深度学习中的优化器" href="15577404931077.html">深度学习中的优化器</a></li>
+          
+            <li><a title="深度学习中的激活函数" href="15577404400424.html">深度学习中的激活函数</a></li>
+          
+            <li><a title="深度学习中的注意力机制(Attention Mechanism)" href="15574848959443.html">深度学习中的注意力机制(Attention Mechanism)</a></li>
+          
             <li><a title="深度学习库keras" href="15421840556162.html">深度学习库keras</a></li>
           
             <li><a title="数据预处理「文本」" href="15429415402935.html">数据预处理「文本」</a></li>
@@ -166,8 +174,6 @@
             <li><a title="词向量发展历程<一>" href="15395247337147.html">词向量发展历程<一></a></li>
           
             <li><a title="词向量发展历程<二>" href="15560941732047.html">词向量发展历程<二></a></li>
-          
-            <li><a title="文本分类模型" href="15395241741886.html">文本分类模型</a></li>
           
 
       
@@ -296,6 +302,14 @@
                     
                       <li class="side-title"><span>深度学习</span></li>
                         
+                          <li><a title="深度学习中的防止过拟合机制" href="15577405434359.html">深度学习中的防止过拟合机制</a></li>
+                        
+                          <li><a title="深度学习中的优化器" href="15577404931077.html">深度学习中的优化器</a></li>
+                        
+                          <li><a title="深度学习中的激活函数" href="15577404400424.html">深度学习中的激活函数</a></li>
+                        
+                          <li><a title="深度学习中的注意力机制(Attention Mechanism)" href="15574848959443.html">深度学习中的注意力机制(Attention Mechanism)</a></li>
+                        
                           <li><a title="深度学习库keras" href="15421840556162.html">深度学习库keras</a></li>
                         
                           <li><a title="数据预处理「文本」" href="15429415402935.html">数据预处理「文本」</a></li>
@@ -305,8 +319,6 @@
                           <li><a title="词向量发展历程<一>" href="15395247337147.html">词向量发展历程<一></a></li>
                         
                           <li><a title="词向量发展历程<二>" href="15560941732047.html">词向量发展历程<二></a></li>
-                        
-                          <li><a title="文本分类模型" href="15395241741886.html">文本分类模型</a></li>
                         
 
                     
@@ -349,274 +361,24 @@
 
 	
 		<div class="markdown-body">
-		<h1>深度学习库keras</h1>
+		<h1>深度学习中的防止过拟合机制</h1>
 
-		<pre class="line-numbers"><code class="language-mermaid">graph LR;
-  数据处理--&gt;模型训练;
-  模型训练--&gt;模型优化;
-</code></pre>
-
-<p>深度学习整个的流程跟机器学习没什么差别，主要的区别在模型上，深度神经网络更复杂，更加多变，能力更强，「 简单快读的入门方式就是找到体系的流程快读的实现demo。而这个流程的一些问题和阻碍，以及应该注意的地方是我这里想说的。」</p>
-
-<h1 id="toc_0">keras相关的模块</h1>
-
-<p>涉及到机器学习总是离不开几个关键词<code>『数据』</code>，<code>『模型』</code>，<code>『评估函数』</code>，<code>『损失函数』</code>。同样的深度学习也以这几个关键词为基础。keras以主流的深度学习库为后端构建了简单易用的上层API以便我们使用。包括数据处理，评估函数，损失函数的实现，更是提供了各种网络层的实现和封装，通过简单的函数API和序列API进行各种网络层的堆叠就可以实现各式各样的神经网络结构。</p>
-
-<h2 id="toc_1">keras的预处理模块</h2>
-
-<p><code>from keras.preprocessing import sequence,text,image</code></p>
-
-<ul>
-<li>image：图像相关</li>
-<li>sequence：序列相关</li>
-<li>text：文本相关</li>
+		<ul>
+<li>dropout</li>
+<li>batchnormalization</li>
 </ul>
-
-<h2 id="toc_2">keras的Utils</h2>
-
-<p>keras的utils模块主要是提供建模流程的各种辅助操作，其中包括数据相关的，IO相关的，数据操作相关，网络层相关的操作具体如下：</p>
-
-<pre class="line-numbers"><code class="language-python">from .io_utils import HDF5Matrix
-from .data_utils import get_file
-from .data_utils import Sequence
-from .data_utils import GeneratorEnqueuer
-from .data_utils import OrderedEnqueuer
-from .generic_utils import CustomObjectScope
-from .generic_utils import custom_object_scope
-from .generic_utils import get_custom_objects
-from .generic_utils import serialize_keras_object
-from .generic_utils import deserialize_keras_object
-from .generic_utils import Progbar
-from .layer_utils import convert_all_kernels_in_model
-from .layer_utils import print_summary
-from .vis_utils import plot_model
-from .np_utils import to_categorical
-from .np_utils import normalize
-from .multi_gpu_utils import multi_gpu_model
-</code></pre>
-
-<p>而常用的主要是：<code>from keras.utils import np_utils, plot_model</code></p>
-
-<ul>
-<li>np_utils：
-<ul>
-<li>to_categorical：进行类别编码</li>
-<li>normalize：正则化</li>
-</ul></li>
-<li>plot_model:用与画出模型结构</li>
-</ul>
-
-<h2 id="toc_3">keras的Models</h2>
-
-<p>keras的models模块主要是实现模型相关的操作：</p>
-
-<ul>
-<li>load_model：模型加载，可以加在已经保存的训练好的模型直接用于预测</li>
-<li>save_model：模型保存，可以讲训练好的模型进行保存</li>
-<li>Sequential：顺序模型，可以直接使用此函数构建一个模型网络，顺序模型是多个网络层的线性堆叠。</li>
-</ul>
-
-<pre class="line-numbers"><code class="language-python">from keras.models import Sequential
-from keras.layers import Dense, Activation
-model = Sequential([
-    Dense(32, input_shape=(784,)),
-    Activation(&#39;relu&#39;),
-    Dense(10),
-    Activation(&#39;softmax&#39;),
-])
-&#39;&#39;&#39;或&#39;&#39;&#39;
-model = Sequential()
-model.add(Dense(32, input_dim=784))
-model.add(Activation(&#39;relu&#39;))
-model.add(Dense(10))
-model.add(Activation(&#39;softmax&#39;))
-</code></pre>
-
-<h2 id="toc_4">keras的losses</h2>
-
-<p>losses即损失函数，也可以叫做目标函数，优化评分函数，它用来告诉我们模型该如何调整到最优，keras中的losses 实现如下：</p>
-
-<pre class="line-numbers"><code class="language-python">回归
-    mse = MSE = mean_squared_error
-    mae = MAE = mean_absolute_error
-    mape = MAPE = mean_absolute_percentage_error
-    msle = MSLE = mean_squared_logarithmic_error
-    kld = KLD = kullback_leibler_divergence
-    cosine = cosine_proximity
-分类
-    categorical_crossentropy：多分
-    binary_crossentropy：二分
-    sparse_categorical_crossentropy
-。。。
-</code></pre>
-
-<p>对于不同的问题需要选择不同的损失函数，二分勒，多分类，回归都需要不同的损失函数，模型才能正常训练。</p>
-
-<h2 id="toc_5">keras的metrics</h2>
-
-<p>评估函数是用来评估模型效果，与loss有很多公用的函数，keras中的metrics实现如下：</p>
-
-<pre class="line-numbers"><code class="language-python">误差：
-    mse = MSE = mean_squared_error
-    mae = MAE = mean_absolute_error
-    mape = MAPE = mean_absolute_percentage_error
-    msle = MSLE = mean_squared_logarithmic_error
-    cosine = cosine_proximity
-准确率：
-    binary_accuracy:
-    categorical_accuracy
-    sparse_categorical_accuracy
-。。。
-</code></pre>
-
-<blockquote>
-<p>如果没有我们需要的评价函数的话就需要自定义评价函数如：f1_score</p>
-</blockquote>
-
-<pre class="line-numbers"><code class="language-python">def f1_score(y_true, y_pred):
-    # Count positive samples.
-    c1 = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
-    c2 = K.sum(K.round(K.clip(y_pred, 0, 1)))
-    c3 = K.sum(K.round(K.clip(y_true, 0, 1)))
-    # If there are no true samples, fix the F1 score at 0.
-    if c3 == 0:
-        return 0
-    # How many selected items are relevant?
-    precision = c1 / c2
-    # How many relevant items are selected?
-    recall = c1 / c3
-    # Calculate f1_score
-    f1_score = 2 * (precision * recall) / (precision + recall)
-    return f1_score
-</code></pre>
-
-<h2 id="toc_6">keras的「optimizer」优化器</h2>
-
-<p>optermizer优化器是用来根据误差不断调整参数使得目标函数预测值不断接近真实值的一种计算方法。耳熟能详的<code>梯度下降</code>就是其一，其他的还有牛顿法，共轭梯度法，keras中的优化器如下：</p>
-
-<pre class="line-numbers"><code class="language-python">sgd = SGD
-rmsprop = RMSprop
-adagrad = Adagrad
-adadelta = Adadelta
-adam = Adam
-adamax = Adamax
-nadam = Nadam
-</code></pre>
-
-<h2 id="toc_7">keras的callback</h2>
-
-<p>callback回调函数是用于在模型训练过程中对模型活着数据进行操作，最常用的是：</p>
-
-<pre class="line-numbers"><code class="language-python">ModelCheckpoint:训练的过程中不断的保存模型，是一种容错机制。
-EarlyStopping:提前停止，一种降低训练时间和过拟合的策略。
-
-</code></pre>
-
-<h2 id="toc_8">keras的layers「网络层」</h2>
-
-<p>0、嵌入层</p>
-
-<pre class="line-numbers"><code class="language-python">Embedding:
-</code></pre>
-
-<p>1、核心层：</p>
-
-<pre class="line-numbers"><code class="language-python">Input:输入层，用于实例化Keras张量。
-Dense：全链接层
-Activation：激活函数
-Dropout：随机失活，防止过拟合
-Faltten:输入展平
-Reshape：修改尺寸
-Permute：纬度置换
-RepeatVector：重复输入数据
-Lambda：将表达式封装为一个层，即自定义层
-ActivityRegularization：正则化
-Masking：
-SpatialDropout1D
-SpatialDropout2D
-SpatialDropout3D
-</code></pre>
-
-<p>2、卷积层：构成卷积神经网络的基础</p>
-
-<pre class="line-numbers"><code class="language-python">Conv1D:一维卷积
-Conv2D:二维卷积
-Conv3D:三维卷积
-
-UpSampling1D:1D 输入的上采样层。
-UpSampling2D:2D 输入的上采样层。
-UpSampling3D:3D 输入的上采样层。
-。。。
-</code></pre>
-
-<p>3、循环层：循环神经网路的基础</p>
-
-<pre class="line-numbers"><code class="language-python">RNN 
-SimpleRNN
-GRU
-Lstm 
-</code></pre>
-
-<p>4、池化层：</p>
-
-<pre class="line-numbers"><code class="language-python">最大池化层
-    MaxPooling1D
-    MaxPooling2D
-    MaxPooling3D
-平均池化层：
-    AveragePooling1D
-    AveragePooling2D
-    AveragePooling3D
-全局最大池化层
-    GlobalMaxPooling1D
-    GlobalMaxPooling2D
-    GlobalMaxPooling3D
-全局平均池化层：
-    GlobalAveragePooling1D
-    GlobalAveragePooling2D
-    GlobalAveragePooling3D
-</code></pre>
-
-<p>5、融合层：两个/多个层的数据进行某种计算进行融合</p>
-
-<pre class="line-numbers"><code class="language-python">Add:逐元素相加
-Subtract:逐元素相减
-Multiply：逐元素相乘
-Average：逐元素平均
-Maximum：逐元素最大值
-Concatenate：按轴拼接
-Dot：点积
-</code></pre>
-
-<p>6、噪声层：缓解过拟合</p>
-
-<pre class="line-numbers"><code class="language-python">GaussianNoise:高斯噪声
-GaussianDropout:
-AlphaDropout:
-</code></pre>
-
-<p>7、层封装器</p>
-
-<pre class="line-numbers"><code class="language-python">TimeDistributed:
-Bidirectional:RNN的双向封装器，对序列进行前向和后向计算。
-</code></pre>
-
-<p>8、激活函数：用于对数据进行非线性变换</p>
-
-<pre class="line-numbers"><code class="language-python">sigmoid
-softmax
-hard_sigmoid
-linear:线性激活函数（即不做任何改变）
-elu:指数线性单元。
-selu:可伸缩的指数线性单元（SELU）。
-relu:线性修正单元。
-tanh:双曲正切激活函数。
-softplus:log(exp(x) + 1)
-softsign:x / (abs(x) + 1)
-</code></pre>
 
 
 		</div>
+	
+
+ 
+	
+
+ 
+	
+
+ 
 	
 
  

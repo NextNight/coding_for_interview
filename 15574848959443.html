@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
   
-  时间复杂度与空间复杂度 - Kaka
+  深度学习中的注意力机制(Attention Mechanism) - Kaka
   
   </title>
  <meta name="description" content="面试，刷题，扯淡。。">
@@ -357,53 +357,92 @@
             </div>
             <div class="large-9 medium-9 columns">
  <div class="markdown-body">
-<h1>时间复杂度与空间复杂度</h1>
+<h1>深度学习中的注意力机制(Attention Mechanism)</h1>
 
-<p>时间复杂度和空间复杂度是衡量算法性能好还的标准，在代码为执行前进行分析可以得到时间和空间消耗的预估，而一个好的算法必然能在二者之间得到平衡。复杂度通常书取决于执行次数最多的代码。</p>
+<p>Attention Mechanism:人类在观察事物，思考事情的时候往往会将注意力聚焦到某个位置或者某个点上，而忽略其他不相关的、相关性弱的事物上，这就是人类注意力机制，那么对于机器来说同样可以在各种任务中加入这种机制来提升解决问题的能力，这就是机器的注意力机制，那么这种机制如何实现的呢，又是如何发展的呢？</p>
 
-<h1 id="toc_0">时间复杂度的几种类型</h1>
+<h1 id="toc_0">注意力机制的发展史</h1>
 
-<pre class="line-numbers"><code class="language-python">def line_search(nums,key):
-    for i,num in enumerate(nums):
-        if num==key:
-            return i
-    return None
-</code></pre>
+<p>注意力机制最早被使用于图像领域，好像很多东西都是从图像领域开始被使用进而发展到各个领域中，包括深度学习的盛行也是。Attention最早在图像领域被踢出来的时候同样是沉默了很久，没有被开发出什么威力，就像当年的神经网络一样，直到google mind团队的这篇论文《Recurrent Models of Visual Attention》，使用RNN+Attention进行图像分类，是的Attention被众人所熟知。之后Bahdanau等人在论文《Neural Machine Translation by Jointly Learning to Align and Translate》将Attention应用于NLP领域的机器翻译。到了2016年左右基于CNN的Attention机制也被用于NLP领域，再到2017年的基于自注意力机制的特征抽取器Transformer,2018年的BERT刷新NLP的各项任务记录，Attention的江湖地位也越来越高。</p>
+
+<h1 id="toc_1">Ecoder-Decoder架构</h1>
+
+<p>Ecoder-Decoder是一种模型架构，这种结构可以用来解决多种seq-seq问题，如：机器翻译,摘要生成，自动对话，图像标题生成，语音识别。。。这种结构可以采用多种多样的实现，只要改变Ecoder或者Decoder中的网络层结构，就可以得到一种新的Model.</p>
+
+<h1 id="toc_2">机器翻译</h1>
+
+<p><img src="media/15574848959443/15574891500614.jpg" alt="" style="width:827px;"/><br/>
+早期的机器翻译采用RNN作为编码-解码的网络结构，RNN可以解决单词之间的依赖问题，使翻译更流畅编码器。将输入语句编码成一个中间语义向量C,解码器通过对这个中间语义和生成的单词进行下一个单词的解码，一步步得到后续的翻译结果，如下图：<br/>
+<img src="media/15574848959443/15574895459703.jpg" alt="" style="width:827px;"/></p>
+
+<p>这种结构存在一个问题就是无论我们翻译出哪一个词所使用的中间语义C都是同一个，而且这个固定大小的中间语义向量无论句子的长度大小，向量C都不会改变。这就导致句子越长的时候这个中间向量的抽象程度越高，所包含的单独每个向量的信息就越少。解决这个问题的关键就是注意力机制，加入注意力机制对于每个要解码的单词给与不同的中间语义C,不仅仅是不同，他同时对于要解码的目标单词去关注输入源数据中的相关的单词，找到二者存在的某种神秘联系。_注意力机制的一个很好的副产品是源语句和目标语句之间易于可视化的对齐矩阵_（如图4所示）。<br/>
+<img src="media/15574848959443/15577357222907.jpg" alt="" style="width:821px;"/><br/>
+它展示英语-翻译成-法语是解码器的注意力权重，即每解码一个单词对原语句中每个单词的关注程度。每一行代表的都是一个要翻译词的注意力权重。</p>
+
+<h3 id="toc_3">基于rnn+attention的神经网络机器翻译结构如下：</h3>
+
+<p><img src="media/15574848959443/15574895910789.jpg" alt="" style="width:826px;"/><br/>
+如上图所示，注意力计算在每个解码器时间步骤发生。它包括以下几个阶段：---</p>
 
 <ul>
-<li>最好，最坏时间复杂度：两种极端情况，代码最少执行的次数和代码最多次数。</li>
-<li>加权平均复杂度：当一段代码执行次数的可能性有多种的时候，代码复杂度不能用最好最坏这种极端的情况来表示，此时可以用每种可能性的概率*次数在求和/可能性的个数 就可以得到加权平均复杂度。</li>
+<li>1.将当前目标隐藏状态\( h_t \)与所有源状态\( \overline {h} _s \)进行比较以得出注意力权重\(\alpha_{t s}\)（可以如图4中那样可视化）。</li>
+<li>2.基于注意力权重\(\alpha_{t s}\)，我们计算上下文向量作为源状态\( \overline {h} _s \)的加权平均值。</li>
+<li>3.将上下文向量\({c}_t\)与当前目标隐藏状态\({h}_t\)组合以产生最终之注意力向量</li>
+<li>4.注意向量作为输入馈送到下一个时间步（输入馈送）。</li>
 </ul>
+
+<h4 id="toc_4">前三个步骤可以通过以下等式汇总：</h4>
+
+<p>\[<br/>
+\begin{aligned} \alpha_{t s} &amp;=\frac{\exp \left(\operatorname{score}\left(\boldsymbol{h}_{t}, \overline{\boldsymbol{h}}_{s}\right)\right)}{\sum_{s^{\prime}=1}^{S} \exp \left(\operatorname{score}\left(\boldsymbol{h}_{t}, \overline{\boldsymbol{h}}_{s^{\prime}}\right)\right)} &amp;[\text { Attention weights }](1)\\ \boldsymbol{c}_{t} &amp;=\sum_{s} \alpha_{t s} \overline{\boldsymbol{h}}_{s} &amp;[\text { Context vector }](2)\\ \boldsymbol{a}_{t} &amp;=f\left(\boldsymbol{c}_{t}, \boldsymbol{h}_{t}\right)=\tanh \left(\boldsymbol{W}_{c}\left[\boldsymbol{c}_{t} ; \boldsymbol{h}_{t}\right]\right) &amp;[\text { Attention vector }](3) \end{aligned}<br/>
+\]<br/>
+这里，该函数score用于将目标隐藏状态\( h_t \)与每个源隐藏状态\( \overline {h} _s \)进行比较，并将结果归一化(softmax)为产生的注意力权重（源位置的分布） ）。<br/>
+评分功能有多种选择; 流行的评分函数包括公式中给出的乘法和加法形式。该功能函数f也可以采取其他形式。<br/>
+\[<br/>
+\operatorname{score}\left(\boldsymbol{h}_{t}, \overline{\boldsymbol{h}}_{s}\right)=\left\{\begin{array}{ll}{\boldsymbol{h}_{t}^{\top} \boldsymbol{W} \overline{\boldsymbol{h}}_{s}} &amp; {[\text { Luong&#39;s multiplicative style] }} \\ {\boldsymbol{v}_{a}^{\top} \tanh \left(\boldsymbol{W}_{1} \boldsymbol{h}_{t}+\boldsymbol{W}_{2} \overline{\boldsymbol{h}}_{s}\right)} &amp; {[\text { Bahdanau&#39;s additive style] }}\end{array}\right.<br/>
+\]</p>
+
+<h4 id="toc_5">第四步骤的细节</h4>
+
+<p>注意力向量作为下一个时间步\({h}_{t+1}\)的输入，但是我们不能直接使用一个关于所有原词的注意力权重作为一个输入，我们必须选择一个单词来作为下一个时间步的输入，如何选择呢？_最简单的就是选择注意力权重中权重最大的位置对应的单词作为下一个是时间步的输入_，如下图：<br/>
+<img src="media/15574848959443/15577384343749.jpg" alt="" style="width:827px;"/><br/>
+这就是<code>贪婪搜索</code>，每一步都选择最好的，得到的结果至少是个差不多的结果，能得到一个局部最优结果。但是并不一定能得到最优的解码结果。它的优点是速度快。为了得到更好的结果我们可以选择<code>beam_search</code>集束搜索这种搜索策略，它可以得到多的搜索空间，以提高搜索的准确性。</p>
+
+<h1 id="toc_6">注意力机制</h1>
+
+<h2 id="toc_7">Attention的定义：</h2>
+
+<p>1、给定一组向量集合values，以及一个向量query，attention机制是一种根据该query计算values的加权求和的机制。<br/>
+2、attention的重点就是这个集合values中的每个value的“权值”的计算方法。<br/>
+3、有时候也把这种attention的机制叫做query的输出关注。(Query attends to the values）</p>
 
 <blockquote>
-<p>以上的<code>line_search</code>最好的时间复杂度是：<code>O(1)</code>,最坏是：<code>O（N）</code>,但是每个nums数组的每个索引上都有可能知道key，同时也可能所有位置都找不到，假设：找到找不到的概率分别是0.5，那么加权平均复杂度就是：0.5<em>($\sum _{ i }<sup>{</sup> N }{ 1</em>{ p }_{ i } }$)+0.5</p>
+<p>在机器翻译中，Query=上一个翻译的词，key=value=源数据中的单词。目标就是得到一个关于源数据中每个单词的注意力向量。</p>
 </blockquote>
 
-<ul>
-<li>均摊时间复杂度：均摊时间复杂度指的是在某种情况下会偶尔出现复杂度较高的情况，大部分时间都是较低的复杂度，此时可以将这个较高的复杂度均摊到这些复杂度较低的步骤上，这样复杂度均摊之后就近似于低复杂度的情况：</li>
-</ul>
+<h2 id="toc_8">Soft Attention</h2>
 
-<h1 id="toc_1">时间复杂度的常见量级</h1>
+<p><img src="media/15574848959443/15578218747502.jpg" alt="" style="width:761px;"/><br/>
+在这里有两个计算函数\(f(hs,ht)\)和\(f（hs,ws）\),前一个函数是得分计算函数：可以是<code>点积</code>，<code>cos相似度</code>等，计算这个得分之后需要计算权重，原始使用的是<code>softamx</code>函数，得到的是关于所有源数据的注意力权重，然后再计算注意力权重和源数据的点积，这就是<code>gloal attention</code>,它存在一个很大的缺点就是关注的数据太多，计算复杂。因此提出了一种只关注部分数据的<code>local attention</code>,它所产生的注意力向量部分有值，其他部分为0。<br/>
+<img src="media/15574848959443/15578279324697.jpg" alt=""/><br/>
+当注意力向量是一个one-hot向量时，他所关注的仅仅是只有一个源数据单词，这就是<code>Hard attention</code>。</p>
 
-<h2 id="toc_2">多项式量级</h2>
+<h2 id="toc_9">self Attention</h2>
 
-<ul>
-<li>O(1):常数量级，不管是1，2，3还是更多次，只要是固定的不随数据量n而改变的就常数量级的复杂度</li>
-<li>O(n):线性量级,复杂度与数据量n成线性关系，无论是(O(a*n)，a为常数，统称为O(n))</li>
-<li>O(n<sup>2):K次方介，复杂度是数据量的k次方</sup></li>
-<li>O(nlogn)：线性多数介</li>
-<li>O(logn)：对数介，不论底数是2，3，4，5。。。都表示为logn,对数可以使用换底公式都转换成常数*logn的形式。</li>
-</ul>
+<p>自注意力是一种非常特殊的注意力机制，<code>soft attention</code>中query和key,value两组不同的数据，它是一种生成target需要关注source的关系，而自注意力是在source或target中去寻找单词之间的关系，他可以找到某句话每个单词跟其他单词的关注关系或者是依赖关系，可以更容易捕获同一个句子中单词之间的一些句法特征或者语义特征，这就十分像rnn，但是rnn只能顺序捕捉依赖关系，并不能直接关注到目标单词，相隔越远，有效捕捉到关系的可能性就越小。而self attention直接将两个单词联系起来。</p>
 
-<h2 id="toc_3">非多项式量级</h2>
+<p>可以发现self attention更能发掘数据本身存在的特点，让数据本身变得菱角分明，相比rnn更适合作为数据的特征抽取，在<a href="https://arxiv.org/pdf/1703.03130.pdf">A structured Self-Attentive Sentence Embedding</a>中介绍了self attention的定义和计算方法，以及基于这种自注意力机制的句子嵌入提取及其在3个NLP任务中的表现远超隐层数据的maxpool和avg作为句子嵌入。</p>
 
-<blockquote>
-<p>以下两种量级的复杂度，随数据量的增长急剧上升，截至目前没有对这类问题有一个好的解决方案，又称为NP问题。</p>
-</blockquote>
+<p><code>self attention</code>忽略了语序可以直接关注不同时间步间的单词，提高了长距离依赖的有效性，这是一个很大的优点，同时也带了一个缺点就是它无法编码单词之间的顺序信息，然而在NLP中的数据都是时序数据，位置信息十分重要，因此提出了一种<code>位置编码</code>向量作为辅助输入解决这个问题。</p>
+
+<h1 id="toc_10">参考内容</h1>
 
 <ul>
-<li>O(2<sup>n):指数介</sup></li>
-<li>O(n!):阶乘介</li>
+<li><a href="https://blog.csdn.net/malefactor/article/details/50550211">自然语言处理中的Attention Model：是什么及为什么</a></li>
+<li><a href="https://github.com/tensorflow/nmt">Tensorflow的神经网络机器翻译</a></li>
+<li>Attention解决长期记忆问题：<a href="https://arxiv.org/pdf/1512.08756.pdf">FEED-FORWARD NETWORKS WITH ATTENTION CAN SOLVE SOME LONG-TERM MEMORY PROBLEMS</a></li>
+<li>机器翻译与Attention：<a href="https://arxiv.org/pdf/1409.0473.pdf">NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE</a></li>
+<li>自注意力机制：<a href="https://arxiv.org/pdf/1703.03130.pdf">A structured Self-Attentive Sentence Embedding</a></li>
 </ul>
 
 
@@ -416,15 +455,15 @@
   <div class="large-6 columns">
 	<div class="text-left" style="padding:15px 0px;">
 		
-	        <a href="15391839924703.html"  title="Previous Post: Markdown语法">&laquo; Markdown语法</a>
+	        <a href="15577404400424.html"  title="Previous Post: 深度学习中的激活函数">&laquo; 深度学习中的激活函数</a>
 	    
 	</div>
   </div>
   <div class="large-6 columns">
 	<div class="text-right" style="padding:15px 0px;">
 		
-	        <a href="15393053301597.html" 
-	        title="Next Post: 分治">分治 &raquo;</a>
+	        <a href="15510643590406.html" 
+	        title="Next Post: 数据结构">数据结构 &raquo;</a>
 	    
 	</div>
   </div>
@@ -437,7 +476,7 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		var currentURL = '15500647845613.html';
+		var currentURL = '15574848959443.html';
 		$('#side-nav a').each(function(){
 			if($(this).attr('href') == currentURL){
 				$(this).parent().addClass('active');
