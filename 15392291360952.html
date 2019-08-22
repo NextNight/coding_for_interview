@@ -375,91 +375,83 @@
 <h1 id="toc_1">栈的实现</h1>
 
 <ul>
-<li>栈可以用数组实现(顺序栈）：需要面对动态扩容的问题，最坏的情况是扩容数组需要O（n）时间复杂度。</li>
+<li><p>栈可以用数组实现(顺序栈）：需要面对动态扩容的问题，最坏的情况是扩容数组需要O（n）时间复杂度。</p>
+<pre class="line-numbers"><code class="language-python">class Stack(object):
+&#39;&#39;&#39;数组实现&#39;&#39;&#39;<br/>
+def __init__(self, init_size):<br/>
+    self._data = [0] * init_size<br/>
+    self._top = 0<br/>
+    self._size = init_size<br/>
+def isempty(self):<br/>
+    return self._top==0<br/>
+def push(self, item):<br/>
+    if self._top&gt;=self._size-1:<br/>
+        print(&quot;stack full&quot;)<br/>
+    else:<br/>
+        self._top += 1<br/>
+        self._data[self._top] = item<br/>
+def pop(self):<br/>
+    if self.isempty():<br/>
+        print(&quot;stack empty&quot;)<br/>
+        return None<br/>
+    else:<br/>
+        top = self._data[self._top]<br/>
+        self._top -= 1<br/>
+        return top
+</code></pre></li>
+<li><p>也可以用链表实现（链式栈）：入栈，出栈时间复杂度都是O（1）。</p></li>
 </ul>
 
-<pre class="line-numbers"><code class="language-python">class Stack(object):
-    &#39;&#39;&#39;数组实现&#39;&#39;&#39;
-    def __init__(self, init_size):
-        self._data = [0] * init_size
-        self._top = 0
-        self._size = init_size
+<pre class="line-numbers"><code class="language-python">class Node(object):
+    &quot;&quot;&quot;定义链表的节点&quot;&quot;&quot;
+    def __init__(self, data):
+        self.data_ = data
+        self.next_ = None
 
-    def isempty(self):
-        return self._top==0
+class Stack_imp_linkedlist(object):
+    &#39;&#39;&#39;链表实现栈&#39;&#39;&#39;
+    def __init__(self,):
+        self.Link = Node(None)
+        self.top = None
+        self.len = 0
 
-    def push(self, item):
-        if self._top&gt;=self._size-1:
-            print(&quot;stack full&quot;)
-        else:
-            self._top += 1
-            self._data[self._top] = item
+    def push(self,item):
+        p = Node(item)
+        p.next_=self.Link.next_
+        self.Link.next_=p
+        self.top=p
+        self.len+=1
 
     def pop(self):
-        if self.isempty():
-            print(&quot;stack empty&quot;)
-            return None
+        if self.len&gt;0:
+            data = self.top.data_
+            self.Link.next_ = self.top.next_
+            self.top = self.Link.next_
+            self.len-=1
+            return data
         else:
-            top = self._data[self._top]
-            self._top -= 1
-            return top
+            print(&#39;Stack empty&#39;)
+            return None
 </code></pre>
 
-<ul>
-<li>也可以用链表实现（链式栈）：入栈，出栈时间复杂度都是O（1）。<br/>
-```python<br/>
-class Node(object):<br/>
-&quot;&quot;&quot;定义链表的节点&quot;&quot;&quot;<br/>
-def <strong>init</strong>(self, data):<br/>
-    self.data_ = data<br/>
-    self.next_ = None</li>
-</ul>
+<h1 id="toc_2">栈的应用</h1>
 
-<p>class Stack_imp_linkedlist(object):<br/>
-    &#39;&#39;&#39;链表实现栈&#39;&#39;&#39;<br/>
-    def <strong>init</strong>(self,):<br/>
-        self.Link = Node(None)<br/>
-        self.top = None<br/>
-        self.len = 0</p>
+<h3 id="toc_3">线程栈帧中的函数调用栈</h3>
 
-<pre class="line-numbers"><code class="language-text">def push(self,item):
-    p = Node(item)
-    p.next_=self.Link.next_
-    self.Link.next_=p
-    self.top=p
-    self.len+=1
+<p>每个线程都会分配一块独立的内存空间，这块空间被组织成<code>栈</code>这种结构，用来存储函数调用的是的临时变量。每执行一个函数，都会将其中的临时变量作为一个栈帧入栈，执行完之后，则会将这个函数对应的栈帧出栈。</p>
 
-def pop(self):
-    if self.len&gt;0:
-        data = self.top.data_
-        self.Link.next_ = self.top.next_
-        self.top = self.Link.next_
-        self.len-=1
-        return data
-    else:
-        print(&#39;Stack empty&#39;)
-        return None
-</code></pre>
+<h3 id="toc_4">表达式求值</h3>
 
-<pre class="line-numbers"><code class="language-text"># 栈的应用
-### 线程栈帧中的函数调用栈
-每个线程都会分配一块独立的内存空间，这块空间被组织成`栈`这种结构，用来存储函数调用的是的临时变量。每执行一个函数，都会将其中的临时变量作为一个栈帧入栈，执行完之后，则会将这个函数对应的栈帧出栈。
+<p>如：3+4*5-2<br/>
+编译器通过两个栈来实现表达式求值，一个栈存储操作数，一个存储操作符，</p>
 
-### 表达式求值
-如：3+4*5-2
-编译器通过两个栈来实现表达式求值，一个栈存储操作数，一个存储操作符，
+<h3 id="toc_5">括号匹配</h3>
 
-### 括号匹配
-使用栈来检查表达式中的括号是否匹配，括号必须是成对出现的。而且不能交叉嵌套，
+<p>使用栈来检查表达式中的括号是否匹配，括号必须是成对出现的。而且不能交叉嵌套，</p>
 
-### 浏览器的前进后退
-两个栈来实现浏览器的前进和后退功能，同样链表和数组也可以实现这个功能(因为链表和数组可以实现栈🙄)。
+<h3 id="toc_6">浏览器的前进后退</h3>
 
-
-
-
-
-</code></pre>
+<p>两个栈来实现浏览器的前进和后退功能，同样链表和数组也可以实现这个功能(因为链表和数组可以实现栈🙄)。</p>
 
 
 </div>
